@@ -91,7 +91,7 @@
   </div>
   <div class="home-wrap">
 
-
+```
 <div class="section-title">نماذج المناوبة</div>
 <div class="form-grid">
   <div class="form-card c-blue" onclick="showPage('page-shift')">
@@ -133,7 +133,7 @@
     <div class="arrow">‹</div>
   </div>
 </div>
-
+```
 
   </div>
 </div>
@@ -415,7 +415,7 @@ function sRenderSectors() {
         <div style="font-weight:bold;font-size:.88rem;margin-bottom:4px;">استجابة داعمة:</div>
         <textarea id="sup_${id}" style="width:100%;min-height:50px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.85rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea>
 
-
+```
   </div>
   <div style="margin-top:10px;margin-bottom:10px;">
     <div style="font-weight:bold;font-size:.88rem;margin-bottom:4px;">استجابة ملغية:</div>
@@ -428,16 +428,16 @@ function sRenderSectors() {
   </div>`;
 c.appendChild(div);
 sRenderInc(id);
-
+```
 
 });
 }
 
 function sRenderInc(id) {
-const c = document.getElementById('sinc_'+id); if(!c) return;
-c.innerHTML = '';
+const c = document.getElementById(‘sinc_’+id); if(!c) return;
+c.innerHTML = ‘’;
 sSectors[id].incidents.forEach((inc,idx) => {
-const b = document.createElement('div'); b.className='incident-block';
+const b = document.createElement(‘div’); b.className=‘incident-block’;
 b.innerHTML=`<div style="display:flex;align-items:center;gap:8px;"> <span style="font-weight:bold;font-size:.9rem;white-space:nowrap;">استجابة أولية ${inc.num}:</span> <input type="text" placeholder="أدخل رقم البلاغ أو الملاحظة" value="${inc.note||''}" oninput="sSectors['${id}'].incidents[${idx}].note=this.value" style="flex:1;"> <button onclick="sRemoveInc('${id}',${idx})" style="background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:.82rem;font-family:inherit;white-space:nowrap;">حذف</button> </div>`;
 c.appendChild(b);
 });
@@ -447,47 +447,78 @@ function sAddInc(id) { sIncCounter++; sSectors[id].incidents.push({num:sIncCount
 function sAddBulk(id,n) { for(let i=0;i<n;i++){sIncCounter++;sSectors[id].incidents.push({num:sIncCounter});} sRenderInc(id); }
 function sRemoveInc(id,idx) { sSectors[id].incidents.splice(idx,1); sRenderInc(id); }
 function sAddPerson(type) {
-const c=document.getElementById(type==='absent'?'s-absent-list':'s-late-list');
-const d=document.createElement('div'); d.className='person-item';
+const c=document.getElementById(type===‘absent’?‘s-absent-list’:‘s-late-list’);
+const d=document.createElement(‘div’); d.className=‘person-item’;
 d.innerHTML=`<input type="text" placeholder="الاسم الكامل"><button class="remove-btn" onclick="this.parentElement.remove()">✕</button>`;
-c.appendChild(d); d.querySelector('input').focus();
+c.appendChild(d); d.querySelector(‘input’).focus();
 }
 function sSend() {
-const date=document.getElementById('s-date').value||'—';
-const period=document.querySelector('input[name="s-period"]:checked')?.value||'—';
-const resp=document.getElementById('s-ind-resp').value||'—';
-const indN=document.getElementById('s-ind-notes').value||'';
-const vW=document.getElementById('s-v-work').value||'—';
-const vR=document.getElementById('s-v-res').value||'—';
-const vB=document.getElementById('s-v-brk').value||'—';
-const vN=document.getElementById('s-v-notes').value||'';
-const gen=document.getElementById('s-gen-notes').value||'';
-const chief=document.getElementById('s-chief').value||'—';
-const asst=document.getElementById('s-asst').value||'—';
-let msg=`📋 *نموذج نهاية المناوبة*\n📅 ${date} | ${period}\n\n`;
-msg+=`📊 *الموشر*\nمتوسط وقت الاستجابة: ${resp} دقيقة\n`;
-if(indN) msg+=`ملاحظات: ${indN}\n`;
-msg+=`\n🚗 *المركبات*\nعاملة: ${vW} | احتياط: ${vR} | متعطلة: ${vB}\n`;
-if(vN) msg+=`ملاحظات الأعطال: ${vN}\n`;
-msg+=`\n`;
+const date=document.getElementById(‘s-date’).value||’—’;
+const period=document.querySelector(‘input[name=“s-period”]:checked’)?.value||’—’;
+const resp=document.getElementById(‘s-ind-resp’).value||’—’;
+const indN=document.getElementById(‘s-ind-notes’).value||’’;
+const vW=document.getElementById(‘s-v-work’).value||’—’;
+const vR=document.getElementById(‘s-v-res’).value||’—’;
+const vB=document.getElementById(‘s-v-brk’).value||’—’;
+const vN=document.getElementById(‘s-v-notes’).value||’’;
+const gen=document.getElementById(‘s-gen-notes’).value||’’;
+const chief=document.getElementById(‘s-chief’).value||’—’;
+const asst=document.getElementById(‘s-asst’).value||’—’;
+const LINE = ‘➖’.repeat(14);
+
+let msg = ‘’;
+msg += `${LINE}\n`;
+msg += `       📋 *نموذج نهاية المناوبة*\n`;
+msg += `${LINE}\n`;
+msg += `📅 *التاريخ:* ${date}\n`;
+msg += `🕐 *الفترة:* ${period}\n`;
+msg += `\n`;
+
+msg += `*〔 📊 الموشر 〕*\n`;
+msg += `> ⏱ *متوسط وقت الاستجابة:* _${resp} دقيقة_\n`;
+if(indN) msg += `> 📝 *ملاحظات:* ${indN}\n`;
+msg += `\n`;
+
+msg += `*〔 🚗 المركبات 〕*\n`;
+msg += `> ✅ *عاملة:* ${vW}   |   ⏳ *احتياط:* ${vR}   |   ❌ *متعطلة:* ${vB}\n`;
+if(vN) msg += `> 🔧 *ملاحظات الأعطال:* ${vN}\n`;
+msg += `\n`;
+
+msg += `*〔 📋 بلاغات التدخل السريع 〕*\n`;
 Object.keys(sSectors).forEach(id=>{
 const sec=sSectors[id];
-const nm=document.getElementById('sname_'+id)?.value||sec.name||'—';
-msg+=`📍 *القطاع: ${nm}*\n`;
-if(!sec.incidents.length) msg+=`لا توجد بلاغات\n`;
-else sec.incidents.forEach(i=>{ msg+=`🔹 استجابة أولية ${i.num}: ${i.note||'—'}\n`; });
-const sup=document.getElementById('sup_'+id)?.value||'';
-const can=document.getElementById('can_'+id)?.value||'';
-if(sup) msg+=`🟢 داعمة: ${sup}\n`;
-if(can) msg+=`🔴 ملغية: ${can}\n`;
-msg+=`\n`;
+const nm=document.getElementById(‘sname_’+id)?.value||sec.name||’—’;
+msg += `\n📍 *القطاع: ${nm}*\n`;
+if(!sec.incidents.length) {
+msg += `_لا توجد بلاغات_\n`;
+} else {
+sec.incidents.forEach(i=>{ msg+=`   🔹 *استجابة أولية ${i.num}:* ${i.note||'—'}\n`; });
+}
+const sup=document.getElementById(‘sup_’+id)?.value||’’;
+const can=document.getElementById(‘can_’+id)?.value||’’;
+if(sup) msg += `   🟢 *داعمة:* ${sup}\n`;
+if(can) msg += `   🔴 *ملغية:* ${can}\n`;
 });
-const abs=[...document.querySelectorAll('#s-absent-list input')].map(i=>i.value).filter(Boolean);
-const lat=[...document.querySelectorAll('#s-late-list input')].map(i=>i.value).filter(Boolean);
-if(abs.length) msg+=`🚫 الغياب: ${abs.join(' | ')}\n`;
-if(lat.length) msg+=`⏱ المتأخرون: ${lat.join(' | ')}\n`;
-if(gen) msg+=`\n📝 ملاحظات عامة:\n${gen}\n`;
-msg+=`\n👥 كبير المسعفين: ${chief} | المساعد: ${asst}`;
+msg += `\n`;
+
+const abs=[…document.querySelectorAll(’#s-absent-list input’)].map(i=>i.value).filter(Boolean);
+const lat=[…document.querySelectorAll(’#s-late-list input’)].map(i=>i.value).filter(Boolean);
+if(abs.length || lat.length) {
+msg += `*〔 👤 الغياب والمتأخرين 〕*\n`;
+if(abs.length) msg += `> 🚫 *الغياب:* ${abs.join('، ')}\n`;
+if(lat.length) msg += `> ⏱ *المتأخرون:* ${lat.join('، ')}\n`;
+msg += `\n`;
+}
+
+if(gen) {
+msg += `*〔 📝 ملاحظات عامة 〕*\n`;
+msg += `> ${gen}\n\n`;
+}
+
+msg += `*〔 👥 الطاقم 〕*\n`;
+msg += `> 🎖 *كبير المسعفين:* ${chief}\n`;
+msg += `> 🤝 *المساعد:* ${asst}\n`;
+msg += `\n${LINE}`;
 wa(msg);
 }
 
@@ -495,16 +526,24 @@ wa(msg);
 // مؤشر المناوبة
 // ==========================================
 function mBuildMsg() {
-const date=document.getElementById('m-date').value||'—';
-const period=document.querySelector('input[name="m-period"]:checked')?.value||'—';
-const resp=document.getElementById('m-resp').value||'—';
-const phrase=document.getElementById('m-phrase-select').value||'';
-let msg=`*مؤشر المناوبة لقطاع الوسط*\n\nالتاريخ: ${date}\nالمناوبة: ${period}\nمتوسط وقت الاستجابة: ${resp}`;
-if(phrase) msg+=`\n\n${phrase}`;
+const date=document.getElementById(‘m-date’).value||’—’;
+const period=document.querySelector(‘input[name=“m-period”]:checked’)?.value||’—’;
+const resp=document.getElementById(‘m-resp’).value||’—’;
+const phrase=document.getElementById(‘m-phrase-select’).value||’’;
+const LINE=‘➖’.repeat(14);
+let msg=’’;
+msg+=`${LINE}\n`;
+msg+=`   📊 *مؤشر المناوبة لقطاع الوسط*\n`;
+msg+=`${LINE}\n`;
+msg+=`📅 *التاريخ:* ${date}\n`;
+msg+=`🕐 *المناوبة:* ${period}\n`;
+msg+=`⏱ *متوسط وقت الاستجابة:* _${resp}_\n`;
+if(phrase) msg+=`\n${phrase}\n`;
+msg+=`${LINE}`;
 return msg;
 }
 function mUpdatePreview() {
-const el=document.getElementById('m-preview');
+const el=document.getElementById(‘m-preview’);
 if(el) el.textContent=mBuildMsg();
 }
 function mSend() { wa(mBuildMsg()); }
@@ -513,24 +552,32 @@ function mSend() { wa(mBuildMsg()); }
 // نموذج تغيير الزيت
 // ==========================================
 function oAddVehicle() {
-const c=document.getElementById('o-vehicles-list');
-const d=document.createElement('div'); d.className='item-row';
+const c=document.getElementById(‘o-vehicles-list’);
+const d=document.createElement(‘div’); d.className=‘item-row’;
 d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>نداء الفرقة</label><input type="text" placeholder="نداء الفرقة"></div> <div class="ff" style="margin-bottom:7px;"><label>رقم اللوحة</label><input type="text" placeholder="رقم اللوحة"></div> <div class="ff" style="margin-bottom:7px;"><label>العداد الحالي (كم)</label><input type="text" placeholder="الكيلومترات الحالية"></div> <div class="ff"><label>الموعد القادم لتغيير الزيت (كم)</label><input type="text" placeholder="الكيلومترات القادمة"></div>`;
 c.appendChild(d);
 }
 function oSend() {
-const date=document.getElementById('o-date').value||'—';
-const notes=document.getElementById('o-notes').value||'';
-let msg=`🛢️ *نموذج تغيير الزيت*\n📅 ${date}\n\n`;
-document.querySelectorAll('#o-vehicles-list .item-row').forEach((row,i)=>{
-const f=row.querySelectorAll('input');
-msg+=`🚑 *مركبة ${i+1}*\n`;
-msg+=`نداء الفرقة: ${f[0].value||'—'}\n`;
-msg+=`رقم اللوحة: ${f[1].value||'—'}\n`;
-msg+=`العداد الحالي: ${f[2].value||'—'} كم\n`;
-msg+=`الموعد القادم: ${f[3].value||'—'} كم\n\n`;
+const date=document.getElementById(‘o-date’).value||’—’;
+const notes=document.getElementById(‘o-notes’).value||’’;
+const LINE=‘➖’.repeat(14);
+let msg=’’;
+msg+=`${LINE}\n`;
+msg+=`      🛢 *نموذج تغيير الزيت*\n`;
+msg+=`${LINE}\n`;
+msg+=`📅 *التاريخ:* ${date}\n\n`;
+const rows=document.querySelectorAll(’#o-vehicles-list .item-row’);
+if(!rows.length){ msg+=`_لم يتم إضافة أي مركبة_\n`; }
+rows.forEach((row,i)=>{
+const f=row.querySelectorAll(‘input’);
+msg+=`*〔 🚑 مركبة ${i+1} 〕*\n`;
+msg+=`> 📻 *نداء الفرقة:* ${f[0].value||'—'}\n`;
+msg+=`> 🔢 *رقم اللوحة:* ${f[1].value||'—'}\n`;
+msg+=`> 📏 *العداد الحالي:* _${f[2].value||'—'} كم_\n`;
+msg+=`> 🗓 *الموعد القادم:* _${f[3].value||'—'} كم_\n\n`;
 });
-if(notes) msg+=`📝 ملاحظات: ${notes}`;
+if(notes){ msg+=`*〔 📝 ملاحظات 〕*\n> ${notes}\n\n`; }
+msg+=LINE;
 wa(msg);
 }
 
@@ -538,23 +585,28 @@ wa(msg);
 // نموذج صيانة جهاز
 // ==========================================
 function dAddDevice() {
-const c=document.getElementById('d-devices-list');
-const d=document.createElement('div'); d.className='item-row';
+const c=document.getElementById(‘d-devices-list’);
+const d=document.createElement(‘div’); d.className=‘item-row’;
 d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>اسم الجهاز</label><input type="text" placeholder="اسم الجهاز"></div> <div class="ff" style="margin-bottom:7px;"><label>السيريال نمبر</label><input type="text" placeholder="Serial No."></div> <div class="ff"><label>العطل / المشكلة</label><input type="text" placeholder="وصف المشكلة"></div>`;
 c.appendChild(d);
 }
 function dSend() {
-const date=document.getElementById('d-date').value||'—';
-const notes=document.getElementById('d-notes').value||'';
-let msg=`🔧 *نموذج صيانة جهاز*\n📅 ${date}\n\n`;
-document.querySelectorAll('#d-devices-list .item-row').forEach((row,i)=>{
-const f=row.querySelectorAll('input');
-msg+=`🔹 *جهاز ${i+1}*\n`;
-msg+=`اسم الجهاز: ${f[0].value||'—'}\n`;
-msg+=`السيريال نمبر: ${f[1].value||'—'}\n`;
-msg+=`العطل: ${f[2].value||'—'}\n\n`;
-});
-if(notes) msg+=`📝 ملاحظات: ${notes}`;
+const date=document.getElementById(‘d-date’).value||’—’;
+const notes=document.getElementById(‘d-notes’).value||’’;
+const LINE=‘➖’.repeat(14);
+let msg=’’;
+msg+=`${LINE}\n`;
+msg+=`      🔧 *نموذج صيانة جهاز*\n`;
+msg+=`${LINE}\n`;
+msg+=`📅 *التاريخ:* ${date}\n\n`;
+const rows=document.querySelectorAll(’#d-devices-list .item-row’);
+if(!rows.length){ msg+=`_لم يتم إضافة أي جهاز_\n`; }
+rows.forEach((row,i)=>{
+const f=row.querySelectorAll(‘input’);
+msg+=`*〔 🔧 جهاز ${i+1} 〕*\n`;
+msg+=`> 📛 *اسم الجهاز:* ${f[0].value||'—'}\n`;
+msg+=`> 🔖 *السيريال نمبر:* \`${f[1].value||’—’}`\n`; msg+=`> ⚠️ *العطل:* *${f[2].value||’—’}*\n\n`; }); if(notes){ msg+=`*〔 📝 ملاحظات 〕*\n> ${notes}\n\n`; }
+msg+=LINE;
 wa(msg);
 }
 
@@ -562,26 +614,43 @@ wa(msg);
 // نموذج صيانة مركبة
 // ==========================================
 function vmAddFault() {
-const c=document.getElementById('vm-faults-list');
-const d=document.createElement('div'); d.className='item-row';
+const c=document.getElementById(‘vm-faults-list’);
+const d=document.createElement(‘div’); d.className=‘item-row’;
 d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>وصف العطل</label><input type="text" placeholder="وصف العطل"></div> <div class="ff"><label>الشدة</label> <select><option>بسيط</option><option>متوسط</option><option>خطير</option></select> </div>`;
 c.appendChild(d);
 }
 function vmSend() {
-const date=document.getElementById('vm-date').value||'—';
-const num=document.getElementById('vm-num').value||'—';
-const type=document.getElementById('vm-type').value||'—';
-const km=document.getElementById('vm-km').value||'—';
-const pri=document.getElementById('vm-priority').value||'—';
-const notes=document.getElementById('vm-notes').value||'';
-let msg=`🚑 *نموذج صيانة مركبة*\n📅 ${date}\n`;
-msg+=`المركبة: ${num} | النوع: ${type}\nالعداد: ${km} كم | الأولوية: ${pri}\n\n⚠️ *الأعطال:*\n`;
-document.querySelectorAll('#vm-faults-list .item-row').forEach((row,i)=>{
-const f=row.querySelector('input');
-const s=row.querySelector('select');
-msg+=`${i+1}. ${f?.value||'—'} — الشدة: ${s?.value||'—'}\n`;
+const date=document.getElementById(‘vm-date’).value||’—’;
+const num=document.getElementById(‘vm-num’).value||’—’;
+const type=document.getElementById(‘vm-type’).value||’—’;
+const km=document.getElementById(‘vm-km’).value||’—’;
+const pri=document.getElementById(‘vm-priority’).value||’—’;
+const notes=document.getElementById(‘vm-notes’).value||’’;
+const priEmoji={‘عادية’:‘🟢’,‘عاجلة’:‘🟡’,‘حرجة’:‘🔴’};
+const LINE=‘➖’.repeat(14);
+let msg=’’;
+msg+=`${LINE}\n`;
+msg+=`     🚑 *نموذج صيانة مركبة*\n`;
+msg+=`${LINE}\n`;
+msg+=`📅 *التاريخ:* ${date}\n\n`;
+msg+=`*〔 🚑 بيانات المركبة 〕*\n`;
+msg+=`> 🔢 *رقم المركبة:* ${num}\n`;
+msg+=`> 🚘 *النوع:* ${type}\n`;
+msg+=`> 📏 *العداد:* _${km} كم_\n`;
+msg+=`> ${priEmoji[pri]||'⚪'} *الأولوية:* *${pri}*\n\n`;
+const rows=document.querySelectorAll(’#vm-faults-list .item-row’);
+if(rows.length){
+msg+=`*〔 ⚠️ الأعطال المبلغ عنها 〕*\n`;
+rows.forEach((row,i)=>{
+const f=row.querySelector(‘input’);
+const s=row.querySelector(‘select’);
+const sEmoji={‘بسيط’:‘🟡’,‘متوسط’:‘🟠’,‘خطير’:‘🔴’};
+msg+=`> ${i+1}. _${f?.value||'—'}_ — ${sEmoji[s?.value]||'⚪'} *${s?.value||'—'}*\n`;
 });
-if(notes) msg+=`\n📝 ملاحظات: ${notes}`;
+msg+=`\n`;
+}
+if(notes){ msg+=`*〔 📝 ملاحظات 〕*\n> ${notes}\n\n`; }
+msg+=LINE;
 wa(msg);
 }
 
@@ -589,30 +658,46 @@ wa(msg);
 // نموذج ROSC
 // ==========================================
 function roscSend() {
-const time=document.getElementById('r-time').value||'—';
-const type=document.getElementById('r-type').value||'—';
-const loc=document.getElementById('r-location').value||'—';
-const resp=document.getElementById('r-resp').value||'—';
-const units=document.getElementById('r-units').value||'—';
-const rosc=document.getElementById('r-rosc').value;
-const lucas=document.getElementById('r-lucas').value;
-const ops=document.getElementById('r-ops').value||'—';
-const coord=document.getElementById('r-coord').value||'—';
-const names=[...document.querySelectorAll('#r-names-list input')].map(i=>i.value).filter(Boolean);
-const ar=['١','٢','٣','٤','٥','٦','٧','٨'];
-let msg=`*توقيت البلاغ:* ${time}\n`;
-msg+=`*نوع البلاغ:* ${type}\n`;
-msg+=`*موقع البلاغ:* ${loc}\n`;
-msg+=`*زمن الاستجابة:* ${resp}\n\n`;
-msg+=`*الوحدات المستجيبة:*\n${units}\n\n`;
-msg+=`*هل تحقق ROSC؟:* ${rosc}\n`;
-msg+=`*هل تم استخدام جهاز لوكس؟:* ${lucas}\n\n`;
-msg+=`عمل عظيم يجسد الإخلاص والاحترافية في العمل\n`;
-msg+=`بكل فخر واعتزاز، نتقدم بجزيل الشكر والعرفان لجهود الزملاء الذين كان لهم – بعد توفيق الله – الفضل في نجاح عملية إنعاش قلبي رئوي\n\n`;
-names.forEach((n,i)=>{ msg+=`${ar[i]||i+1}- ${n}\n`; });
-msg+=`\n* تحكم عملياتي: ${ops}\n`;
-msg+=`* تنسيق استجابة: ${coord}\n\n`;
-msg+=`جزاكم الله خيرًا، وكتب أجركم، وجعل ما قدمتموه في موازين حسناتكم 🌹`;
+const time=document.getElementById(‘r-time’).value||’—’;
+const type=document.getElementById(‘r-type’).value||’—’;
+const loc=document.getElementById(‘r-location’).value||’—’;
+const resp=document.getElementById(‘r-resp’).value||’—’;
+const units=document.getElementById(‘r-units’).value||’—’;
+const rosc=document.getElementById(‘r-rosc’).value;
+const lucas=document.getElementById(‘r-lucas’).value;
+const ops=document.getElementById(‘r-ops’).value||’—’;
+const coord=document.getElementById(‘r-coord’).value||’—’;
+const names=[…document.querySelectorAll(’#r-names-list input’)].map(i=>i.value).filter(Boolean);
+const ar=[‘١’,‘٢’,‘٣’,‘٤’,‘٥’,‘٦’,‘٧’,‘٨’];
+const LINE=‘➖’.repeat(14);
+let msg=’’;
+msg+=`${LINE}\n`;
+msg+=`         ❤️ *نموذج ROSC*\n`;
+msg+=`${LINE}\n\n`;
+msg+=`*〔 📋 بيانات البلاغ 〕*\n`;
+msg+=`> ⏰ *توقيت البلاغ:* ${time}\n`;
+msg+=`> 📌 *نوع البلاغ:* ${type}\n`;
+msg+=`> 📍 *موقع البلاغ:* ${loc}\n`;
+msg+=`> ⚡ *زمن الاستجابة:* _${resp}_\n\n`;
+msg+=`*〔 🚑 الوحدات المستجيبة 〕*\n`;
+units.split(’\n’).forEach(u=>{ if(u.trim()) msg+=`> ${u.trim()}\n`; });
+msg+=`\n`;
+msg+=`*〔 ✅ نتائج التدخل 〕*\n`;
+msg+=`> 💓 *هل تحقق ROSC؟:* *${rosc}*\n`;
+msg+=`> 🤖 *هل تم استخدام جهاز لوكس؟:* *${lucas}*\n\n`;
+msg+=`${LINE}\n`;
+msg+=`عمل عظيم يجسد الإخلاص والاحترافية في العمل 🌟\n`;
+msg+=`بكل فخر واعتزاز، نتقدم بجزيل الشكر والعرفان لجهود الزملاء الذين كان لهم – بعد توفيق الله – الفضل في نجاح عملية إنعاش قلبي رئوي\n`;
+msg+=`${LINE}\n\n`;
+if(names.length){
+names.forEach((n,i)=>{ msg+=`${ar[i]||i+1}- *${n}*\n`; });
+msg+=`\n`;
+}
+msg+=`> 🎯 *تحكم عملياتي:* ${ops}\n`;
+msg+=`> 🔗 *تنسيق استجابة:* ${coord}\n\n`;
+msg+=`${LINE}\n`;
+msg+=`جزاكم الله خيرًا، وكتب أجركم، وجعل ما قدمتموه في موازين حسناتكم 🌹\n`;
+msg+=`${LINE}`;
 wa(msg);
 }
 </script>
