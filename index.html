@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نظام النماذج الميدانية</title>
+<style>
+  :root {
+    --primary: #1a5276;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --border: #d5e8f0;
+    --text: #1c2833;
+    --muted: #7f8c8d;
+    --shadow: 0 2px 12px rgba(0,0,0,0.09);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .header { background: linear-gradient(135deg,#1a5276,#1f618d); color:#fff; padding:22px 16px 18px; text-align:center; box-shadow:0 3px 12px rgba(0,0,0,.18); }
+  .header h1 { font-size:1.35rem; font-weight:700; margin-bottom:4px; }
+  .header p { font-size:.78rem; opacity:.8; }
+  .page { display:none; } .page.active { display:block; }
+  .home-wrap { padding:16px; max-width:520px; margin:0 auto; }
+  .section-title { font-size:.72rem; font-weight:700; color:var(--muted); letter-spacing:1px; margin:18px 0 10px; padding-right:4px; }
+  .form-grid { display:flex; flex-direction:column; gap:10px; }
+  .form-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:14px 16px; display:flex; align-items:center; gap:14px; cursor:pointer; box-shadow:var(--shadow); border-right:5px solid transparent; }
+  .form-card:active { transform:scale(.98); }
+  .form-card .icon { font-size:2rem; width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .form-card .info { flex:1; }
+  .form-card .info .name { font-weight:700; font-size:.95rem; margin-bottom:2px; }
+  .form-card .info .desc { font-size:.75rem; color:var(--muted); }
+  .form-card .arrow { color:var(--muted); font-size:1rem; }
+  .c-blue   { border-right-color:#2e86c1; } .c-blue   .icon { background:#eaf4fb; }
+  .c-green  { border-right-color:#1e8449; } .c-green  .icon { background:#eafaf1; }
+  .c-orange { border-right-color:#d35400; } .c-orange .icon { background:#fef5e7; }
+  .c-red    { border-right-color:#c0392b; } .c-red    .icon { background:#fdedec; }
+  .c-gold   { border-right-color:#b7950b; } .c-gold   .icon { background:#fef9e7; }
+  .c-teal   { border-right-color:#148f77; } .c-teal   .icon { background:#e8f8f5; }
+  .inner-page { max-width:520px; margin:0 auto; padding:12px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.06); }
+  .card h2 { font-size:.95rem; color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:6px; margin-bottom:10px; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; align-items:flex-start; }
+  .field { display:flex; flex-direction:column; flex:1; min-width:120px; }
+  .field label { font-size:.75rem; color:var(--muted); margin-bottom:3px; }
+  .ff { display:flex; flex-direction:column; margin-bottom:8px; }
+  .ff label { font-size:.75rem; color:var(--muted); margin-bottom:3px; }
+  input[type=text], input[type=date], select, textarea {
+    border:1px solid var(--border); border-radius:6px; padding:6px 8px;
+    font-size:.85rem; font-family:inherit; color:var(--text); background:#f9fbfc; width:100%; direction:rtl;
+  }
+  textarea { resize:vertical; min-height:55px; }
+  .radio-group { display:flex; gap:12px; margin-top:2px; flex-wrap:wrap; }
+  .radio-group label { display:flex; align-items:center; gap:4px; font-size:.85rem; cursor:pointer; }
+  .sector-header { display:flex; justify-content:space-between; align-items:center; background:var(--primary); color:#fff; border-radius:6px; padding:6px 10px; margin-bottom:8px; font-size:.85rem; font-weight:bold; }
+  .incident-block { border:1px solid var(--border); border-radius:8px; padding:10px; margin-bottom:8px; background:#f9fbff; }
+  .remove-btn { background:none; border:none; color:#e74c3c; cursor:pointer; font-size:1rem; padding:0 4px; }
+  .btn { border:none; border-radius:6px; padding:6px 12px; cursor:pointer; font-size:.8rem; font-family:inherit; display:inline-flex; align-items:center; gap:4px; }
+  .btn-primary { background:var(--primary); color:#fff; }
+  .btn-sm { padding:4px 8px; font-size:.75rem; }
+  .btn-outline { background:#fff; border:1px solid var(--primary); color:var(--primary); }
+  .add-bar { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+  .person-item { display:flex; align-items:center; gap:6px; background:#f9f9f9; border:1px solid var(--border); border-radius:6px; padding:5px 8px; margin-bottom:5px; }
+  .person-item input { flex:1; }
+  .divider { border:none; border-top:1px dashed var(--border); margin:6px 0; }
+  .item-row { border:1px solid var(--border); border-radius:8px; padding:10px 10px 10px 42px; margin-bottom:8px; background:#f9fbff; position:relative; }
+  .del-btn { position:absolute; top:8px; left:8px; background:#e74c3c; color:#fff; border:none; border-radius:5px; padding:3px 8px; cursor:pointer; font-size:.72rem; white-space:nowrap; }
+  .send-btn { width:100%; padding:12px; background:#25d366; color:#fff; border:none; border-radius:8px; font-size:1rem; font-weight:bold; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:4px; }
+  .send-btn:active { opacity:.85; }
+  .pg-header { display:flex; align-items:center; gap:10px; padding:14px 16px; color:#fff; }
+  .pg-header .back { background:rgba(255,255,255,.18); border:none; color:#fff; border-radius:8px; padding:6px 10px; cursor:pointer; font-size:1.1rem; flex-shrink:0; }
+  .pg-header .pg-title { font-weight:700; font-size:1rem; }
+  .pg-header .pg-sub { font-size:.75rem; opacity:.8; }
+  .rosc-names { display:flex; flex-direction:column; gap:6px; }
+  .name-row { display:flex; align-items:center; gap:6px; }
+  .name-row span { font-size:.8rem; color:var(--muted); width:20px; flex-shrink:0; text-align:center; }
+  .name-row input { flex:1; }
+  .preview-box { background:#f0f9f4; border:1px solid #a9dfbf; border-radius:8px; padding:10px; font-size:.83rem; line-height:1.9; white-space:pre-wrap; direction:rtl; min-height:80px; margin-top:8px; color:#1c2833; }
+  .wa-icon { flex-shrink:0; }
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+
+<div id="page-home" class="page active">
+  <div class="header">
+    <h1>🚑 نظام النماذج الميدانية</h1>
+    <p>اختر النموذج المطلوب</p>
+  </div>
+  <div class="home-wrap">
+
+
+<div class="section-title">نماذج المناوبة</div>
+<div class="form-grid">
+  <div class="form-card c-blue" onclick="showPage('page-shift')">
+    <div class="icon">📋</div>
+    <div class="info"><div class="name">نموذج نهاية المناوبة</div><div class="desc">البلاغات، المركبات، الغياب، الطاقم</div></div>
+    <div class="arrow">‹</div>
+  </div>
+  <div class="form-card c-teal" onclick="showPage('page-moshr')">
+    <div class="icon">📊</div>
+    <div class="info"><div class="name">مؤشر المناوبة</div><div class="desc">متوسط وقت الاستجابة وجملة الختام</div></div>
+    <div class="arrow">‹</div>
+  </div>
+</div>
+
+<div class="section-title">نماذج الصيانة</div>
+<div class="form-grid">
+  <div class="form-card c-green" onclick="showPage('page-oil')">
+    <div class="icon">🛢️</div>
+    <div class="info"><div class="name">نموذج تغيير الزيت</div><div class="desc">تسجيل بيانات تغيير زيت المركبات</div></div>
+    <div class="arrow">‹</div>
+  </div>
+  <div class="form-card c-orange" onclick="showPage('page-device')">
+    <div class="icon">🔧</div>
+    <div class="info"><div class="name">نموذج صيانة جهاز</div><div class="desc">صيانة الأجهزة الطبية والميدانية</div></div>
+    <div class="arrow">‹</div>
+  </div>
+  <div class="form-card c-red" onclick="showPage('page-vehicle-maint')">
+    <div class="icon">🚑</div>
+    <div class="info"><div class="name">نموذج صيانة مركبة</div><div class="desc">تسجيل أعطال وطلبات الصيانة</div></div>
+    <div class="arrow">‹</div>
+  </div>
+</div>
+
+<div class="section-title">نماذج أخرى</div>
+<div class="form-grid">
+  <div class="form-card c-gold" onclick="showPage('page-rosc')">
+    <div class="icon">❤️</div>
+    <div class="info"><div class="name">نموذج ROSC</div><div class="desc">تقرير إنعاش قلبي رئوي ناجح</div></div>
+    <div class="arrow">‹</div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+<!-- نموذج نهاية المناوبة -->
+
+<div id="page-shift" class="page">
+  <div class="header pg-header">
+    <button class="back" onclick="showPage('page-home')">›</button>
+    <div><div class="pg-title">نموذج نهاية المناوبة</div><div class="pg-sub">تقرير شامل للمناوبة</div></div>
+  </div>
+  <div class="inner-page">
+    <div class="card">
+      <div class="row">
+        <div class="field"><label>التاريخ</label><input type="date" id="s-date"></div>
+        <div class="field"><label>الفترة</label>
+          <div class="radio-group">
+            <label><input type="radio" name="s-period" value="صباحية" checked> صباحية</label>
+            <label><input type="radio" name="s-period" value="مسائية"> مسائية</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="border-right:4px solid #2471a3;">
+      <h2>📊 الموشر</h2>
+      <div class="ff"><label>متوسط وقت الاستجابة (دقيقة)</label><input type="text" id="s-ind-resp" placeholder="دقيقة"></div>
+      <div class="ff"><label>ملاحظات الموشر</label><textarea id="s-ind-notes" placeholder="ملاحظات الموشر..."></textarea></div>
+    </div>
+    <div class="card">
+      <h2>🚗 المركبات</h2>
+      <div class="row">
+        <div class="field"><label>عاملة</label><input type="text" id="s-v-work" placeholder="عدد أو أرقام"></div>
+        <div class="field"><label>احتياط</label><input type="text" id="s-v-res" placeholder="عدد أو أرقام"></div>
+        <div class="field"><label>متعطلة</label><input type="text" id="s-v-brk" placeholder="عدد أو أرقام"></div>
+      </div>
+      <div class="ff"><label>ملاحظات الأعطال</label><textarea id="s-v-notes" placeholder="ملاحظات الأعطال..."></textarea></div>
+    </div>
+    <div class="card">
+      <h2>📋 نموذج بلاغات التدخل السريع</h2>
+      <div id="s-sectors-container"></div>
+      <button class="btn btn-outline btn-sm" onclick="sAddSector()">➕ إضافة قطاع</button>
+    </div>
+    <div class="card">
+      <h2>👤 الغياب والمتأخرين</h2>
+      <label style="font-size:.8rem;font-weight:bold;display:block;margin-bottom:5px;">أسماء الغياب</label>
+      <div id="s-absent-list"></div>
+      <button class="btn btn-outline btn-sm" onclick="sAddPerson('absent')">➕ إضافة غياب</button>
+      <hr class="divider">
+      <label style="font-size:.8rem;font-weight:bold;display:block;margin:8px 0 5px;">أسماء المتأخرين</label>
+      <div id="s-late-list"></div>
+      <button class="btn btn-outline btn-sm" onclick="sAddPerson('late')">➕ إضافة متأخر</button>
+    </div>
+    <div class="card"><h2>📝 ملاحظات عامة</h2><textarea id="s-gen-notes" placeholder="ملاحظات عامة..."></textarea></div>
+    <div class="card">
+      <h2>👥 معلومات الطاقم</h2>
+      <div class="row">
+        <div class="field"><label>اسم كبير المسعفين</label><input type="text" id="s-chief" placeholder="الاسم الكامل"></div>
+        <div class="field"><label>اسم المساعد</label><input type="text" id="s-asst" placeholder="الاسم الكامل"></div>
+      </div>
+    </div>
+    <button class="send-btn" onclick="sSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+  </div>
+</div>
+
+<!-- مؤشر المناوبة -->
+
+<div id="page-moshr" class="page">
+  <div class="header pg-header" style="background:linear-gradient(135deg,#148f77,#1abc9c);">
+    <button class="back" onclick="showPage('page-home')">›</button>
+    <div><div class="pg-title">مؤشر المناوبة</div><div class="pg-sub">قطاع الوسط</div></div>
+  </div>
+  <div class="inner-page">
+    <div class="card">
+      <div class="ff"><label>التاريخ</label><input type="date" id="m-date" oninput="mUpdatePreview()"></div>
+      <div class="ff" style="margin-top:8px;"><label>المناوبة</label>
+        <div class="radio-group">
+          <label><input type="radio" name="m-period" value="صباحية" checked onchange="mUpdatePreview()"> صباحية</label>
+          <label><input type="radio" name="m-period" value="مسائية" onchange="mUpdatePreview()"> مسائية</label>
+        </div>
+      </div>
+      <div class="ff" style="margin-top:8px;"><label>متوسط وقت الاستجابة</label><input type="text" id="m-resp" placeholder="مثال: 8 دقائق" oninput="mUpdatePreview()"></div>
+    </div>
+    <div class="card">
+      <h2>💬 جملة الختام</h2>
+      <label style="font-size:.75rem;color:var(--muted);display:block;margin-bottom:4px;">اختر جملة ختام</label>
+      <select id="m-phrase-select" onchange="mUpdatePreview()">
+        <option value="">-- بدون جملة ختام --</option>
+        <option value="الله يعطيكم العافية جميعاً ماقصرتوا 🌹">الله يعطيكم العافية جميعاً ماقصرتوا 🌹</option>
+        <option value="جزاكم الله خيراً على جهودكم المبذولة 🌹">جزاكم الله خيراً على جهودكم المبذولة 🌹</option>
+        <option value="بارك الله فيكم ونفع بكم 🌹">بارك الله فيكم ونفع بكم 🌹</option>
+        <option value="شكراً لكل من أسهم في إنجاح هذه المناوبة 🌹">شكراً لكل من أسهم في إنجاح هذه المناوبة 🌹</option>
+        <option value="وفقكم الله وسدد خطاكم 🌹">وفقكم الله وسدد خطاكم 🌹</option>
+      </select>
+      <div class="preview-box" id="m-preview"></div>
+    </div>
+    <button class="send-btn" style="background:#148f77;" onclick="mSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+  </div>
+</div>
+
+<!-- نموذج تغيير الزيت -->
+
+<div id="page-oil" class="page">
+  <div class="header pg-header" style="background:linear-gradient(135deg,#1e8449,#239b56);">
+    <button class="back" onclick="showPage('page-home')">›</button>
+    <div><div class="pg-title">نموذج تغيير الزيت</div><div class="pg-sub">تسجيل بيانات تغيير زيت المركبات</div></div>
+  </div>
+  <div class="inner-page">
+    <div class="card">
+      <div class="ff"><label>التاريخ</label><input type="date" id="o-date"></div>
+    </div>
+    <div class="card">
+      <h2>🛢️ بيانات المركبات</h2>
+      <div id="o-vehicles-list"></div>
+      <button class="btn btn-outline btn-sm" onclick="oAddVehicle()">➕ إضافة مركبة</button>
+    </div>
+    <div class="card"><h2>📝 ملاحظات</h2><textarea id="o-notes" placeholder="ملاحظات إضافية..."></textarea></div>
+    <button class="send-btn" style="background:#1e8449;" onclick="oSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+  </div>
+</div>
+
+<!-- نموذج صيانة جهاز -->
+
+<div id="page-device" class="page">
+  <div class="header pg-header" style="background:linear-gradient(135deg,#d35400,#e67e22);">
+    <button class="back" onclick="showPage('page-home')">›</button>
+    <div><div class="pg-title">نموذج صيانة جهاز</div><div class="pg-sub">صيانة الأجهزة الطبية والميدانية</div></div>
+  </div>
+  <div class="inner-page">
+    <div class="card">
+      <div class="ff"><label>التاريخ</label><input type="date" id="d-date"></div>
+    </div>
+    <div class="card">
+      <h2>🔧 بيانات الأجهزة</h2>
+      <div id="d-devices-list"></div>
+      <button class="btn btn-outline btn-sm" onclick="dAddDevice()">➕ إضافة جهاز</button>
+    </div>
+    <div class="card"><h2>📝 ملاحظات</h2><textarea id="d-notes" placeholder="ملاحظات إضافية..."></textarea></div>
+    <button class="send-btn" style="background:#d35400;" onclick="dSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+  </div>
+</div>
+
+<!-- نموذج صيانة مركبة -->
+
+<div id="page-vehicle-maint" class="page">
+  <div class="header pg-header" style="background:linear-gradient(135deg,#c0392b,#e74c3c);">
+    <button class="back" onclick="showPage('page-home')">›</button>
+    <div><div class="pg-title">نموذج صيانة مركبة</div><div class="pg-sub">تسجيل أعطال وطلبات الصيانة</div></div>
+  </div>
+  <div class="inner-page">
+    <div class="card">
+      <div class="ff"><label>التاريخ</label><input type="date" id="vm-date"></div>
+    </div>
+    <div class="card">
+      <h2>🚑 بيانات المركبة</h2>
+      <div class="row">
+        <div class="field"><label>رقم المركبة</label><input type="text" id="vm-num" placeholder="رقم اللوحة"></div>
+        <div class="field"><label>نوع المركبة</label><input type="text" id="vm-type" placeholder="نوع / موديل"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>عداد الكيلومترات</label><input type="text" id="vm-km" placeholder="كم"></div>
+        <div class="field"><label>الأولوية</label>
+          <select id="vm-priority"><option>عادية</option><option>عاجلة</option><option>حرجة</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>⚠️ الأعطال المُبلَّغ عنها</h2>
+      <div id="vm-faults-list"></div>
+      <button class="btn btn-outline btn-sm" onclick="vmAddFault()">➕ إضافة عطل</button>
+    </div>
+    <div class="card"><h2>📝 ملاحظات</h2><textarea id="vm-notes" placeholder="ملاحظات إضافية..."></textarea></div>
+    <button class="send-btn" style="background:#c0392b;" onclick="vmSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+  </div>
+</div>
+
+<!-- نموذج ROSC -->
+
+<div id="page-rosc" class="page">
+  <div class="header pg-header" style="background:linear-gradient(135deg,#922b21,#e74c3c);">
+    <button class="back" onclick="showPage('page-home')">›</button>
+    <div><div class="pg-title">نموذج ROSC</div><div class="pg-sub">تقرير إنعاش قلبي رئوي ناجح</div></div>
+  </div>
+  <div class="inner-page">
+    <div class="card">
+      <h2>📋 بيانات البلاغ</h2>
+      <div class="ff"><label>توقيت البلاغ</label><input type="text" id="r-time" placeholder="مثال: 14:30"></div>
+      <div class="ff" style="margin-top:8px;"><label>نوع البلاغ</label><input type="text" id="r-type" placeholder="نوع البلاغ"></div>
+      <div class="ff" style="margin-top:8px;"><label>موقع البلاغ</label><input type="text" id="r-location" placeholder="الموقع"></div>
+      <div class="ff" style="margin-top:8px;"><label>زمن الاستجابة</label><input type="text" id="r-resp" placeholder="مثال: 8 دقائق"></div>
+    </div>
+    <div class="card">
+      <h2>🚑 الوحدات المستجيبة</h2>
+      <textarea id="r-units" placeholder="اذكر الوحدات المستجيبة..." style="min-height:60px;"></textarea>
+    </div>
+    <div class="card">
+      <h2>✅ نتائج التدخل</h2>
+      <div class="row">
+        <div class="field"><label>هل تحقق ROSC؟</label>
+          <select id="r-rosc"><option value="نعم 👏">نعم 👏</option><option value="لا">لا</option></select>
+        </div>
+        <div class="field"><label>هل تم استخدام جهاز لوكس؟</label>
+          <select id="r-lucas"><option value="نعم ✅">نعم ✅</option><option value="لا">لا</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>👥 أسماء الزملاء المشاركين</h2>
+      <div class="rosc-names" id="r-names-list">
+        <div class="name-row"><span>١</span><input type="text" placeholder="الاسم"></div>
+        <div class="name-row"><span>٢</span><input type="text" placeholder="الاسم"></div>
+        <div class="name-row"><span>٣</span><input type="text" placeholder="الاسم"></div>
+        <div class="name-row"><span>٤</span><input type="text" placeholder="الاسم"></div>
+        <div class="name-row"><span>٥</span><input type="text" placeholder="الاسم"></div>
+        <div class="name-row"><span>٦</span><input type="text" placeholder="الاسم"></div>
+        <div class="name-row"><span>٧</span><input type="text" placeholder="الاسم"></div>
+        <div class="name-row"><span>٨</span><input type="text" placeholder="الاسم"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>🎖️ التحكم والتنسيق</h2>
+      <div class="ff"><label>تحكم عملياتي</label><input type="text" id="r-ops" placeholder="الاسم"></div>
+      <div class="ff" style="margin-top:8px;"><label>تنسيق استجابة</label><input type="text" id="r-coord" placeholder="الاسم"></div>
+    </div>
+    <button class="send-btn" style="background:#922b21;" onclick="roscSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+  </div>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function wa(msg) { window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); }
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date().toISOString().split('T')[0];
+  ['s-date','o-date','d-date','vm-date','m-date'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.value = today;
+  });
+  sAddSector('الوسط');
+  mUpdatePreview();
+});
+
+// ==========================================
+// نموذج نهاية المناوبة
+// ==========================================
+let sIncCounter = 0;
+const sSectors = {};
+
+function sAddSector(defaultName) {
+  const id = 'sec_' + Date.now();
+  sSectors[id] = { name: defaultName||'', incidents:[] };
+  sRenderSectors();
+  if(!defaultName) setTimeout(()=>{ const el=document.getElementById('sname_'+id); if(el) el.focus(); },50);
+}
+function sRemoveSector(id) { delete sSectors[id]; sRenderSectors(); }
+
+function sRenderSectors() {
+  const c = document.getElementById('s-sectors-container');
+  c.innerHTML = '';
+  Object.keys(sSectors).forEach(id => {
+    const sec = sSectors[id];
+    const div = document.createElement('div');
+    div.style.marginBottom = '14px';
+    div.innerHTML = `
+      <div class="sector-header">
+        <span>القطاع:</span>
+        <input id="sname_${id}" type="text" value="${sec.name}"
+          style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:4px;color:#fff;padding:2px 6px;font-size:.82rem;width:120px;text-align:right;"
+          oninput="sSectors['${id}'].name=this.value">
+        <button class="remove-btn" onclick="sRemoveSector('${id}')" style="color:#fff;">🗑</button>
+      </div>
+      <div id="sinc_${id}"></div>
+      <div style="margin-top:10px;">
+        <div style="font-weight:bold;font-size:.88rem;margin-bottom:4px;">استجابة داعمة:</div>
+        <textarea id="sup_${id}" style="width:100%;min-height:50px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.85rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea>
+
+
+  </div>
+  <div style="margin-top:10px;margin-bottom:10px;">
+    <div style="font-weight:bold;font-size:.88rem;margin-bottom:4px;">استجابة ملغية:</div>
+    <textarea id="can_${id}" style="width:100%;min-height:50px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.85rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea>
+  </div>
+  <div class="add-bar">
+    <button class="btn btn-primary btn-sm" onclick="sAddInc('${id}')">➕ إضافة استجابة أولية</button>
+    <button class="btn btn-sm btn-outline" onclick="sAddBulk('${id}',5)">إضافة 5</button>
+    <button class="btn btn-sm btn-outline" onclick="sAddBulk('${id}',7)">أضف 1..7</button>
+  </div>`;
+c.appendChild(div);
+sRenderInc(id);
+
+
+});
+}
+
+function sRenderInc(id) {
+const c = document.getElementById('sinc_'+id); if(!c) return;
+c.innerHTML = '';
+sSectors[id].incidents.forEach((inc,idx) => {
+const b = document.createElement('div'); b.className='incident-block';
+b.innerHTML=`<div style="display:flex;align-items:center;gap:8px;"> <span style="font-weight:bold;font-size:.9rem;white-space:nowrap;">استجابة أولية ${inc.num}:</span> <input type="text" placeholder="أدخل رقم البلاغ أو الملاحظة" value="${inc.note||''}" oninput="sSectors['${id}'].incidents[${idx}].note=this.value" style="flex:1;"> <button onclick="sRemoveInc('${id}',${idx})" style="background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:.82rem;font-family:inherit;white-space:nowrap;">حذف</button> </div>`;
+c.appendChild(b);
+});
+}
+
+function sAddInc(id) { sIncCounter++; sSectors[id].incidents.push({num:sIncCounter}); sRenderInc(id); }
+function sAddBulk(id,n) { for(let i=0;i<n;i++){sIncCounter++;sSectors[id].incidents.push({num:sIncCounter});} sRenderInc(id); }
+function sRemoveInc(id,idx) { sSectors[id].incidents.splice(idx,1); sRenderInc(id); }
+function sAddPerson(type) {
+const c=document.getElementById(type==='absent'?'s-absent-list':'s-late-list');
+const d=document.createElement('div'); d.className='person-item';
+d.innerHTML=`<input type="text" placeholder="الاسم الكامل"><button class="remove-btn" onclick="this.parentElement.remove()">✕</button>`;
+c.appendChild(d); d.querySelector('input').focus();
+}
+function sSend() {
+const date=document.getElementById('s-date').value||'—';
+const period=document.querySelector('input[name="s-period"]:checked')?.value||'—';
+const resp=document.getElementById('s-ind-resp').value||'—';
+const indN=document.getElementById('s-ind-notes').value||'';
+const vW=document.getElementById('s-v-work').value||'—';
+const vR=document.getElementById('s-v-res').value||'—';
+const vB=document.getElementById('s-v-brk').value||'—';
+const vN=document.getElementById('s-v-notes').value||'';
+const gen=document.getElementById('s-gen-notes').value||'';
+const chief=document.getElementById('s-chief').value||'—';
+const asst=document.getElementById('s-asst').value||'—';
+let msg=`📋 *نموذج نهاية المناوبة*\n📅 ${date} | ${period}\n\n`;
+msg+=`📊 *الموشر*\nمتوسط وقت الاستجابة: ${resp} دقيقة\n`;
+if(indN) msg+=`ملاحظات: ${indN}\n`;
+msg+=`\n🚗 *المركبات*\nعاملة: ${vW} | احتياط: ${vR} | متعطلة: ${vB}\n`;
+if(vN) msg+=`ملاحظات الأعطال: ${vN}\n`;
+msg+=`\n`;
+Object.keys(sSectors).forEach(id=>{
+const sec=sSectors[id];
+const nm=document.getElementById('sname_'+id)?.value||sec.name||'—';
+msg+=`📍 *القطاع: ${nm}*\n`;
+if(!sec.incidents.length) msg+=`لا توجد بلاغات\n`;
+else sec.incidents.forEach(i=>{ msg+=`🔹 استجابة أولية ${i.num}: ${i.note||'—'}\n`; });
+const sup=document.getElementById('sup_'+id)?.value||'';
+const can=document.getElementById('can_'+id)?.value||'';
+if(sup) msg+=`🟢 داعمة: ${sup}\n`;
+if(can) msg+=`🔴 ملغية: ${can}\n`;
+msg+=`\n`;
+});
+const abs=[...document.querySelectorAll('#s-absent-list input')].map(i=>i.value).filter(Boolean);
+const lat=[...document.querySelectorAll('#s-late-list input')].map(i=>i.value).filter(Boolean);
+if(abs.length) msg+=`🚫 الغياب: ${abs.join(' | ')}\n`;
+if(lat.length) msg+=`⏱ المتأخرون: ${lat.join(' | ')}\n`;
+if(gen) msg+=`\n📝 ملاحظات عامة:\n${gen}\n`;
+msg+=`\n👥 كبير المسعفين: ${chief} | المساعد: ${asst}`;
+wa(msg);
+}
+
+// ==========================================
+// مؤشر المناوبة
+// ==========================================
+function mBuildMsg() {
+const date=document.getElementById('m-date').value||'—';
+const period=document.querySelector('input[name="m-period"]:checked')?.value||'—';
+const resp=document.getElementById('m-resp').value||'—';
+const phrase=document.getElementById('m-phrase-select').value||'';
+let msg=`*مؤشر المناوبة لقطاع الوسط*\n\nالتاريخ: ${date}\nالمناوبة: ${period}\nمتوسط وقت الاستجابة: ${resp}`;
+if(phrase) msg+=`\n\n${phrase}`;
+return msg;
+}
+function mUpdatePreview() {
+const el=document.getElementById('m-preview');
+if(el) el.textContent=mBuildMsg();
+}
+function mSend() { wa(mBuildMsg()); }
+
+// ==========================================
+// نموذج تغيير الزيت
+// ==========================================
+function oAddVehicle() {
+const c=document.getElementById('o-vehicles-list');
+const d=document.createElement('div'); d.className='item-row';
+d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>نداء الفرقة</label><input type="text" placeholder="نداء الفرقة"></div> <div class="ff" style="margin-bottom:7px;"><label>رقم اللوحة</label><input type="text" placeholder="رقم اللوحة"></div> <div class="ff" style="margin-bottom:7px;"><label>العداد الحالي (كم)</label><input type="text" placeholder="الكيلومترات الحالية"></div> <div class="ff"><label>الموعد القادم لتغيير الزيت (كم)</label><input type="text" placeholder="الكيلومترات القادمة"></div>`;
+c.appendChild(d);
+}
+function oSend() {
+const date=document.getElementById('o-date').value||'—';
+const notes=document.getElementById('o-notes').value||'';
+let msg=`🛢️ *نموذج تغيير الزيت*\n📅 ${date}\n\n`;
+document.querySelectorAll('#o-vehicles-list .item-row').forEach((row,i)=>{
+const f=row.querySelectorAll('input');
+msg+=`🚑 *مركبة ${i+1}*\n`;
+msg+=`نداء الفرقة: ${f[0].value||'—'}\n`;
+msg+=`رقم اللوحة: ${f[1].value||'—'}\n`;
+msg+=`العداد الحالي: ${f[2].value||'—'} كم\n`;
+msg+=`الموعد القادم: ${f[3].value||'—'} كم\n\n`;
+});
+if(notes) msg+=`📝 ملاحظات: ${notes}`;
+wa(msg);
+}
+
+// ==========================================
+// نموذج صيانة جهاز
+// ==========================================
+function dAddDevice() {
+const c=document.getElementById('d-devices-list');
+const d=document.createElement('div'); d.className='item-row';
+d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>اسم الجهاز</label><input type="text" placeholder="اسم الجهاز"></div> <div class="ff" style="margin-bottom:7px;"><label>السيريال نمبر</label><input type="text" placeholder="Serial No."></div> <div class="ff"><label>العطل / المشكلة</label><input type="text" placeholder="وصف المشكلة"></div>`;
+c.appendChild(d);
+}
+function dSend() {
+const date=document.getElementById('d-date').value||'—';
+const notes=document.getElementById('d-notes').value||'';
+let msg=`🔧 *نموذج صيانة جهاز*\n📅 ${date}\n\n`;
+document.querySelectorAll('#d-devices-list .item-row').forEach((row,i)=>{
+const f=row.querySelectorAll('input');
+msg+=`🔹 *جهاز ${i+1}*\n`;
+msg+=`اسم الجهاز: ${f[0].value||'—'}\n`;
+msg+=`السيريال نمبر: ${f[1].value||'—'}\n`;
+msg+=`العطل: ${f[2].value||'—'}\n\n`;
+});
+if(notes) msg+=`📝 ملاحظات: ${notes}`;
+wa(msg);
+}
+
+// ==========================================
+// نموذج صيانة مركبة
+// ==========================================
+function vmAddFault() {
+const c=document.getElementById('vm-faults-list');
+const d=document.createElement('div'); d.className='item-row';
+d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>وصف العطل</label><input type="text" placeholder="وصف العطل"></div> <div class="ff"><label>الشدة</label> <select><option>بسيط</option><option>متوسط</option><option>خطير</option></select> </div>`;
+c.appendChild(d);
+}
+function vmSend() {
+const date=document.getElementById('vm-date').value||'—';
+const num=document.getElementById('vm-num').value||'—';
+const type=document.getElementById('vm-type').value||'—';
+const km=document.getElementById('vm-km').value||'—';
+const pri=document.getElementById('vm-priority').value||'—';
+const notes=document.getElementById('vm-notes').value||'';
+let msg=`🚑 *نموذج صيانة مركبة*\n📅 ${date}\n`;
+msg+=`المركبة: ${num} | النوع: ${type}\nالعداد: ${km} كم | الأولوية: ${pri}\n\n⚠️ *الأعطال:*\n`;
+document.querySelectorAll('#vm-faults-list .item-row').forEach((row,i)=>{
+const f=row.querySelector('input');
+const s=row.querySelector('select');
+msg+=`${i+1}. ${f?.value||'—'} — الشدة: ${s?.value||'—'}\n`;
+});
+if(notes) msg+=`\n📝 ملاحظات: ${notes}`;
+wa(msg);
+}
+
+// ==========================================
+// نموذج ROSC
+// ==========================================
+function roscSend() {
+const time=document.getElementById('r-time').value||'—';
+const type=document.getElementById('r-type').value||'—';
+const loc=document.getElementById('r-location').value||'—';
+const resp=document.getElementById('r-resp').value||'—';
+const units=document.getElementById('r-units').value||'—';
+const rosc=document.getElementById('r-rosc').value;
+const lucas=document.getElementById('r-lucas').value;
+const ops=document.getElementById('r-ops').value||'—';
+const coord=document.getElementById('r-coord').value||'—';
+const names=[...document.querySelectorAll('#r-names-list input')].map(i=>i.value).filter(Boolean);
+const ar=['١','٢','٣','٤','٥','٦','٧','٨'];
+let msg=`*توقيت البلاغ:* ${time}\n`;
+msg+=`*نوع البلاغ:* ${type}\n`;
+msg+=`*موقع البلاغ:* ${loc}\n`;
+msg+=`*زمن الاستجابة:* ${resp}\n\n`;
+msg+=`*الوحدات المستجيبة:*\n${units}\n\n`;
+msg+=`*هل تحقق ROSC؟:* ${rosc}\n`;
+msg+=`*هل تم استخدام جهاز لوكس؟:* ${lucas}\n\n`;
+msg+=`عمل عظيم يجسد الإخلاص والاحترافية في العمل\n`;
+msg+=`بكل فخر واعتزاز، نتقدم بجزيل الشكر والعرفان لجهود الزملاء الذين كان لهم – بعد توفيق الله – الفضل في نجاح عملية إنعاش قلبي رئوي\n\n`;
+names.forEach((n,i)=>{ msg+=`${ar[i]||i+1}- ${n}\n`; });
+msg+=`\n* تحكم عملياتي: ${ops}\n`;
+msg+=`* تنسيق استجابة: ${coord}\n\n`;
+msg+=`جزاكم الله خيرًا، وكتب أجركم، وجعل ما قدمتموه في موازين حسناتكم 🌹`;
+wa(msg);
+}
+</script>
+
+</body>
+</html>
