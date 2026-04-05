@@ -4,700 +4,472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نظام النماذج الميدانية</title>
+<title>&#x627;&#x644;&#x646;&#x645;&#x627;&#x630;&#x62C; &#x627;&#x644;&#x645;&#x64A;&#x62F;&#x627;&#x646;&#x64A;&#x629;</title>
 <style>
-  :root {
-    --primary: #1a5276;
-    --bg: #f0f4f8;
-    --card: #ffffff;
-    --border: #d5e8f0;
-    --text: #1c2833;
-    --muted: #7f8c8d;
-    --shadow: 0 2px 12px rgba(0,0,0,0.09);
-    --radius: 14px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-  .header { background: linear-gradient(135deg,#1a5276,#1f618d); color:#fff; padding:22px 16px 18px; text-align:center; box-shadow:0 3px 12px rgba(0,0,0,.18); }
-  .header h1 { font-size:1.35rem; font-weight:700; margin-bottom:4px; }
-  .header p { font-size:.78rem; opacity:.8; }
-  .page { display:none; } .page.active { display:block; }
-  .home-wrap { padding:16px; max-width:520px; margin:0 auto; }
-  .section-title { font-size:.72rem; font-weight:700; color:var(--muted); letter-spacing:1px; margin:18px 0 10px; padding-right:4px; }
-  .form-grid { display:flex; flex-direction:column; gap:10px; }
-  .form-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:14px 16px; display:flex; align-items:center; gap:14px; cursor:pointer; box-shadow:var(--shadow); border-right:5px solid transparent; }
-  .form-card:active { transform:scale(.98); }
-  .form-card .icon { font-size:2rem; width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .form-card .info { flex:1; }
-  .form-card .info .name { font-weight:700; font-size:.95rem; margin-bottom:2px; }
-  .form-card .info .desc { font-size:.75rem; color:var(--muted); }
-  .form-card .arrow { color:var(--muted); font-size:1rem; }
-  .c-blue   { border-right-color:#2e86c1; } .c-blue   .icon { background:#eaf4fb; }
-  .c-green  { border-right-color:#1e8449; } .c-green  .icon { background:#eafaf1; }
-  .c-orange { border-right-color:#d35400; } .c-orange .icon { background:#fef5e7; }
-  .c-red    { border-right-color:#c0392b; } .c-red    .icon { background:#fdedec; }
-  .c-gold   { border-right-color:#b7950b; } .c-gold   .icon { background:#fef9e7; }
-  .c-teal   { border-right-color:#148f77; } .c-teal   .icon { background:#e8f8f5; }
-  .inner-page { max-width:520px; margin:0 auto; padding:12px; }
-  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,.06); }
-  .card h2 { font-size:.95rem; color:var(--primary); border-bottom:2px solid var(--border); padding-bottom:6px; margin-bottom:10px; }
-  .row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; align-items:flex-start; }
-  .field { display:flex; flex-direction:column; flex:1; min-width:120px; }
-  .field label { font-size:.75rem; color:var(--muted); margin-bottom:3px; }
-  .ff { display:flex; flex-direction:column; margin-bottom:8px; }
-  .ff label { font-size:.75rem; color:var(--muted); margin-bottom:3px; }
-  input[type=text], input[type=date], select, textarea {
-    border:1px solid var(--border); border-radius:6px; padding:6px 8px;
-    font-size:.85rem; font-family:inherit; color:var(--text); background:#f9fbfc; width:100%; direction:rtl;
-  }
-  textarea { resize:vertical; min-height:55px; }
-  .radio-group { display:flex; gap:12px; margin-top:2px; flex-wrap:wrap; }
-  .radio-group label { display:flex; align-items:center; gap:4px; font-size:.85rem; cursor:pointer; }
-  .sector-header { display:flex; justify-content:space-between; align-items:center; background:var(--primary); color:#fff; border-radius:6px; padding:6px 10px; margin-bottom:8px; font-size:.85rem; font-weight:bold; }
-  .incident-block { border:1px solid var(--border); border-radius:8px; padding:10px; margin-bottom:8px; background:#f9fbff; }
-  .remove-btn { background:none; border:none; color:#e74c3c; cursor:pointer; font-size:1rem; padding:0 4px; }
-  .btn { border:none; border-radius:6px; padding:6px 12px; cursor:pointer; font-size:.8rem; font-family:inherit; display:inline-flex; align-items:center; gap:4px; }
-  .btn-primary { background:var(--primary); color:#fff; }
-  .btn-sm { padding:4px 8px; font-size:.75rem; }
-  .btn-outline { background:#fff; border:1px solid var(--primary); color:var(--primary); }
-  .add-bar { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
-  .person-item { display:flex; align-items:center; gap:6px; background:#f9f9f9; border:1px solid var(--border); border-radius:6px; padding:5px 8px; margin-bottom:5px; }
-  .person-item input { flex:1; }
-  .divider { border:none; border-top:1px dashed var(--border); margin:6px 0; }
-  .item-row { border:1px solid var(--border); border-radius:8px; padding:10px 10px 10px 42px; margin-bottom:8px; background:#f9fbff; position:relative; }
-  .del-btn { position:absolute; top:8px; left:8px; background:#e74c3c; color:#fff; border:none; border-radius:5px; padding:3px 8px; cursor:pointer; font-size:.72rem; white-space:nowrap; }
-  .send-btn { width:100%; padding:12px; background:#25d366; color:#fff; border:none; border-radius:8px; font-size:1rem; font-weight:bold; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:4px; }
-  .send-btn:active { opacity:.85; }
-  .pg-header { display:flex; align-items:center; gap:10px; padding:14px 16px; color:#fff; }
-  .pg-header .back { background:rgba(255,255,255,.18); border:none; color:#fff; border-radius:8px; padding:6px 10px; cursor:pointer; font-size:1.1rem; flex-shrink:0; }
-  .pg-header .pg-title { font-weight:700; font-size:1rem; }
-  .pg-header .pg-sub { font-size:.75rem; opacity:.8; }
-  .rosc-names { display:flex; flex-direction:column; gap:6px; }
-  .name-row { display:flex; align-items:center; gap:6px; }
-  .name-row span { font-size:.8rem; color:var(--muted); width:20px; flex-shrink:0; text-align:center; }
-  .name-row input { flex:1; }
-  .preview-box { background:#f0f9f4; border:1px solid #a9dfbf; border-radius:8px; padding:10px; font-size:.83rem; line-height:1.9; white-space:pre-wrap; direction:rtl; min-height:80px; margin-top:8px; color:#1c2833; }
-  .wa-icon { flex-shrink:0; }
+:root{--pr:#1a5276;--bg:#f0f4f8;--ca:#fff;--bo:#d5e8f0;--tx:#1c2833;--mu:#7f8c8d;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;}
+.page{display:none;}.page.active{display:block;}
+.hdr{color:#fff;padding:20px 16px 16px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.2);background:linear-gradient(135deg,#1a5276,#1f618d);}
+.hdr h1{font-size:1.3rem;font-weight:700;margin-bottom:3px;}
+.hdr p{font-size:.75rem;opacity:.8;}
+.home-wrap{padding:16px;max-width:520px;margin:0 auto;}
+.sec-title{font-size:.7rem;font-weight:700;color:var(--mu);letter-spacing:1px;margin:16px 0 9px;padding-right:3px;}
+.fgrid{display:flex;flex-direction:column;gap:9px;}
+.fcard{background:var(--ca);border:1px solid var(--bo);border-radius:14px;padding:14px 15px;display:flex;align-items:center;gap:13px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.07);border-right:5px solid transparent;transition:transform .1s;}
+.fcard:active{transform:scale(.97);}
+.fcard .ic{font-size:1.9rem;width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.fcard .inf{flex:1;}
+.fcard .nm{font-weight:700;font-size:.93rem;margin-bottom:2px;}
+.fcard .ds{font-size:.73rem;color:var(--mu);}
+.fcard .ar{color:var(--mu);font-size:1.1rem;}
+.cb{border-right-color:#2e86c1;}.cb .ic{background:#eaf4fb;}
+.cg{border-right-color:#1e8449;}.cg .ic{background:#eafaf1;}
+.co{border-right-color:#d35400;}.co .ic{background:#fef5e7;}
+.cr{border-right-color:#c0392b;}.cr .ic{background:#fdedec;}
+.ck{border-right-color:#b7950b;}.ck .ic{background:#fef9e7;}
+.ct{border-right-color:#148f77;}.ct .ic{background:#e8f8f5;}
+.inner{max-width:520px;margin:0 auto;padding:12px;}
+.phdr{display:flex;align-items:center;gap:10px;padding:13px 15px;color:#fff;}
+.phdr .bk{background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:8px;padding:5px 11px;cursor:pointer;font-size:1.2rem;flex-shrink:0;line-height:1;}
+.phdr .pt{font-weight:700;font-size:1rem;}
+.phdr .ps{font-size:.73rem;opacity:.8;}
+.card{background:var(--ca);border:1px solid var(--bo);border-radius:10px;padding:12px;margin-bottom:11px;box-shadow:0 2px 7px rgba(0,0,0,.05);}
+.card h2{font-size:.93rem;color:var(--pr);border-bottom:2px solid var(--bo);padding-bottom:5px;margin-bottom:9px;}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:7px;align-items:flex-start;}
+.fl{display:flex;flex-direction:column;flex:1;min-width:115px;}
+.fl label{font-size:.73rem;color:var(--mu);margin-bottom:3px;}
+.ff{display:flex;flex-direction:column;margin-bottom:8px;}
+.ff label{font-size:.73rem;color:var(--mu);margin-bottom:3px;}
+input[type=text],input[type=date],select,textarea{border:1px solid var(--bo);border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;color:var(--tx);background:#f9fbfc;width:100%;direction:rtl;}
+textarea{resize:vertical;min-height:54px;}
+.rg{display:flex;gap:11px;margin-top:3px;flex-wrap:wrap;}
+.rg label{display:flex;align-items:center;gap:4px;font-size:.84rem;cursor:pointer;}
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;background:var(--pr);color:#fff;border-radius:6px;padding:6px 9px;margin-bottom:7px;font-size:.83rem;font-weight:700;}
+.inc-blk{border:1px solid var(--bo);border-radius:7px;padding:9px;margin-bottom:7px;background:#f9fbff;}
+.rm-btn{background:none;border:none;color:#e74c3c;cursor:pointer;font-size:1rem;padding:0 3px;}
+.btn{border:none;border-radius:6px;padding:6px 11px;cursor:pointer;font-size:.79rem;font-family:inherit;display:inline-flex;align-items:center;gap:4px;}
+.bp{background:var(--pr);color:#fff;}
+.bsm{padding:4px 7px;font-size:.73rem;}
+.bo2{background:#fff;border:1px solid var(--pr);color:var(--pr);}
+.add-bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.p-item{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:1px solid var(--bo);border-radius:6px;padding:5px 8px;margin-bottom:5px;}
+.p-item input{flex:1;}
+.dvd{border:none;border-top:1px dashed var(--bo);margin:6px 0;}
+.irow{border:1px solid var(--bo);border-radius:8px;padding:10px 10px 10px 40px;margin-bottom:8px;background:#f9fbff;position:relative;}
+.del{position:absolute;top:8px;left:7px;background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:3px 7px;cursor:pointer;font-size:.7rem;}
+.send-btn{width:100%;padding:12px;background:#25d366;color:#fff;border:none;border-radius:8px;font-size:.98rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;}
+.send-btn:active{opacity:.85;}
+.prev-box{background:#f0f9f4;border:1px solid #a9dfbf;border-radius:8px;padding:10px;font-size:.82rem;line-height:1.85;white-space:pre-wrap;direction:rtl;min-height:80px;margin-top:8px;color:#1c2833;}
+.name-add-row{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:1px solid var(--bo);border-radius:6px;padding:5px 8px;margin-bottom:5px;}
+.name-add-row .nn{font-size:.78rem;color:var(--mu);width:22px;flex-shrink:0;text-align:center;font-weight:700;}
+.name-add-row input{flex:1;}
 </style>
 </head>
 <body>
 
 <!-- HOME -->
 
-<div id="page-home" class="page active">
-  <div class="header">
-    <h1>🚑 نظام النماذج الميدانية</h1>
-    <p>اختر النموذج المطلوب</p>
+<div id="pg-home" class="page active">
+  <div class="hdr">
+    <h1>&#x1F691; &#x646;&#x638;&#x627;&#x645; &#x627;&#x644;&#x646;&#x645;&#x627;&#x630;&#x62C; &#x627;&#x644;&#x645;&#x64A;&#x62F;&#x627;&#x646;&#x64A;&#x629;</h1>
+    <p>&#x627;&#x62E;&#x62A;&#x631; &#x627;&#x644;&#x646;&#x645;&#x648;&#x630;&#x62C; &#x627;&#x644;&#x645;&#x637;&#x644;&#x648;&#x628;</p>
   </div>
   <div class="home-wrap">
-
-```
-<div class="section-title">نماذج المناوبة</div>
-<div class="form-grid">
-  <div class="form-card c-blue" onclick="showPage('page-shift')">
-    <div class="icon">📋</div>
-    <div class="info"><div class="name">نموذج نهاية المناوبة</div><div class="desc">البلاغات، المركبات، الغياب، الطاقم</div></div>
-    <div class="arrow">‹</div>
-  </div>
-  <div class="form-card c-teal" onclick="showPage('page-moshr')">
-    <div class="icon">📊</div>
-    <div class="info"><div class="name">مؤشر المناوبة</div><div class="desc">متوسط وقت الاستجابة وجملة الختام</div></div>
-    <div class="arrow">‹</div>
-  </div>
-</div>
-
-<div class="section-title">نماذج الصيانة</div>
-<div class="form-grid">
-  <div class="form-card c-green" onclick="showPage('page-oil')">
-    <div class="icon">🛢️</div>
-    <div class="info"><div class="name">نموذج تغيير الزيت</div><div class="desc">تسجيل بيانات تغيير زيت المركبات</div></div>
-    <div class="arrow">‹</div>
-  </div>
-  <div class="form-card c-orange" onclick="showPage('page-device')">
-    <div class="icon">🔧</div>
-    <div class="info"><div class="name">نموذج صيانة جهاز</div><div class="desc">صيانة الأجهزة الطبية والميدانية</div></div>
-    <div class="arrow">‹</div>
-  </div>
-  <div class="form-card c-red" onclick="showPage('page-vehicle-maint')">
-    <div class="icon">🚑</div>
-    <div class="info"><div class="name">نموذج صيانة مركبة</div><div class="desc">تسجيل أعطال وطلبات الصيانة</div></div>
-    <div class="arrow">‹</div>
-  </div>
-</div>
-
-<div class="section-title">نماذج أخرى</div>
-<div class="form-grid">
-  <div class="form-card c-gold" onclick="showPage('page-rosc')">
-    <div class="icon">❤️</div>
-    <div class="info"><div class="name">نموذج ROSC</div><div class="desc">تقرير إنعاش قلبي رئوي ناجح</div></div>
-    <div class="arrow">‹</div>
-  </div>
-</div>
-```
-
+    <div class="sec-title">&#x646;&#x645;&#x627;&#x630;&#x62C; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div>
+    <div class="fgrid">
+      <div class="fcard cb" onclick="go('pg-shift')">
+        <div class="ic">&#x1F4CB;</div>
+        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x646;&#x647;&#x627;&#x64A;&#x629; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div><div class="ds">&#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;&#x627;&#x62A; &#x648;&#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A; &#x648;&#x627;&#x644;&#x63A;&#x64A;&#x627;&#x628; &#x648;&#x627;&#x644;&#x637;&#x627;&#x642;&#x645;</div></div>
+        <div class="ar">&#x2039;</div>
+      </div>
+      <div class="fcard ct" onclick="go('pg-moshr')">
+        <div class="ic">&#x1F4CA;</div>
+        <div class="inf"><div class="nm">&#x645;&#x624;&#x634;&#x631; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div><div class="ds">&#x645;&#x62A;&#x648;&#x633;&#x637; &#x648;&#x642;&#x62A; &#x627;&#x644;&#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629; &#x648;&#x62C;&#x645;&#x644;&#x629; &#x627;&#x644;&#x62E;&#x62A;&#x627;&#x645;</div></div>
+        <div class="ar">&#x2039;</div>
+      </div>
+    </div>
+    <div class="sec-title">&#x646;&#x645;&#x627;&#x630;&#x62C; &#x627;&#x644;&#x635;&#x64A;&#x627;&#x646;&#x629;</div>
+    <div class="fgrid">
+      <div class="fcard cg" onclick="go('pg-oil')">
+        <div class="ic">&#x1F6E2;</div>
+        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x62A;&#x63A;&#x64A;&#x64A;&#x631; &#x627;&#x644;&#x632;&#x64A;&#x62A;</div><div class="ds">&#x62A;&#x633;&#x62C;&#x64A;&#x644; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x62A;&#x63A;&#x64A;&#x64A;&#x631; &#x632;&#x64A;&#x62A; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A;</div></div>
+        <div class="ar">&#x2039;</div>
+      </div>
+      <div class="fcard co" onclick="go('pg-device')">
+        <div class="ic">&#x1F527;</div>
+        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x635;&#x64A;&#x627;&#x646;&#x629; &#x62C;&#x647;&#x627;&#x632;</div><div class="ds">&#x635;&#x64A;&#x627;&#x646;&#x629; &#x627;&#x644;&#x623;&#x62C;&#x647;&#x632;&#x629; &#x627;&#x644;&#x637;&#x628;&#x64A;&#x629; &#x648;&#x627;&#x644;&#x645;&#x64A;&#x62F;&#x627;&#x646;&#x64A;&#x629;</div></div>
+        <div class="ar">&#x2039;</div>
+      </div>
+      <div class="fcard cr" onclick="go('pg-vm')">
+        <div class="ic">&#x1F691;</div>
+        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x635;&#x64A;&#x627;&#x646;&#x629; &#x645;&#x631;&#x643;&#x628;&#x629;</div><div class="ds">&#x62A;&#x633;&#x62C;&#x64A;&#x644; &#x623;&#x639;&#x637;&#x627;&#x644; &#x648;&#x637;&#x644;&#x628;&#x627;&#x62A; &#x627;&#x644;&#x635;&#x64A;&#x627;&#x646;&#x629;</div></div>
+        <div class="ar">&#x2039;</div>
+      </div>
+    </div>
+    <div class="sec-title">&#x646;&#x645;&#x627;&#x630;&#x62C; &#x623;&#x62E;&#x631;&#x649;</div>
+    <div class="fgrid">
+      <div class="fcard ck" onclick="go('pg-rosc')">
+        <div class="ic">&#x2764;</div>
+        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; ROSC</div><div class="ds">&#x62A;&#x642;&#x631;&#x64A;&#x631; &#x625;&#x646;&#x639;&#x627;&#x634; &#x642;&#x644;&#x628;&#x64A; &#x631;&#x626;&#x648;&#x64A; &#x646;&#x627;&#x62C;&#x62D;</div></div>
+        <div class="ar">&#x2039;</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- نموذج نهاية المناوبة -->
+<!-- نهاية المناوبة -->
 
-<div id="page-shift" class="page">
-  <div class="header pg-header">
-    <button class="back" onclick="showPage('page-home')">›</button>
-    <div><div class="pg-title">نموذج نهاية المناوبة</div><div class="pg-sub">تقرير شامل للمناوبة</div></div>
+<div id="pg-shift" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#1a5276,#1f618d);">
+    <button class="bk" onclick="go('pg-home')">&#x203A;</button>
+    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x646;&#x647;&#x627;&#x64A;&#x629; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div><div class="ps">&#x62A;&#x642;&#x631;&#x64A;&#x631; &#x634;&#x627;&#x645;&#x644; &#x644;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div></div>
   </div>
-  <div class="inner-page">
+  <div class="inner">
     <div class="card">
       <div class="row">
-        <div class="field"><label>التاريخ</label><input type="date" id="s-date"></div>
-        <div class="field"><label>الفترة</label>
-          <div class="radio-group">
-            <label><input type="radio" name="s-period" value="صباحية" checked> صباحية</label>
-            <label><input type="radio" name="s-period" value="مسائية"> مسائية</label>
+        <div class="fl"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="s-date"></div>
+        <div class="fl"><label>&#x627;&#x644;&#x641;&#x62A;&#x631;&#x629;</label>
+          <div class="rg">
+            <label><input type="radio" name="sp" value="&#x635;&#x628;&#x627;&#x62D;&#x64A;&#x629;" checked> &#x635;&#x628;&#x627;&#x62D;&#x64A;&#x629;</label>
+            <label><input type="radio" name="sp" value="&#x645;&#x633;&#x627;&#x626;&#x64A;&#x629;"> &#x645;&#x633;&#x627;&#x626;&#x64A;&#x629;</label>
           </div>
         </div>
       </div>
     </div>
     <div class="card" style="border-right:4px solid #2471a3;">
-      <h2>📊 الموشر</h2>
-      <div class="ff"><label>متوسط وقت الاستجابة (دقيقة)</label><input type="text" id="s-ind-resp" placeholder="دقيقة"></div>
-      <div class="ff"><label>ملاحظات الموشر</label><textarea id="s-ind-notes" placeholder="ملاحظات الموشر..."></textarea></div>
+      <h2>&#x1F4CA; &#x627;&#x644;&#x645;&#x624;&#x634;&#x631;</h2>
+      <div class="ff"><label>&#x645;&#x62A;&#x648;&#x633;&#x637; &#x648;&#x642;&#x62A; &#x627;&#x644;&#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629; (&#x62F;&#x642;&#x64A;&#x642;&#x629;)</label><input type="text" id="s-ir" placeholder="&#x62F;&#x642;&#x64A;&#x642;&#x629;"></div>
+      <div class="ff"><label>&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x624;&#x634;&#x631;</label><textarea id="s-in" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
     </div>
     <div class="card">
-      <h2>🚗 المركبات</h2>
+      <h2>&#x1F697; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A;</h2>
       <div class="row">
-        <div class="field"><label>عاملة</label><input type="text" id="s-v-work" placeholder="عدد أو أرقام"></div>
-        <div class="field"><label>احتياط</label><input type="text" id="s-v-res" placeholder="عدد أو أرقام"></div>
-        <div class="field"><label>متعطلة</label><input type="text" id="s-v-brk" placeholder="عدد أو أرقام"></div>
+        <div class="fl"><label>&#x639;&#x627;&#x645;&#x644;&#x629;</label><input type="text" id="s-vw" placeholder="&#x639;&#x62F;&#x62F;"></div>
+        <div class="fl"><label>&#x627;&#x62D;&#x62A;&#x64A;&#x627;&#x637;</label><input type="text" id="s-vr" placeholder="&#x639;&#x62F;&#x62F;"></div>
+        <div class="fl"><label>&#x645;&#x62A;&#x639;&#x637;&#x644;&#x629;</label><input type="text" id="s-vb" placeholder="&#x639;&#x62F;&#x62F;"></div>
       </div>
-      <div class="ff"><label>ملاحظات الأعطال</label><textarea id="s-v-notes" placeholder="ملاحظات الأعطال..."></textarea></div>
+      <div class="ff"><label>&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A; &#x627;&#x644;&#x623;&#x639;&#x637;&#x627;&#x644;</label><textarea id="s-vn" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
     </div>
     <div class="card">
-      <h2>📋 نموذج بلاغات التدخل السريع</h2>
-      <div id="s-sectors-container"></div>
-      <button class="btn btn-outline btn-sm" onclick="sAddSector()">➕ إضافة قطاع</button>
+      <h2>&#x1F4CB; &#x628;&#x644;&#x627;&#x63A;&#x627;&#x62A; &#x627;&#x644;&#x62A;&#x62F;&#x62E;&#x644; &#x627;&#x644;&#x633;&#x631;&#x64A;&#x639;</h2>
+      <div id="s-sec-con"></div>
+      <button class="btn bo2 bsm" onclick="sAddSec()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x642;&#x637;&#x627;&#x639;</button>
     </div>
     <div class="card">
-      <h2>👤 الغياب والمتأخرين</h2>
-      <label style="font-size:.8rem;font-weight:bold;display:block;margin-bottom:5px;">أسماء الغياب</label>
-      <div id="s-absent-list"></div>
-      <button class="btn btn-outline btn-sm" onclick="sAddPerson('absent')">➕ إضافة غياب</button>
-      <hr class="divider">
-      <label style="font-size:.8rem;font-weight:bold;display:block;margin:8px 0 5px;">أسماء المتأخرين</label>
-      <div id="s-late-list"></div>
-      <button class="btn btn-outline btn-sm" onclick="sAddPerson('late')">➕ إضافة متأخر</button>
+      <h2>&#x1F464; &#x627;&#x644;&#x63A;&#x64A;&#x627;&#x628; &#x648;&#x627;&#x644;&#x645;&#x62A;&#x623;&#x62E;&#x631;&#x64A;&#x646;</h2>
+      <label style="font-size:.8rem;font-weight:700;display:block;margin-bottom:5px;">&#x623;&#x633;&#x645;&#x627;&#x621; &#x627;&#x644;&#x63A;&#x64A;&#x627;&#x628;</label>
+      <div id="s-abs"></div>
+      <button class="btn bo2 bsm" onclick="sAddP('abs')">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x63A;&#x64A;&#x627;&#x628;</button>
+      <hr class="dvd">
+      <label style="font-size:.8rem;font-weight:700;display:block;margin:7px 0 5px;">&#x623;&#x633;&#x645;&#x627;&#x621; &#x627;&#x644;&#x645;&#x62A;&#x623;&#x62E;&#x631;&#x64A;&#x646;</label>
+      <div id="s-lat"></div>
+      <button class="btn bo2 bsm" onclick="sAddP('lat')">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x645;&#x62A;&#x623;&#x62E;&#x631;</button>
     </div>
-    <div class="card"><h2>📝 ملاحظات عامة</h2><textarea id="s-gen-notes" placeholder="ملاحظات عامة..."></textarea></div>
+    <div class="card"><h2>&#x1F4DD; &#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A; &#x639;&#x627;&#x645;&#x629;</h2><textarea id="s-gn" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
     <div class="card">
-      <h2>👥 معلومات الطاقم</h2>
+      <h2>&#x1F465; &#x645;&#x639;&#x644;&#x648;&#x645;&#x627;&#x62A; &#x627;&#x644;&#x637;&#x627;&#x642;&#x645;</h2>
       <div class="row">
-        <div class="field"><label>اسم كبير المسعفين</label><input type="text" id="s-chief" placeholder="الاسم الكامل"></div>
-        <div class="field"><label>اسم المساعد</label><input type="text" id="s-asst" placeholder="الاسم الكامل"></div>
+        <div class="fl"><label>&#x643;&#x628;&#x64A;&#x631; &#x627;&#x644;&#x645;&#x633;&#x639;&#x641;&#x64A;&#x646;</label><input type="text" id="s-ch" placeholder="&#x627;&#x644;&#x627;&#x633;&#x645;"></div>
+        <div class="fl"><label>&#x627;&#x644;&#x645;&#x633;&#x627;&#x639;&#x62F;</label><input type="text" id="s-as" placeholder="&#x627;&#x644;&#x627;&#x633;&#x645;"></div>
       </div>
     </div>
-    <button class="send-btn" onclick="sSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+    <button class="send-btn" onclick="sSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
   </div>
 </div>
 
 <!-- مؤشر المناوبة -->
 
-<div id="page-moshr" class="page">
-  <div class="header pg-header" style="background:linear-gradient(135deg,#148f77,#1abc9c);">
-    <button class="back" onclick="showPage('page-home')">›</button>
-    <div><div class="pg-title">مؤشر المناوبة</div><div class="pg-sub">قطاع الوسط</div></div>
+<div id="pg-moshr" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#148f77,#1abc9c);">
+    <button class="bk" onclick="go('pg-home')">&#x203A;</button>
+    <div><div class="pt">&#x645;&#x624;&#x634;&#x631; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div><div class="ps">&#x642;&#x637;&#x627;&#x639; &#x627;&#x644;&#x648;&#x633;&#x637;</div></div>
   </div>
-  <div class="inner-page">
+  <div class="inner">
     <div class="card">
-      <div class="ff"><label>التاريخ</label><input type="date" id="m-date" oninput="mUpdatePreview()"></div>
-      <div class="ff" style="margin-top:8px;"><label>المناوبة</label>
-        <div class="radio-group">
-          <label><input type="radio" name="m-period" value="صباحية" checked onchange="mUpdatePreview()"> صباحية</label>
-          <label><input type="radio" name="m-period" value="مسائية" onchange="mUpdatePreview()"> مسائية</label>
+      <div class="ff"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="m-d" oninput="mPrev()"></div>
+      <div class="ff" style="margin-top:7px;"><label>&#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</label>
+        <div class="rg">
+          <label><input type="radio" name="mp" value="&#x635;&#x628;&#x627;&#x62D;&#x64A;&#x629;" checked onchange="mPrev()"> &#x635;&#x628;&#x627;&#x62D;&#x64A;&#x629;</label>
+          <label><input type="radio" name="mp" value="&#x645;&#x633;&#x627;&#x626;&#x64A;&#x629;" onchange="mPrev()"> &#x645;&#x633;&#x627;&#x626;&#x64A;&#x629;</label>
         </div>
       </div>
-      <div class="ff" style="margin-top:8px;"><label>متوسط وقت الاستجابة</label><input type="text" id="m-resp" placeholder="مثال: 8 دقائق" oninput="mUpdatePreview()"></div>
+      <div class="ff" style="margin-top:7px;"><label>&#x645;&#x62A;&#x648;&#x633;&#x637; &#x648;&#x642;&#x62A; &#x627;&#x644;&#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629;</label><input type="text" id="m-r" placeholder="&#x645;&#x62B;&#x627;&#x644;: 8 &#x62F;&#x642;&#x627;&#x626;&#x642;" oninput="mPrev()"></div>
     </div>
     <div class="card">
-      <h2>💬 جملة الختام</h2>
-      <label style="font-size:.75rem;color:var(--muted);display:block;margin-bottom:4px;">اختر جملة ختام</label>
-      <select id="m-phrase-select" onchange="mUpdatePreview()">
-        <option value="">-- بدون جملة ختام --</option>
-        <option value="الله يعطيكم العافية جميعاً ماقصرتوا 🌹">الله يعطيكم العافية جميعاً ماقصرتوا 🌹</option>
-        <option value="جزاكم الله خيراً على جهودكم المبذولة 🌹">جزاكم الله خيراً على جهودكم المبذولة 🌹</option>
-        <option value="بارك الله فيكم ونفع بكم 🌹">بارك الله فيكم ونفع بكم 🌹</option>
-        <option value="شكراً لكل من أسهم في إنجاح هذه المناوبة 🌹">شكراً لكل من أسهم في إنجاح هذه المناوبة 🌹</option>
-        <option value="وفقكم الله وسدد خطاكم 🌹">وفقكم الله وسدد خطاكم 🌹</option>
+      <h2>&#x1F4AC; &#x62C;&#x645;&#x644;&#x629; &#x627;&#x644;&#x62E;&#x62A;&#x627;&#x645;</h2>
+      <label style="font-size:.73rem;color:var(--mu);display:block;margin-bottom:4px;">&#x627;&#x62E;&#x62A;&#x631; &#x62C;&#x645;&#x644;&#x629;</label>
+      <select id="m-ph" onchange="mPrev()">
+        <option value="">-- &#x628;&#x62F;&#x648;&#x646; &#x62C;&#x645;&#x644;&#x629; --</option>
+        <option value="&#x627;&#x644;&#x644;&#x647; &#x64A;&#x639;&#x637;&#x64A;&#x643;&#x645; &#x627;&#x644;&#x639;&#x627;&#x641;&#x64A;&#x629; &#x62C;&#x645;&#x64A;&#x639;&#x627; &#x645;&#x627;&#x642;&#x635;&#x631;&#x62A;&#x648;&#x627; &#x1F339;">&#x627;&#x644;&#x644;&#x647; &#x64A;&#x639;&#x637;&#x64A;&#x643;&#x645; &#x627;&#x644;&#x639;&#x627;&#x641;&#x64A;&#x629; &#x62C;&#x645;&#x64A;&#x639;&#x627; &#x645;&#x627;&#x642;&#x635;&#x631;&#x62A;&#x648;&#x627; &#x1F339;</option>
+        <option value="&#x62C;&#x632;&#x627;&#x643;&#x645; &#x627;&#x644;&#x644;&#x647; &#x62E;&#x64A;&#x631;&#x627; &#x639;&#x644;&#x649; &#x62C;&#x647;&#x648;&#x62F;&#x643;&#x645; &#x627;&#x644;&#x645;&#x628;&#x630;&#x648;&#x644;&#x629; &#x1F339;">&#x62C;&#x632;&#x627;&#x643;&#x645; &#x627;&#x644;&#x644;&#x647; &#x62E;&#x64A;&#x631;&#x627; &#x639;&#x644;&#x649; &#x62C;&#x647;&#x648;&#x62F;&#x643;&#x645; &#x627;&#x644;&#x645;&#x628;&#x630;&#x648;&#x644;&#x629; &#x1F339;</option>
+        <option value="&#x628;&#x627;&#x631;&#x643; &#x627;&#x644;&#x644;&#x647; &#x641;&#x64A;&#x643;&#x645; &#x648;&#x646;&#x641;&#x639; &#x628;&#x643;&#x645; &#x1F339;">&#x628;&#x627;&#x631;&#x643; &#x627;&#x644;&#x644;&#x647; &#x641;&#x64A;&#x643;&#x645; &#x648;&#x646;&#x641;&#x639; &#x628;&#x643;&#x645; &#x1F339;</option>
+        <option value="&#x634;&#x643;&#x631;&#x627; &#x644;&#x643;&#x644; &#x645;&#x646; &#x623;&#x633;&#x647;&#x645; &#x1F339;">&#x634;&#x643;&#x631;&#x627; &#x644;&#x643;&#x644; &#x645;&#x646; &#x623;&#x633;&#x647;&#x645; &#x641;&#x64A; &#x625;&#x646;&#x62C;&#x627;&#x62D; &#x647;&#x630;&#x647; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629; &#x1F339;</option>
+        <option value="&#x648;&#x641;&#x642;&#x643;&#x645; &#x627;&#x644;&#x644;&#x647; &#x648;&#x633;&#x62F;&#x62F; &#x62E;&#x637;&#x627;&#x643;&#x645; &#x1F339;">&#x648;&#x641;&#x642;&#x643;&#x645; &#x627;&#x644;&#x644;&#x647; &#x648;&#x633;&#x62F;&#x62F; &#x62E;&#x637;&#x627;&#x643;&#x645; &#x1F339;</option>
       </select>
-      <div class="preview-box" id="m-preview"></div>
+      <div class="prev-box" id="m-prev"></div>
     </div>
-    <button class="send-btn" style="background:#148f77;" onclick="mSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+    <button class="send-btn" style="background:#148f77;" onclick="mSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
   </div>
 </div>
 
-<!-- نموذج تغيير الزيت -->
+<!-- تغيير الزيت -->
 
-<div id="page-oil" class="page">
-  <div class="header pg-header" style="background:linear-gradient(135deg,#1e8449,#239b56);">
-    <button class="back" onclick="showPage('page-home')">›</button>
-    <div><div class="pg-title">نموذج تغيير الزيت</div><div class="pg-sub">تسجيل بيانات تغيير زيت المركبات</div></div>
+<div id="pg-oil" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#1e8449,#239b56);">
+    <button class="bk" onclick="go('pg-home')">&#x203A;</button>
+    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x62A;&#x63A;&#x64A;&#x64A;&#x631; &#x627;&#x644;&#x632;&#x64A;&#x62A;</div><div class="ps">&#x62A;&#x633;&#x62C;&#x64A;&#x644; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x62A;&#x63A;&#x64A;&#x64A;&#x631; &#x632;&#x64A;&#x62A; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A;</div></div>
   </div>
-  <div class="inner-page">
-    <div class="card">
-      <div class="ff"><label>التاريخ</label><input type="date" id="o-date"></div>
-    </div>
-    <div class="card">
-      <h2>🛢️ بيانات المركبات</h2>
-      <div id="o-vehicles-list"></div>
-      <button class="btn btn-outline btn-sm" onclick="oAddVehicle()">➕ إضافة مركبة</button>
-    </div>
-    <div class="card"><h2>📝 ملاحظات</h2><textarea id="o-notes" placeholder="ملاحظات إضافية..."></textarea></div>
-    <button class="send-btn" style="background:#1e8449;" onclick="oSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+  <div class="inner">
+    <div class="card"><div class="ff"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="o-d"></div></div>
+    <div class="card"><h2>&#x1F6E2; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A;</h2><div id="o-list"></div><button class="btn bo2 bsm" onclick="oAdd()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x645;&#x631;&#x643;&#x628;&#x629;</button></div>
+    <div class="card"><h2>&#x1F4DD; &#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;</h2><textarea id="o-n" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
+    <button class="send-btn" style="background:#1e8449;" onclick="oSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
   </div>
 </div>
 
-<!-- نموذج صيانة جهاز -->
+<!-- صيانة جهاز -->
 
-<div id="page-device" class="page">
-  <div class="header pg-header" style="background:linear-gradient(135deg,#d35400,#e67e22);">
-    <button class="back" onclick="showPage('page-home')">›</button>
-    <div><div class="pg-title">نموذج صيانة جهاز</div><div class="pg-sub">صيانة الأجهزة الطبية والميدانية</div></div>
+<div id="pg-device" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#d35400,#e67e22);">
+    <button class="bk" onclick="go('pg-home')">&#x203A;</button>
+    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x635;&#x64A;&#x627;&#x646;&#x629; &#x62C;&#x647;&#x627;&#x632;</div><div class="ps">&#x635;&#x64A;&#x627;&#x646;&#x629; &#x627;&#x644;&#x623;&#x62C;&#x647;&#x632;&#x629; &#x627;&#x644;&#x637;&#x628;&#x64A;&#x629;</div></div>
   </div>
-  <div class="inner-page">
-    <div class="card">
-      <div class="ff"><label>التاريخ</label><input type="date" id="d-date"></div>
-    </div>
-    <div class="card">
-      <h2>🔧 بيانات الأجهزة</h2>
-      <div id="d-devices-list"></div>
-      <button class="btn btn-outline btn-sm" onclick="dAddDevice()">➕ إضافة جهاز</button>
-    </div>
-    <div class="card"><h2>📝 ملاحظات</h2><textarea id="d-notes" placeholder="ملاحظات إضافية..."></textarea></div>
-    <button class="send-btn" style="background:#d35400;" onclick="dSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+  <div class="inner">
+    <div class="card"><div class="ff"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="d-d"></div></div>
+    <div class="card"><h2>&#x1F527; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x627;&#x644;&#x623;&#x62C;&#x647;&#x632;&#x629;</h2><div id="d-list"></div><button class="btn bo2 bsm" onclick="dAdd()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x62C;&#x647;&#x627;&#x632;</button></div>
+    <div class="card"><h2>&#x1F4DD; &#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;</h2><textarea id="d-n" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
+    <button class="send-btn" style="background:#d35400;" onclick="dSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
   </div>
 </div>
 
-<!-- نموذج صيانة مركبة -->
+<!-- صيانة مركبة -->
 
-<div id="page-vehicle-maint" class="page">
-  <div class="header pg-header" style="background:linear-gradient(135deg,#c0392b,#e74c3c);">
-    <button class="back" onclick="showPage('page-home')">›</button>
-    <div><div class="pg-title">نموذج صيانة مركبة</div><div class="pg-sub">تسجيل أعطال وطلبات الصيانة</div></div>
+<div id="pg-vm" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#c0392b,#e74c3c);">
+    <button class="bk" onclick="go('pg-home')">&#x203A;</button>
+    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x635;&#x64A;&#x627;&#x646;&#x629; &#x645;&#x631;&#x643;&#x628;&#x629;</div><div class="ps">&#x62A;&#x633;&#x62C;&#x64A;&#x644; &#x623;&#x639;&#x637;&#x627;&#x644; &#x648;&#x637;&#x644;&#x628;&#x627;&#x62A; &#x627;&#x644;&#x635;&#x64A;&#x627;&#x646;&#x629;</div></div>
   </div>
-  <div class="inner-page">
+  <div class="inner">
+    <div class="card"><div class="ff"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="v-d"></div></div>
     <div class="card">
-      <div class="ff"><label>التاريخ</label><input type="date" id="vm-date"></div>
-    </div>
-    <div class="card">
-      <h2>🚑 بيانات المركبة</h2>
+      <h2>&#x1F691; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x629;</h2>
       <div class="row">
-        <div class="field"><label>رقم المركبة</label><input type="text" id="vm-num" placeholder="رقم اللوحة"></div>
-        <div class="field"><label>نوع المركبة</label><input type="text" id="vm-type" placeholder="نوع / موديل"></div>
+        <div class="fl"><label>&#x631;&#x642;&#x645; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x629;</label><input type="text" id="v-num" placeholder="&#x631;&#x642;&#x645; &#x627;&#x644;&#x644;&#x648;&#x62D;&#x629;"></div>
+        <div class="fl"><label>&#x646;&#x648;&#x639; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x629;</label><input type="text" id="v-typ" placeholder="&#x646;&#x648;&#x639; / &#x645;&#x648;&#x62F;&#x64A;&#x644;"></div>
       </div>
       <div class="row">
-        <div class="field"><label>عداد الكيلومترات</label><input type="text" id="vm-km" placeholder="كم"></div>
-        <div class="field"><label>الأولوية</label>
-          <select id="vm-priority"><option>عادية</option><option>عاجلة</option><option>حرجة</option></select>
-        </div>
+        <div class="fl"><label>&#x639;&#x62F;&#x627;&#x62F; &#x627;&#x644;&#x643;&#x64A;&#x644;&#x648;&#x645;&#x62A;&#x631;&#x627;&#x62A;</label><input type="text" id="v-km" placeholder="&#x643;&#x645;"></div>
+        <div class="fl"><label>&#x627;&#x644;&#x623;&#x648;&#x644;&#x648;&#x64A;&#x629;</label><select id="v-pri"><option>&#x639;&#x627;&#x62F;&#x64A;&#x629;</option><option>&#x639;&#x627;&#x62C;&#x644;&#x629;</option><option>&#x62D;&#x631;&#x62C;&#x629;</option></select></div>
       </div>
     </div>
-    <div class="card">
-      <h2>⚠️ الأعطال المُبلَّغ عنها</h2>
-      <div id="vm-faults-list"></div>
-      <button class="btn btn-outline btn-sm" onclick="vmAddFault()">➕ إضافة عطل</button>
-    </div>
-    <div class="card"><h2>📝 ملاحظات</h2><textarea id="vm-notes" placeholder="ملاحظات إضافية..."></textarea></div>
-    <button class="send-btn" style="background:#c0392b;" onclick="vmSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+    <div class="card"><h2>&#x26A0; &#x627;&#x644;&#x623;&#x639;&#x637;&#x627;&#x644; &#x627;&#x644;&#x645;&#x628;&#x644;&#x651;&#x63A; &#x639;&#x646;&#x647;&#x627;</h2><div id="v-faults"></div><button class="btn bo2 bsm" onclick="vAdd()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x639;&#x637;&#x644;</button></div>
+    <div class="card"><h2>&#x1F4DD; &#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;</h2><textarea id="v-n" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
+    <button class="send-btn" style="background:#c0392b;" onclick="vSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
   </div>
 </div>
 
-<!-- نموذج ROSC -->
+<!-- ROSC -->
 
-<div id="page-rosc" class="page">
-  <div class="header pg-header" style="background:linear-gradient(135deg,#922b21,#e74c3c);">
-    <button class="back" onclick="showPage('page-home')">›</button>
-    <div><div class="pg-title">نموذج ROSC</div><div class="pg-sub">تقرير إنعاش قلبي رئوي ناجح</div></div>
+<div id="pg-rosc" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#922b21,#e74c3c);">
+    <button class="bk" onclick="go('pg-home')">&#x203A;</button>
+    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; ROSC</div><div class="ps">&#x625;&#x646;&#x639;&#x627;&#x634; &#x642;&#x644;&#x628;&#x64A; &#x631;&#x626;&#x648;&#x64A; &#x646;&#x627;&#x62C;&#x62D;</div></div>
   </div>
-  <div class="inner-page">
+  <div class="inner">
     <div class="card">
-      <h2>📋 بيانات البلاغ</h2>
-      <div class="ff"><label>توقيت البلاغ</label><input type="text" id="r-time" placeholder="مثال: 14:30"></div>
-      <div class="ff" style="margin-top:8px;"><label>نوع البلاغ</label><input type="text" id="r-type" placeholder="نوع البلاغ"></div>
-      <div class="ff" style="margin-top:8px;"><label>موقع البلاغ</label><input type="text" id="r-location" placeholder="الموقع"></div>
-      <div class="ff" style="margin-top:8px;"><label>زمن الاستجابة</label><input type="text" id="r-resp" placeholder="مثال: 8 دقائق"></div>
+      <h2>&#x1F4CB; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;</h2>
+      <div class="ff"><label>&#x62A;&#x648;&#x642;&#x64A;&#x62A; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;</label><input type="text" id="r-ti" placeholder="&#x645;&#x62B;&#x627;&#x644;: 14:30"></div>
+      <div class="ff" style="margin-top:7px;"><label>&#x646;&#x648;&#x639; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;</label><input type="text" id="r-ty" placeholder="&#x646;&#x648;&#x639; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;"></div>
+      <div class="ff" style="margin-top:7px;"><label>&#x645;&#x648;&#x642;&#x639; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;</label><input type="text" id="r-lo" placeholder="&#x627;&#x644;&#x645;&#x648;&#x642;&#x639;"></div>
+      <div class="ff" style="margin-top:7px;"><label>&#x632;&#x645;&#x646; &#x627;&#x644;&#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629;</label><input type="text" id="r-re" placeholder="&#x645;&#x62B;&#x627;&#x644;: 8 &#x62F;&#x642;&#x627;&#x626;&#x642;"></div>
     </div>
+    <div class="card"><h2>&#x1F691; &#x627;&#x644;&#x648;&#x62D;&#x62F;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x633;&#x62A;&#x62C;&#x64A;&#x628;&#x629;</h2><textarea id="r-un" placeholder="&#x627;&#x630;&#x643;&#x631; &#x627;&#x644;&#x648;&#x62D;&#x62F;&#x627;&#x62A;..." style="min-height:60px;"></textarea></div>
     <div class="card">
-      <h2>🚑 الوحدات المستجيبة</h2>
-      <textarea id="r-units" placeholder="اذكر الوحدات المستجيبة..." style="min-height:60px;"></textarea>
-    </div>
-    <div class="card">
-      <h2>✅ نتائج التدخل</h2>
+      <h2>&#x2705; &#x646;&#x62A;&#x627;&#x626;&#x62C; &#x627;&#x644;&#x62A;&#x62F;&#x62E;&#x644;</h2>
       <div class="row">
-        <div class="field"><label>هل تحقق ROSC؟</label>
-          <select id="r-rosc"><option value="نعم 👏">نعم 👏</option><option value="لا">لا</option></select>
-        </div>
-        <div class="field"><label>هل تم استخدام جهاز لوكس؟</label>
-          <select id="r-lucas"><option value="نعم ✅">نعم ✅</option><option value="لا">لا</option></select>
-        </div>
+        <div class="fl"><label>&#x647;&#x644; &#x62A;&#x62D;&#x642;&#x642; ROSC&#x61F;</label><select id="r-ro"><option value="&#x646;&#x639;&#x645;">&#x646;&#x639;&#x645;</option><option value="&#x644;&#x627;">&#x644;&#x627;</option></select></div>
+        <div class="fl"><label>&#x647;&#x644; &#x62A;&#x645; &#x627;&#x633;&#x62A;&#x62E;&#x62F;&#x627;&#x645; &#x62C;&#x647;&#x627;&#x632; &#x644;&#x648;&#x643;&#x633;&#x61F;</label><select id="r-lu"><option value="&#x646;&#x639;&#x645;">&#x646;&#x639;&#x645;</option><option value="&#x644;&#x627;">&#x644;&#x627;</option></select></div>
       </div>
     </div>
     <div class="card">
-      <h2>👥 أسماء الزملاء المشاركين</h2>
-      <div class="rosc-names" id="r-names-list">
-        <div class="name-row"><span>١</span><input type="text" placeholder="الاسم"></div>
-        <div class="name-row"><span>٢</span><input type="text" placeholder="الاسم"></div>
-        <div class="name-row"><span>٣</span><input type="text" placeholder="الاسم"></div>
-        <div class="name-row"><span>٤</span><input type="text" placeholder="الاسم"></div>
-        <div class="name-row"><span>٥</span><input type="text" placeholder="الاسم"></div>
-        <div class="name-row"><span>٦</span><input type="text" placeholder="الاسم"></div>
-        <div class="name-row"><span>٧</span><input type="text" placeholder="الاسم"></div>
-        <div class="name-row"><span>٨</span><input type="text" placeholder="الاسم"></div>
-      </div>
+      <h2>&#x1F465; &#x623;&#x633;&#x645;&#x627;&#x621; &#x627;&#x644;&#x632;&#x645;&#x644;&#x627;&#x621; &#x627;&#x644;&#x645;&#x634;&#x627;&#x631;&#x643;&#x64A;&#x646;</h2>
+      <div id="r-names"></div>
+      <button class="btn bo2 bsm" id="r-add-btn" onclick="rAddName()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x627;&#x633;&#x645;</button>
     </div>
     <div class="card">
-      <h2>🎖️ التحكم والتنسيق</h2>
-      <div class="ff"><label>تحكم عملياتي</label><input type="text" id="r-ops" placeholder="الاسم"></div>
-      <div class="ff" style="margin-top:8px;"><label>تنسيق استجابة</label><input type="text" id="r-coord" placeholder="الاسم"></div>
+      <h2>&#x1F396; &#x627;&#x644;&#x62A;&#x62D;&#x643;&#x645; &#x648;&#x627;&#x644;&#x62A;&#x646;&#x633;&#x64A;&#x642;</h2>
+      <div class="ff"><label>&#x62A;&#x62D;&#x643;&#x645; &#x639;&#x645;&#x644;&#x64A;&#x627;&#x62A;&#x64A;</label><input type="text" id="r-op" placeholder="&#x627;&#x644;&#x627;&#x633;&#x645;"></div>
+      <div class="ff" style="margin-top:7px;"><label>&#x62A;&#x646;&#x633;&#x64A;&#x642; &#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629;</label><input type="text" id="r-co" placeholder="&#x627;&#x644;&#x627;&#x633;&#x645;"></div>
     </div>
-    <button class="send-btn" style="background:#922b21;" onclick="roscSend()"><span class="wa-icon">📤</span> إرسال على الواتساب</button>
+    <button class="send-btn" style="background:#922b21;" onclick="rSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
   </div>
 </div>
 
 <script>
-// ===== NAVIGATION =====
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
+function go(id){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function wa(msg){window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');}
+function L(){var s='';for(var i=0;i<14;i++)s+='\u2796';return s;}
 
-function wa(msg) { window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); }
-
-// ===== INIT =====
-document.addEventListener('DOMContentLoaded', () => {
-  const today = new Date().toISOString().split('T')[0];
-  ['s-date','o-date','d-date','vm-date','m-date'].forEach(id => {
-    const el = document.getElementById(id); if(el) el.value = today;
-  });
-  sAddSector('الوسط');
-  mUpdatePreview();
+document.addEventListener('DOMContentLoaded',function(){
+  var t=new Date().toISOString().split('T')[0];
+  ['s-date','o-d','d-d','v-d','m-d'].forEach(function(id){var el=document.getElementById(id);if(el)el.value=t;});
+  sAddSec('\u0627\u0644\u0648\u0633\u0637');
+  mPrev();
 });
 
-// ==========================================
-// نموذج نهاية المناوبة
-// ==========================================
-let sIncCounter = 0;
-const sSectors = {};
-
-function sAddSector(defaultName) {
-  const id = 'sec_' + Date.now();
-  sSectors[id] = { name: defaultName||'', incidents:[] };
-  sRenderSectors();
-  if(!defaultName) setTimeout(()=>{ const el=document.getElementById('sname_'+id); if(el) el.focus(); },50);
-}
-function sRemoveSector(id) { delete sSectors[id]; sRenderSectors(); }
-
-function sRenderSectors() {
-  const c = document.getElementById('s-sectors-container');
-  c.innerHTML = '';
-  Object.keys(sSectors).forEach(id => {
-    const sec = sSectors[id];
-    const div = document.createElement('div');
-    div.style.marginBottom = '14px';
-    div.innerHTML = `
-      <div class="sector-header">
-        <span>القطاع:</span>
-        <input id="sname_${id}" type="text" value="${sec.name}"
-          style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:4px;color:#fff;padding:2px 6px;font-size:.82rem;width:120px;text-align:right;"
-          oninput="sSectors['${id}'].name=this.value">
-        <button class="remove-btn" onclick="sRemoveSector('${id}')" style="color:#fff;">🗑</button>
-      </div>
-      <div id="sinc_${id}"></div>
-      <div style="margin-top:10px;">
-        <div style="font-weight:bold;font-size:.88rem;margin-bottom:4px;">استجابة داعمة:</div>
-        <textarea id="sup_${id}" style="width:100%;min-height:50px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.85rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea>
+/* ---- SHIFT ---- */
+var sCount=0,sSecs={};
+function sAddSec(nm){var id='sc'+Date.now();sSecs[id]={name:nm||'',incs:[]};sRender();}
+function sDelSec(id){delete sSecs[id];sRender();}
+function sRender(){
+  var c=document.getElementById('s-sec-con');c.innerHTML='';
+  Object.keys(sSecs).forEach(function(id){
+    var s=sSecs[id],w=document.createElement('div');w.style.marginBottom='13px';
+    w.innerHTML='<div class="sec-hdr"><span>\u0627\u0644\u0642\u0637\u0627\u0639:</span><input id="sn'+id+'" type="text" value="'+s.name+'" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:4px;color:#fff;padding:2px 6px;font-size:.8rem;width:120px;text-align:right;" oninput="sSecs[\''+id+'\'].name=this.value"><button class="rm-btn" onclick="sDelSec(\''+id+'\')" style="color:#fff;">\uD83D\uDDD1</button></div><div id="si'+id+'"></div><div style="margin-top:9px;"><div style="font-weight:700;font-size:.86rem;margin-bottom:4px;">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u062F\u0627\u0639\u0645\u0629:</div><textarea id="sup'+id+'" style="width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea></div><div style="margin-top:9px;margin-bottom:9px;"><div style="font-weight:700;font-size:.86rem;margin-bottom:4px;">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0645\u0644\u063A\u064A\u0629:</div><textarea id="can'+id+'" style="width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea></div><div class="add-bar"><button class="btn bp bsm" onclick="sAddInc(\''+id+'\')">\u2795 \u0625\u0636\u0627\u0641\u0629 \u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629</button><button class="btn bo2 bsm" onclick="sBulk(\''+id+'\',5)">\u0625\u0636\u0627\u0641\u0629 5</button><button class="btn bo2 bsm" onclick="sBulk(\''+id+'\',7)">\u0623\u0636\u0641 1..7</button></div>';
 
 ```
-  </div>
-  <div style="margin-top:10px;margin-bottom:10px;">
-    <div style="font-weight:bold;font-size:.88rem;margin-bottom:4px;">استجابة ملغية:</div>
-    <textarea id="can_${id}" style="width:100%;min-height:50px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.85rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea>
-  </div>
-  <div class="add-bar">
-    <button class="btn btn-primary btn-sm" onclick="sAddInc('${id}')">➕ إضافة استجابة أولية</button>
-    <button class="btn btn-sm btn-outline" onclick="sAddBulk('${id}',5)">إضافة 5</button>
-    <button class="btn btn-sm btn-outline" onclick="sAddBulk('${id}',7)">أضف 1..7</button>
-  </div>`;
-c.appendChild(div);
-sRenderInc(id);
+c.appendChild(w);sRenderIncs(id);
 ```
 
 });
 }
-
-function sRenderInc(id) {
-const c = document.getElementById(‘sinc_’+id); if(!c) return;
-c.innerHTML = ‘’;
-sSectors[id].incidents.forEach((inc,idx) => {
-const b = document.createElement(‘div’); b.className=‘incident-block’;
-b.innerHTML=`<div style="display:flex;align-items:center;gap:8px;"> <span style="font-weight:bold;font-size:.9rem;white-space:nowrap;">استجابة أولية ${inc.num}:</span> <input type="text" placeholder="أدخل رقم البلاغ أو الملاحظة" value="${inc.note||''}" oninput="sSectors['${id}'].incidents[${idx}].note=this.value" style="flex:1;"> <button onclick="sRemoveInc('${id}',${idx})" style="background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:.82rem;font-family:inherit;white-space:nowrap;">حذف</button> </div>`;
+function sRenderIncs(id){
+var c=document.getElementById(‘si’+id);if(!c)return;c.innerHTML=’’;
+sSecs[id].incs.forEach(function(inc,idx){
+var b=document.createElement(‘div’);b.className=‘inc-blk’;
+b.innerHTML=’<div style="display:flex;align-items:center;gap:8px;"><span style="font-weight:700;font-size:.88rem;white-space:nowrap;">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629 ‘+inc.n+’:</span><input type="text" placeholder="\u0623\u062F\u062E\u0644 \u0631\u0642\u0645 \u0627\u0644\u0628\u0644\u0627\u063A \u0623\u0648 \u0627\u0644\u0645\u0644\u0627\u062D\u0638\u0629" value="'+(inc.note||'')+'" oninput="sSecs[\''+id+'\'].incs['+idx+'].note=this.value" style="flex:1;"><button onclick="sDelInc(\''+id+'\','+idx+')" style="background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:.8rem;white-space:nowrap;">\u062D\u0630\u0641</button></div>’;
 c.appendChild(b);
 });
 }
-
-function sAddInc(id) { sIncCounter++; sSectors[id].incidents.push({num:sIncCounter}); sRenderInc(id); }
-function sAddBulk(id,n) { for(let i=0;i<n;i++){sIncCounter++;sSectors[id].incidents.push({num:sIncCounter});} sRenderInc(id); }
-function sRemoveInc(id,idx) { sSectors[id].incidents.splice(idx,1); sRenderInc(id); }
-function sAddPerson(type) {
-const c=document.getElementById(type===‘absent’?‘s-absent-list’:‘s-late-list’);
-const d=document.createElement(‘div’); d.className=‘person-item’;
-d.innerHTML=`<input type="text" placeholder="الاسم الكامل"><button class="remove-btn" onclick="this.parentElement.remove()">✕</button>`;
-c.appendChild(d); d.querySelector(‘input’).focus();
-}
-function sSend() {
-const date=document.getElementById(‘s-date’).value||’—’;
-const period=document.querySelector(‘input[name=“s-period”]:checked’)?.value||’—’;
-const resp=document.getElementById(‘s-ind-resp’).value||’—’;
-const indN=document.getElementById(‘s-ind-notes’).value||’’;
-const vW=document.getElementById(‘s-v-work’).value||’—’;
-const vR=document.getElementById(‘s-v-res’).value||’—’;
-const vB=document.getElementById(‘s-v-brk’).value||’—’;
-const vN=document.getElementById(‘s-v-notes’).value||’’;
-const gen=document.getElementById(‘s-gen-notes’).value||’’;
-const chief=document.getElementById(‘s-chief’).value||’—’;
-const asst=document.getElementById(‘s-asst’).value||’—’;
-const LINE = ‘➖’.repeat(14);
-
-let msg = ‘’;
-msg += `${LINE}\n`;
-msg += `       📋 *نموذج نهاية المناوبة*\n`;
-msg += `${LINE}\n`;
-msg += `📅 *التاريخ:* ${date}\n`;
-msg += `🕐 *الفترة:* ${period}\n`;
-msg += `\n`;
-
-msg += `*〔 📊 الموشر 〕*\n`;
-msg += `> ⏱ *متوسط وقت الاستجابة:* _${resp} دقيقة_\n`;
-if(indN) msg += `> 📝 *ملاحظات:* ${indN}\n`;
-msg += `\n`;
-
-msg += `*〔 🚗 المركبات 〕*\n`;
-msg += `> ✅ *عاملة:* ${vW}   |   ⏳ *احتياط:* ${vR}   |   ❌ *متعطلة:* ${vB}\n`;
-if(vN) msg += `> 🔧 *ملاحظات الأعطال:* ${vN}\n`;
-msg += `\n`;
-
-msg += `*〔 📋 بلاغات التدخل السريع 〕*\n`;
-Object.keys(sSectors).forEach(id=>{
-const sec=sSectors[id];
-const nm=document.getElementById(‘sname_’+id)?.value||sec.name||’—’;
-msg += `\n📍 *القطاع: ${nm}*\n`;
-if(!sec.incidents.length) {
-msg += `_لا توجد بلاغات_\n`;
-} else {
-sec.incidents.forEach(i=>{ msg+=`   🔹 *استجابة أولية ${i.num}:* ${i.note||'—'}\n`; });
-}
-const sup=document.getElementById(‘sup_’+id)?.value||’’;
-const can=document.getElementById(‘can_’+id)?.value||’’;
-if(sup) msg += `   🟢 *داعمة:* ${sup}\n`;
-if(can) msg += `   🔴 *ملغية:* ${can}\n`;
+function sAddInc(id){sCount++;sSecs[id].incs.push({n:sCount,note:’’});sRenderIncs(id);}
+function sBulk(id,n){for(var i=0;i<n;i++){sCount++;sSecs[id].incs.push({n:sCount,note:’’});}sRenderIncs(id);}
+function sDelInc(id,idx){sSecs[id].incs.splice(idx,1);sRenderIncs(id);}
+function sAddP(type){var c=document.getElementById(type===‘abs’?‘s-abs’:‘s-lat’),d=document.createElement(‘div’);d.className=‘p-item’;d.innerHTML=’<input type="text" placeholder="\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0627\u0645\u0644"><button class="rm-btn" onclick="this.parentElement.remove()">\u2715</button>’;c.appendChild(d);d.querySelector(‘input’).focus();}
+function sSend(){
+var date=document.getElementById(‘s-date’).value||’\u2014’,period=(document.querySelector(‘input[name=“sp”]:checked’)||{}).value||’\u2014’;
+var ir=document.getElementById(‘s-ir’).value||’\u2014’,iN=document.getElementById(‘s-in’).value||’’;
+var vw=document.getElementById(‘s-vw’).value||’\u2014’,vr=document.getElementById(‘s-vr’).value||’\u2014’,vb=document.getElementById(‘s-vb’).value||’\u2014’,vn=document.getElementById(‘s-vn’).value||’’;
+var gn=document.getElementById(‘s-gn’).value||’’,ch=document.getElementById(‘s-ch’).value||’\u2014’,as=document.getElementById(‘s-as’).value||’\u2014’;
+var li=L();
+var msg=li+’\n       \uD83D\uDCCB *\u0646\u0645\u0648\u0630\u062C \u0646\u0647\u0627\u064A\u0629 \u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629*\n’+li+’\n’;
+msg+=’\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\uD83D\uDD50 *\u0627\u0644\u0641\u062A\u0631\u0629:* ‘+period+’\n\n’;
+msg+=’*[ \uD83D\uDCCA \u0627\u0644\u0645\u0624\u0634\u0631 ]*\n> \u23F1 *\u0645\u062A\u0648\u0633\u0637 \u0648\u0642\u062A \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’+ir+’ \u062F\u0642\u064A\u0642\u0629*\n’;
+if(iN)msg+=’> \uD83D\uDCDD *\u0645\u0644\u0627\u062D\u0638\u0627\u062A:* ‘+iN+’\n’;
+msg+=’\n*[ \uD83D\uDE97 \u0627\u0644\u0645\u0631\u0643\u0628\u0627\u062A ]*\n> \u2705 *\u0639\u0627\u0645\u0644\u0629:* ‘+vw+’   |   \u23F3 *\u0627\u062D\u062A\u064A\u0627\u0637:* ‘+vr+’   |   \u274C *\u0645\u062A\u0639\u0637\u0644\u0629:* ‘+vb+’\n’;
+if(vn)msg+=’> \uD83D\uDD27 *\u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0627\u0644\u0623\u0639\u0637\u0627\u0644:* ‘+vn+’\n’;
+msg+=’\n*[ \uD83D\uDCCB \u0627\u0644\u0628\u0644\u0627\u063A\u0627\u062A ]*\n’;
+Object.keys(sSecs).forEach(function(id){
+var s=sSecs[id],nm=(document.getElementById(‘sn’+id)||{}).value||s.name||’\u2014’;
+msg+=’\n\uD83D\uDCCD *\u0627\u0644\u0642\u0637\u0627\u0639: ‘+nm+’*\n’;
+if(!s.incs.length)msg+=’*\u0644\u0627 \u062A\u0648\u062C\u062F \u0628\u0644\u0627\u063A\u0627\u062A*\n’;
+else s.incs.forEach(function(i){msg+=’   \uD83D\uDD39 *\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629 ‘+i.n+’:* ‘+(i.note||’\u2014’)+’\n’;});
+var sup=(document.getElementById(‘sup’+id)||{}).value||’’,can=(document.getElementById(‘can’+id)||{}).value||’’;
+if(sup)msg+=’   \uD83D\uDFE2 *\u062F\u0627\u0639\u0645\u0629:* ‘+sup+’\n’;
+if(can)msg+=’   \uD83D\uDD34 *\u0645\u0644\u063A\u064A\u0629:* ‘+can+’\n’;
 });
-msg += `\n`;
-
-const abs=[…document.querySelectorAll(’#s-absent-list input’)].map(i=>i.value).filter(Boolean);
-const lat=[…document.querySelectorAll(’#s-late-list input’)].map(i=>i.value).filter(Boolean);
-if(abs.length || lat.length) {
-msg += `*〔 👤 الغياب والمتأخرين 〕*\n`;
-if(abs.length) msg += `> 🚫 *الغياب:* ${abs.join('، ')}\n`;
-if(lat.length) msg += `> ⏱ *المتأخرون:* ${lat.join('، ')}\n`;
-msg += `\n`;
-}
-
-if(gen) {
-msg += `*〔 📝 ملاحظات عامة 〕*\n`;
-msg += `> ${gen}\n\n`;
-}
-
-msg += `*〔 👥 الطاقم 〕*\n`;
-msg += `> 🎖 *كبير المسعفين:* ${chief}\n`;
-msg += `> 🤝 *المساعد:* ${asst}\n`;
-msg += `\n${LINE}`;
+var abs=[].slice.call(document.querySelectorAll(’#s-abs input’)).map(function(i){return i.value;}).filter(Boolean);
+var lat=[].slice.call(document.querySelectorAll(’#s-lat input’)).map(function(i){return i.value;}).filter(Boolean);
+if(abs.length||lat.length){msg+=’\n*[ \uD83D\uDC64 \u0627\u0644\u063A\u064A\u0627\u0628 \u0648\u0627\u0644\u0645\u062A\u0623\u062E\u0631\u064A\u0646 ]*\n’;if(abs.length)msg+=’> \uD83D\uDEAB *\u0627\u0644\u063A\u064A\u0627\u0628:* ‘+abs.join(’\u060C ‘)+’\n’;if(lat.length)msg+=’> \u23F1 *\u0627\u0644\u0645\u062A\u0623\u062E\u0631\u0648\u0646:* ‘+lat.join(’\u060C ‘)+’\n’;}
+if(gn)msg+=’\n*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0639\u0627\u0645\u0629 ]*\n> ‘+gn+’\n’;
+msg+=’\n*[ \uD83D\uDC65 \u0627\u0644\u0637\u0627\u0642\u0645 ]*\n> \uD83C\uDF96 *\u0643\u0628\u064A\u0631 \u0627\u0644\u0645\u0633\u0639\u0641\u064A\u0646:* ‘+ch+’\n> \uD83E\uDD1D *\u0627\u0644\u0645\u0633\u0627\u0639\u062F:* ‘+as+’\n\n’+li;
 wa(msg);
 }
 
-// ==========================================
-// مؤشر المناوبة
-// ==========================================
-function mBuildMsg() {
-const date=document.getElementById(‘m-date’).value||’—’;
-const period=document.querySelector(‘input[name=“m-period”]:checked’)?.value||’—’;
-const resp=document.getElementById(‘m-resp’).value||’—’;
-const phrase=document.getElementById(‘m-phrase-select’).value||’’;
-const LINE=‘➖’.repeat(14);
-let msg=’’;
-msg+=`${LINE}\n`;
-msg+=`   📊 *مؤشر المناوبة لقطاع الوسط*\n`;
-msg+=`${LINE}\n`;
-msg+=`📅 *التاريخ:* ${date}\n`;
-msg+=`🕐 *المناوبة:* ${period}\n`;
-msg+=`⏱ *متوسط وقت الاستجابة:* _${resp}_\n`;
-if(phrase) msg+=`\n${phrase}\n`;
-msg+=`${LINE}`;
-return msg;
+/* –– MOSHR –– */
+function mBuild(){
+var date=document.getElementById(‘m-d’).value||’\u2014’,period=(document.querySelector(‘input[name=“mp”]:checked’)||{}).value||’\u2014’;
+var resp=document.getElementById(‘m-r’).value||’\u2014’,phrase=document.getElementById(‘m-ph’).value||’’;
+var li=L();
+var msg=li+’\n   \uD83D\uDCCA *\u0645\u0624\u0634\u0631 \u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629 \u0644\u0642\u0637\u0627\u0639 \u0627\u0644\u0648\u0633\u0637*\n’+li+’\n’;
+msg+=’\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\uD83D\uDD50 *\u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629:* ‘+period+’\n\u23F1 *\u0645\u062A\u0648\u0633\u0637 \u0648\u0642\u062A \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’+resp+’*\n’;
+if(phrase)msg+=’\n’+phrase+’\n’;
+msg+=li;return msg;
 }
-function mUpdatePreview() {
-const el=document.getElementById(‘m-preview’);
-if(el) el.textContent=mBuildMsg();
-}
-function mSend() { wa(mBuildMsg()); }
+function mPrev(){var el=document.getElementById(‘m-prev’);if(el)el.textContent=mBuild();}
+function mSend(){wa(mBuild());}
 
-// ==========================================
-// نموذج تغيير الزيت
-// ==========================================
-function oAddVehicle() {
-const c=document.getElementById(‘o-vehicles-list’);
-const d=document.createElement(‘div’); d.className=‘item-row’;
-d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>نداء الفرقة</label><input type="text" placeholder="نداء الفرقة"></div> <div class="ff" style="margin-bottom:7px;"><label>رقم اللوحة</label><input type="text" placeholder="رقم اللوحة"></div> <div class="ff" style="margin-bottom:7px;"><label>العداد الحالي (كم)</label><input type="text" placeholder="الكيلومترات الحالية"></div> <div class="ff"><label>الموعد القادم لتغيير الزيت (كم)</label><input type="text" placeholder="الكيلومترات القادمة"></div>`;
+/* –– OIL –– */
+function oAdd(){
+var c=document.getElementById(‘o-list’),d=document.createElement(‘div’);d.className=‘irow’;
+d.innerHTML=’<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button><div class="ff" style="margin-bottom:7px;"><label>\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629</label><input type="text" placeholder="\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629"></div><div class="ff" style="margin-bottom:7px;"><label>\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629</label><input type="text" placeholder="\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629"></div><div class="ff" style="margin-bottom:7px;"><label>\u0627\u0644\u0639\u062F\u0627\u062F \u0627\u0644\u062D\u0627\u0644\u064A (\u0643\u0645)</label><input type="text" placeholder="\u0627\u0644\u0643\u064A\u0644\u0648\u0645\u062A\u0631\u0627\u062A"></div><div class="ff"><label>\u0627\u0644\u0645\u0648\u0639\u062F \u0627\u0644\u0642\u0627\u062F\u0645 \u0644\u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0632\u064A\u062A (\u0643\u0645)</label><input type="text" placeholder="\u0627\u0644\u0643\u064A\u0644\u0648\u0645\u062A\u0631\u0627\u062A \u0627\u0644\u0642\u0627\u062F\u0645\u0629"></div>’;
 c.appendChild(d);
 }
-function oSend() {
-const date=document.getElementById(‘o-date’).value||’—’;
-const notes=document.getElementById(‘o-notes’).value||’’;
-const LINE=‘➖’.repeat(14);
-let msg=’’;
-msg+=`${LINE}\n`;
-msg+=`      🛢 *نموذج تغيير الزيت*\n`;
-msg+=`${LINE}\n`;
-msg+=`📅 *التاريخ:* ${date}\n\n`;
-const rows=document.querySelectorAll(’#o-vehicles-list .item-row’);
-if(!rows.length){ msg+=`_لم يتم إضافة أي مركبة_\n`; }
-rows.forEach((row,i)=>{
-const f=row.querySelectorAll(‘input’);
-msg+=`*〔 🚑 مركبة ${i+1} 〕*\n`;
-msg+=`> 📻 *نداء الفرقة:* ${f[0].value||'—'}\n`;
-msg+=`> 🔢 *رقم اللوحة:* ${f[1].value||'—'}\n`;
-msg+=`> 📏 *العداد الحالي:* _${f[2].value||'—'} كم_\n`;
-msg+=`> 🗓 *الموعد القادم:* _${f[3].value||'—'} كم_\n\n`;
-});
-if(notes){ msg+=`*〔 📝 ملاحظات 〕*\n> ${notes}\n\n`; }
-msg+=LINE;
-wa(msg);
+function oSend(){
+var date=document.getElementById(‘o-d’).value||’\u2014’,notes=document.getElementById(‘o-n’).value||’’,li=L();
+var msg=li+’\n      \uD83D\uDEE2 *\u0646\u0645\u0648\u0630\u062C \u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0632\u064A\u062A*\n’+li+’\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\n’;
+var rows=document.querySelectorAll(’#o-list .irow’);
+if(!rows.length)msg+=’*\u0644\u0645 \u064A\u062A\u0645 \u0625\u062F\u062E\u0627\u0644 \u0623\u064A \u0645\u0631\u0643\u0628\u0629*\n’;
+[].forEach.call(rows,function(row,i){var f=row.querySelectorAll(‘input’);msg+=’*[ \uD83D\uDE91 \u0645\u0631\u0643\u0628\u0629 ‘+(i+1)+’ ]*\n> \uD83D\uDCFB *\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629:* ‘+(f[0].value||’\u2014’)+’\n> \uD83D\uDD22 *\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629:* ‘+(f[1].value||’\u2014’)+’\n> \uD83D\uDCCF *\u0627\u0644\u0639\u062F\u0627\u062F \u0627\u0644\u062D\u0627\u0644\u064A:* *’+(f[2].value||’\u2014’)+’ \u0643\u0645*\n> \uD83D\uDDD3 *\u0627\u0644\u0645\u0648\u0639\u062F \u0627\u0644\u0642\u0627\u062F\u0645:* *’+(f[3].value||’\u2014’)+’ \u0643\u0645*\n\n’;});
+if(notes)msg+=’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ‘+notes+’\n\n’;
+msg+=li;wa(msg);
 }
 
-// ==========================================
-// نموذج صيانة جهاز
-// ==========================================
-function dAddDevice() {
-const c=document.getElementById(‘d-devices-list’);
-const d=document.createElement(‘div’); d.className=‘item-row’;
-d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>اسم الجهاز</label><input type="text" placeholder="اسم الجهاز"></div> <div class="ff" style="margin-bottom:7px;"><label>السيريال نمبر</label><input type="text" placeholder="Serial No."></div> <div class="ff"><label>العطل / المشكلة</label><input type="text" placeholder="وصف المشكلة"></div>`;
+/* –– DEVICE –– */
+function dAdd(){
+var c=document.getElementById(‘d-list’),d=document.createElement(‘div’);d.className=‘irow’;
+d.innerHTML=’<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button><div class="ff" style="margin-bottom:7px;"><label>\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632</label><input type="text" placeholder="\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632"></div><div class="ff" style="margin-bottom:7px;"><label>\u0627\u0644\u0633\u064A\u0631\u064A\u0627\u0644 \u0646\u0645\u0628\u0631</label><input type="text" placeholder="Serial No."></div><div class="ff"><label>\u0627\u0644\u0639\u0637\u0644 / \u0627\u0644\u0645\u0634\u0643\u0644\u0629</label><input type="text" placeholder="\u0648\u0635\u0641 \u0627\u0644\u0645\u0634\u0643\u0644\u0629"></div>’;
 c.appendChild(d);
 }
-function dSend() {
-const date=document.getElementById(‘d-date’).value||’—’;
-const notes=document.getElementById(‘d-notes’).value||’’;
-const LINE=‘➖’.repeat(14);
-let msg=’’;
-msg+=`${LINE}\n`;
-msg+=`      🔧 *نموذج صيانة جهاز*\n`;
-msg+=`${LINE}\n`;
-msg+=`📅 *التاريخ:* ${date}\n\n`;
-const rows=document.querySelectorAll(’#d-devices-list .item-row’);
-if(!rows.length){ msg+=`_لم يتم إضافة أي جهاز_\n`; }
-rows.forEach((row,i)=>{
-const f=row.querySelectorAll(‘input’);
-msg+=`*〔 🔧 جهاز ${i+1} 〕*\n`;
-msg+=`> 📛 *اسم الجهاز:* ${f[0].value||'—'}\n`;
-msg+=`> 🔖 *السيريال نمبر:* \`${f[1].value||’—’}`\n`; msg+=`> ⚠️ *العطل:* *${f[2].value||’—’}*\n\n`; }); if(notes){ msg+=`*〔 📝 ملاحظات 〕*\n> ${notes}\n\n`; }
-msg+=LINE;
-wa(msg);
+function dSend(){
+var date=document.getElementById(‘d-d’).value||’\u2014’,notes=document.getElementById(‘d-n’).value||’’,li=L();
+var msg=li+’\n      \uD83D\uDD27 *\u0646\u0645\u0648\u0630\u062C \u0635\u064A\u0627\u0646\u0629 \u062C\u0647\u0627\u0632*\n’+li+’\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\n’;
+var rows=document.querySelectorAll(’#d-list .irow’);
+if(!rows.length)msg+=’*\u0644\u0645 \u064A\u062A\u0645 \u0625\u062F\u062E\u0627\u0644 \u0623\u064A \u062C\u0647\u0627\u0632*\n’;
+[].forEach.call(rows,function(row,i){var f=row.querySelectorAll(‘input’);msg+=’*[ \uD83D\uDD27 \u062C\u0647\u0627\u0632 ‘+(i+1)+’ ]*\n> \uD83D\uDCDB *\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632:* ‘+(f[0].value||’\u2014’)+’\n> \uD83D\uDD16 *\u0627\u0644\u0633\u064A\u0631\u064A\u0627\u0644:* ‘+(f[1].value||’\u2014’)+’\n> \u26A0 *\u0627\u0644\u0639\u0637\u0644:* *’+(f[2].value||’\u2014’)+’*\n\n’;});
+if(notes)msg+=’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ‘+notes+’\n\n’;
+msg+=li;wa(msg);
 }
 
-// ==========================================
-// نموذج صيانة مركبة
-// ==========================================
-function vmAddFault() {
-const c=document.getElementById(‘vm-faults-list’);
-const d=document.createElement(‘div’); d.className=‘item-row’;
-d.innerHTML=` <button class="del-btn" onclick="this.parentElement.remove()">✕ حذف</button> <div class="ff" style="margin-bottom:7px;"><label>وصف العطل</label><input type="text" placeholder="وصف العطل"></div> <div class="ff"><label>الشدة</label> <select><option>بسيط</option><option>متوسط</option><option>خطير</option></select> </div>`;
+/* –– VM –– */
+function vAdd(){
+var c=document.getElementById(‘v-faults’),d=document.createElement(‘div’);d.className=‘irow’;
+d.innerHTML=’<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button><div class="ff" style="margin-bottom:7px;"><label>\u0648\u0635\u0641 \u0627\u0644\u0639\u0637\u0644</label><input type="text" placeholder="\u0648\u0635\u0641 \u0627\u0644\u0639\u0637\u0644"></div><div class="ff"><label>\u0627\u0644\u0634\u062F\u0629</label><select><option>\u0628\u0633\u064A\u0637</option><option>\u0645\u062A\u0648\u0633\u0637</option><option>\u062E\u0637\u064A\u0631</option></select></div>’;
 c.appendChild(d);
 }
-function vmSend() {
-const date=document.getElementById(‘vm-date’).value||’—’;
-const num=document.getElementById(‘vm-num’).value||’—’;
-const type=document.getElementById(‘vm-type’).value||’—’;
-const km=document.getElementById(‘vm-km’).value||’—’;
-const pri=document.getElementById(‘vm-priority’).value||’—’;
-const notes=document.getElementById(‘vm-notes’).value||’’;
-const priEmoji={‘عادية’:‘🟢’,‘عاجلة’:‘🟡’,‘حرجة’:‘🔴’};
-const LINE=‘➖’.repeat(14);
-let msg=’’;
-msg+=`${LINE}\n`;
-msg+=`     🚑 *نموذج صيانة مركبة*\n`;
-msg+=`${LINE}\n`;
-msg+=`📅 *التاريخ:* ${date}\n\n`;
-msg+=`*〔 🚑 بيانات المركبة 〕*\n`;
-msg+=`> 🔢 *رقم المركبة:* ${num}\n`;
-msg+=`> 🚘 *النوع:* ${type}\n`;
-msg+=`> 📏 *العداد:* _${km} كم_\n`;
-msg+=`> ${priEmoji[pri]||'⚪'} *الأولوية:* *${pri}*\n\n`;
-const rows=document.querySelectorAll(’#vm-faults-list .item-row’);
-if(rows.length){
-msg+=`*〔 ⚠️ الأعطال المبلغ عنها 〕*\n`;
-rows.forEach((row,i)=>{
-const f=row.querySelector(‘input’);
-const s=row.querySelector(‘select’);
-const sEmoji={‘بسيط’:‘🟡’,‘متوسط’:‘🟠’,‘خطير’:‘🔴’};
-msg+=`> ${i+1}. _${f?.value||'—'}_ — ${sEmoji[s?.value]||'⚪'} *${s?.value||'—'}*\n`;
-});
-msg+=`\n`;
-}
-if(notes){ msg+=`*〔 📝 ملاحظات 〕*\n> ${notes}\n\n`; }
-msg+=LINE;
-wa(msg);
+function vSend(){
+var date=document.getElementById(‘v-d’).value||’\u2014’,num=document.getElementById(‘v-num’).value||’\u2014’,typ=document.getElementById(‘v-typ’).value||’\u2014’,km=document.getElementById(‘v-km’).value||’\u2014’,pri=document.getElementById(‘v-pri’).value||’\u2014’,notes=document.getElementById(‘v-n’).value||’’;
+var pE={’\u0639\u0627\u062F\u064A\u0629’:’\uD83D\uDFE2’,’\u0639\u0627\u062C\u0644\u0629’:’\uD83D\uDFE1’,’\u062D\u0631\u062C\u0629’:’\uD83D\uDD34’},sE={’\u0628\u0633\u064A\u0637’:’\uD83D\uDFE1’,’\u0645\u062A\u0648\u0633\u0637’:’\uD83D\uDFE0’,’\u062E\u0637\u064A\u0631’:’\uD83D\uDD34’};
+var li=L();
+var msg=li+’\n     \uD83D\uDE91 *\u0646\u0645\u0648\u0630\u062C \u0635\u064A\u0627\u0646\u0629 \u0645\u0631\u0643\u0628\u0629*\n’+li+’\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\n’;
+msg+=’*[ \uD83D\uDE91 \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0645\u0631\u0643\u0628\u0629 ]*\n> \uD83D\uDD22 *\u0631\u0642\u0645 \u0627\u0644\u0645\u0631\u0643\u0628\u0629:* ‘+num+’\n> \uD83D\uDE98 *\u0627\u0644\u0646\u0648\u0639:* ‘+typ+’\n> \uD83D\uDCCF *\u0627\u0644\u0639\u062F\u0627\u062F:* *’+km+’ \u0643\u0645*\n> ‘+(pE[pri]||’\u26AA’)+’ *\u0627\u0644\u0623\u0648\u0644\u0648\u064A\u0629:* *’+pri+’*\n\n’;
+var rows=document.querySelectorAll(’#v-faults .irow’);
+if(rows.length){msg+=’*[ \u26A0 \u0627\u0644\u0623\u0639\u0637\u0627\u0644 ]*\n’;[].forEach.call(rows,function(row,i){var f=row.querySelector(‘input’),s=row.querySelector(‘select’);msg+=’> ‘+(i+1)+’. *’+(f?f.value:’\u2014’)+’* \u2014 ‘+(sE[s?s.value:’’]||’\u26AA’)+’ *’+(s?s.value:’\u2014’)+’*\n’;});msg+=’\n’;}
+if(notes)msg+=’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ‘+notes+’\n\n’;
+msg+=li;wa(msg);
 }
 
-// ==========================================
-// نموذج ROSC
-// ==========================================
-function roscSend() {
-const time=document.getElementById(‘r-time’).value||’—’;
-const type=document.getElementById(‘r-type’).value||’—’;
-const loc=document.getElementById(‘r-location’).value||’—’;
-const resp=document.getElementById(‘r-resp’).value||’—’;
-const units=document.getElementById(‘r-units’).value||’—’;
-const rosc=document.getElementById(‘r-rosc’).value;
-const lucas=document.getElementById(‘r-lucas’).value;
-const ops=document.getElementById(‘r-ops’).value||’—’;
-const coord=document.getElementById(‘r-coord’).value||’—’;
-const names=[…document.querySelectorAll(’#r-names-list input’)].map(i=>i.value).filter(Boolean);
-const ar=[‘١’,‘٢’,‘٣’,‘٤’,‘٥’,‘٦’,‘٧’,‘٨’];
-const LINE=‘➖’.repeat(14);
-let msg=’’;
-msg+=`${LINE}\n`;
-msg+=`         ❤️ *نموذج ROSC*\n`;
-msg+=`${LINE}\n\n`;
-msg+=`*〔 📋 بيانات البلاغ 〕*\n`;
-msg+=`> ⏰ *توقيت البلاغ:* ${time}\n`;
-msg+=`> 📌 *نوع البلاغ:* ${type}\n`;
-msg+=`> 📍 *موقع البلاغ:* ${loc}\n`;
-msg+=`> ⚡ *زمن الاستجابة:* _${resp}_\n\n`;
-msg+=`*〔 🚑 الوحدات المستجيبة 〕*\n`;
-units.split(’\n’).forEach(u=>{ if(u.trim()) msg+=`> ${u.trim()}\n`; });
-msg+=`\n`;
-msg+=`*〔 ✅ نتائج التدخل 〕*\n`;
-msg+=`> 💓 *هل تحقق ROSC؟:* *${rosc}*\n`;
-msg+=`> 🤖 *هل تم استخدام جهاز لوكس؟:* *${lucas}*\n\n`;
-msg+=`${LINE}\n`;
-msg+=`عمل عظيم يجسد الإخلاص والاحترافية في العمل 🌟\n`;
-msg+=`بكل فخر واعتزاز، نتقدم بجزيل الشكر والعرفان لجهود الزملاء الذين كان لهم – بعد توفيق الله – الفضل في نجاح عملية إنعاش قلبي رئوي\n`;
-msg+=`${LINE}\n\n`;
-if(names.length){
-names.forEach((n,i)=>{ msg+=`${ar[i]||i+1}- *${n}*\n`; });
-msg+=`\n`;
+/* –– ROSC –– */
+var rCount=0;
+function rAddName(){
+if(rCount>=10)return;
+rCount++;
+var ar=[’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’];
+var c=document.getElementById(‘r-names’),d=document.createElement(‘div’);d.className=‘name-add-row’;
+d.innerHTML=’<span class="nn">’+ar[rCount-1]+’</span><input type="text" placeholder="\u0627\u0644\u0627\u0633\u0645"><button class="rm-btn" onclick="rDelName(this)">\u2715</button>’;
+c.appendChild(d);
+var btn=document.getElementById(‘r-add-btn’);if(btn)btn.style.display=rCount>=10?‘none’:’’;
 }
-msg+=`> 🎯 *تحكم عملياتي:* ${ops}\n`;
-msg+=`> 🔗 *تنسيق استجابة:* ${coord}\n\n`;
-msg+=`${LINE}\n`;
-msg+=`جزاكم الله خيرًا، وكتب أجركم، وجعل ما قدمتموه في موازين حسناتكم 🌹\n`;
-msg+=`${LINE}`;
+function rDelName(btn){
+btn.parentElement.remove();rCount–;
+var btn2=document.getElementById(‘r-add-btn’);if(btn2)btn2.style.display=’’;
+var ar=[’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’];
+document.querySelectorAll(’#r-names .nn’).forEach(function(sp,i){sp.textContent=ar[i]||(i+1);});
+}
+function rSend(){
+var time=document.getElementById(‘r-ti’).value||’\u2014’,type=document.getElementById(‘r-ty’).value||’\u2014’,loc=document.getElementById(‘r-lo’).value||’\u2014’,resp=document.getElementById(‘r-re’).value||’\u2014’;
+var units=document.getElementById(‘r-un’).value||’\u2014’,rosc=document.getElementById(‘r-ro’).value,lucas=document.getElementById(‘r-lu’).value;
+var ops=document.getElementById(‘r-op’).value||’\u2014’,coord=document.getElementById(‘r-co’).value||’\u2014’;
+var names=[].slice.call(document.querySelectorAll(’#r-names input’)).map(function(i){return i.value;}).filter(Boolean);
+var ar=[’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’],li=L();
+var msg=li+’\n         \u2764 *\u0646\u0645\u0648\u0630\u062C ROSC*\n’+li+’\n\n’;
+msg+=’*[ \uD83D\uDCCB \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0628\u0644\u0627\u063A ]*\n> \u23F0 *\u062A\u0648\u0642\u064A\u062A \u0627\u0644\u0628\u0644\u0627\u063A:* ‘+time+’\n> \uD83D\uDCCC *\u0646\u0648\u0639 \u0627\u0644\u0628\u0644\u0627\u063A:* ‘+type+’\n> \uD83D\uDCCD *\u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0644\u0627\u063A:* ‘+loc+’\n> \u26A1 *\u0632\u0645\u0646 \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’+resp+’*\n\n’;
+msg+=’*[ \uD83D\uDE91 \u0627\u0644\u0648\u062D\u062F\u0627\u062A \u0627\u0644\u0645\u0633\u062A\u062C\u064A\u0628\u0629 ]*\n’;
+units.split(’\n’).forEach(function(u){if(u.trim())msg+=’> ‘+u.trim()+’\n’;});
+msg+=’\n*[ \u2705 \u0646\u062A\u0627\u0626\u062C \u0627\u0644\u062A\u062F\u062E\u0644 ]*\n> \uD83D\uDC93 *\u0647\u0644 \u062A\u062D\u0642\u0642 ROSC\u061F:* *’+rosc+’*\n> \uD83E\uDD16 *\u0647\u0644 \u062A\u0645 \u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u062C\u0647\u0627\u0632 \u0644\u0648\u0643\u0633\u061F:* *’+lucas+’*\n\n’;
+msg+=li+’\n\u0639\u0645\u0644 \u0639\u0638\u064A\u0645 \u064A\u062C\u0633\u062F \u0627\u0644\u0625\u062E\u0644\u0627\u0635 \u0648\u0627\u0644\u0627\u062D\u062A\u0631\u0627\u0641\u064A\u0629 \u0641\u064A \u0627\u0644\u0639\u0645\u0644\n\u0628\u0643\u0644 \u0641\u062E\u0631 \u0648\u0627\u0639\u062A\u0632\u0627\u0632\u060C \u0646\u062A\u0642\u062F\u0645 \u0628\u062C\u0632\u064A\u0644 \u0627\u0644\u0634\u0643\u0631 \u0648\u0627\u0644\u0639\u0631\u0641\u0627\u0646 \u0644\u062C\u0647\u0648\u062F \u0627\u0644\u0632\u0645\u0644\u0627\u0621 \u0627\u0644\u0630\u064A\u0646 \u0643\u0627\u0646 \u0644\u0647\u0645 \u2013 \u0628\u0639\u062F \u062A\u0648\u0641\u064A\u0642 \u0627\u0644\u0644\u0647 \u2013 \u0627\u0644\u0641\u0636\u0644 \u0641\u064A \u0646\u062C\u0627\u062D \u0639\u0645\u0644\u064A\u0629 \u0625\u0646\u0639\u0627\u0634 \u0642\u0644\u0628\u064A \u0631\u0626\u0648\u064A\n’+li+’\n\n’;
+if(names.length){names.forEach(function(n,i){msg+=(ar[i]||(i+1)+’’)+’- *’+n+’*\n’;});msg+=’\n’;}
+msg+=’> \uD83C\uDFAF *\u062A\u062D\u0643\u0645 \u0639\u0645\u0644\u064A\u0627\u062A\u064A:* ‘+ops+’\n> \uD83D\uDD17 *\u062A\u0646\u0633\u064A\u0642 \u0627\u0633\u062A\u062C\u0627\u0628\u0629:* ‘+coord+’\n\n’+li+’\n\u062C\u0632\u0627\u0643\u0645 \u0627\u0644\u0644\u0647 \u062E\u064A\u0631\u064B\u0627\u060C \u0648\u0643\u062A\u0628 \u0623\u062C\u0631\u0643\u0645\u060C \u0648\u062C\u0639\u0644 \u0645\u0627 \u0642\u062F\u0645\u062A\u0645\u0648\u0647 \u0641\u064A \u0645\u0648\u0627\u0632\u064A\u0646 \u062D\u0633\u0646\u0627\u062A\u0643\u0645 \uD83C\uDF39\n’+li;
 wa(msg);
 }
 </script>
