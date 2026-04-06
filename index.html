@@ -292,8 +292,8 @@ textarea{resize:vertical;min-height:54px;}
 (function() {
   "use strict";
 
-  // ======================================================
-  // HELPERS
+// ======================================================
+  // HELPERS (المصلحة لحل مشكلة علامات الاستفهام)
   // ======================================================
   function show(id) {
     document.getElementById('pg-home').style.display = 'none';
@@ -301,15 +301,18 @@ textarea{resize:vertical;min-height:54px;}
     for (var i = 0; i < pages.length; i++) pages[i].style.display = 'none';
     document.getElementById(id).style.display = 'block';
     window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
   }
 
-  function home() { show('pg-home'); document.getElementById('pg-home').style.display = 'block'; }
+  function wa(msg) { 
+    // الحل هنا: التشفير الكامل للمكونات
+    var encodedMsg = encodeURIComponent(msg);
+    window.open('https://wa.me/?text=' + encodedMsg, '_blank'); 
+  }
 
-  function wa(msg) { window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); }
-
-  function L() { var s = ''; for (var i = 0; i < 14; i++) s += '\u2796'; return s; }
+  function L() { 
+    // استخدام رموز تعبيرية قياسية يدعمها الواتساب مباشرة
+    return "➖➖➖➖➖➖➖➖➖➖➖➖"; 
+  }
 
   function gv(id) {
     var el = document.getElementById(id);
