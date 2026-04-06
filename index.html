@@ -4,268 +4,309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>&#x627;&#x644;&#x646;&#x645;&#x627;&#x630;&#x62C; &#x627;&#x644;&#x645;&#x64A;&#x62F;&#x627;&#x646;&#x64A;&#x629;</title>
+<title>النماذج الميدانية</title>
+<script>
+// NAVIGATION - defined at top level, runs before anything
+function go(id) {
+  // hide home div (not a .page class)
+  var home = document.getElementById('pg-home');
+  if (home) home.style.display = 'none';
+  // hide all .page divs
+  var all = document.getElementsByClassName('page');
+  for (var i = 0; i < all.length; i++) {
+    all[i].style.display = 'none';
+  }
+  // show target
+  var pg = document.getElementById(id);
+  if (pg) pg.style.display = 'block';
+  // scroll to top - all methods
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+  try { window.scrollTo({top:0,left:0,behavior:'instant'}); } catch(e) { window.scrollTo(0,0); }
+}
+function wa(msg) {
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+}
+function L() {
+  var s = '';
+  for (var i = 0; i < 14; i++) s += '\u2796';
+  return s;
+}
+</script>
 <style>
-:root{--pr:#1a5276;--bg:#f0f4f8;--ca:#fff;--bo:#d5e8f0;--tx:#1c2833;--mu:#7f8c8d;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;}
-.page{display:none;}.page.active{display:block;}
-.hdr{color:#fff;padding:20px 16px 16px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.2);background:linear-gradient(135deg,#1a5276,#1f618d);}
-.hdr h1{font-size:1.3rem;font-weight:700;margin-bottom:3px;}
-.hdr p{font-size:.75rem;opacity:.8;}
-.home-wrap{padding:16px;max-width:520px;margin:0 auto;}
-.sec-title{font-size:.7rem;font-weight:700;color:var(--mu);letter-spacing:1px;margin:16px 0 9px;padding-right:3px;}
-.fgrid{display:flex;flex-direction:column;gap:9px;}
-.fcard{background:var(--ca);border:1px solid var(--bo);border-radius:14px;padding:14px 15px;display:flex;align-items:center;gap:13px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.07);border-right:5px solid transparent;transition:transform .1s;}
-.fcard:active{transform:scale(.97);}
-.fcard .ic{font-size:1.9rem;width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.fcard .inf{flex:1;}
-.fcard .nm{font-weight:700;font-size:.93rem;margin-bottom:2px;}
-.fcard .ds{font-size:.73rem;color:var(--mu);}
-.fcard .ar{color:var(--mu);font-size:1.1rem;}
-.cb{border-right-color:#2e86c1;}.cb .ic{background:#eaf4fb;}
-.cg{border-right-color:#1e8449;}.cg .ic{background:#eafaf1;}
-.co{border-right-color:#d35400;}.co .ic{background:#fef5e7;}
-.cr{border-right-color:#c0392b;}.cr .ic{background:#fdedec;}
-.ck{border-right-color:#b7950b;}.ck .ic{background:#fef9e7;}
-.ct{border-right-color:#148f77;}.ct .ic{background:#e8f8f5;}
-.inner{max-width:520px;margin:0 auto;padding:12px;}
-.phdr{display:flex;align-items:center;gap:10px;padding:13px 15px;color:#fff;}
-.phdr .bk{background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:8px;padding:5px 11px;cursor:pointer;font-size:1.2rem;flex-shrink:0;line-height:1;}
-.phdr .pt{font-weight:700;font-size:1rem;}
-.phdr .ps{font-size:.73rem;opacity:.8;}
-.card{background:var(--ca);border:1px solid var(--bo);border-radius:10px;padding:12px;margin-bottom:11px;box-shadow:0 2px 7px rgba(0,0,0,.05);}
-.card h2{font-size:.93rem;color:var(--pr);border-bottom:2px solid var(--bo);padding-bottom:5px;margin-bottom:9px;}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:7px;align-items:flex-start;}
-.fl{display:flex;flex-direction:column;flex:1;min-width:115px;}
-.fl label{font-size:.73rem;color:var(--mu);margin-bottom:3px;}
-.ff{display:flex;flex-direction:column;margin-bottom:8px;}
-.ff label{font-size:.73rem;color:var(--mu);margin-bottom:3px;}
-input[type=text],input[type=date],select,textarea{border:1px solid var(--bo);border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;color:var(--tx);background:#f9fbfc;width:100%;direction:rtl;}
-textarea{resize:vertical;min-height:54px;}
-.rg{display:flex;gap:11px;margin-top:3px;flex-wrap:wrap;}
-.rg label{display:flex;align-items:center;gap:4px;font-size:.84rem;cursor:pointer;}
-.sec-hdr{display:flex;justify-content:space-between;align-items:center;background:var(--pr);color:#fff;border-radius:6px;padding:6px 9px;margin-bottom:7px;font-size:.83rem;font-weight:700;}
-.inc-blk{border:1px solid var(--bo);border-radius:7px;padding:9px;margin-bottom:7px;background:#f9fbff;}
-.rm-btn{background:none;border:none;color:#e74c3c;cursor:pointer;font-size:1rem;padding:0 3px;}
-.btn{border:none;border-radius:6px;padding:6px 11px;cursor:pointer;font-size:.79rem;font-family:inherit;display:inline-flex;align-items:center;gap:4px;}
-.bp{background:var(--pr);color:#fff;}
-.bsm{padding:4px 7px;font-size:.73rem;}
-.bo2{background:#fff;border:1px solid var(--pr);color:var(--pr);}
-.add-bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
-.p-item{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:1px solid var(--bo);border-radius:6px;padding:5px 8px;margin-bottom:5px;}
-.p-item input{flex:1;}
-.dvd{border:none;border-top:1px dashed var(--bo);margin:6px 0;}
-.irow{border:1px solid var(--bo);border-radius:8px;padding:10px 10px 10px 40px;margin-bottom:8px;background:#f9fbff;position:relative;}
-.del{position:absolute;top:8px;left:7px;background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:3px 7px;cursor:pointer;font-size:.7rem;}
-.send-btn{width:100%;padding:12px;background:#25d366;color:#fff;border:none;border-radius:8px;font-size:.98rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;}
-.send-btn:active{opacity:.85;}
-.prev-box{background:#f0f9f4;border:1px solid #a9dfbf;border-radius:8px;padding:10px;font-size:.82rem;line-height:1.85;white-space:pre-wrap;direction:rtl;min-height:80px;margin-top:8px;color:#1c2833;}
-.name-add-row{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:1px solid var(--bo);border-radius:6px;padding:5px 8px;margin-bottom:5px;}
-.name-add-row .nn{font-size:.78rem;color:var(--mu);width:22px;flex-shrink:0;text-align:center;font-weight:700;}
-.name-add-row input{flex:1;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; color: #1c2833; min-height: 100vh; }
+.page {
+  display: none;
+  min-height: 100vh;
+  background: #f0f4f8;
+}
+.hdr { color: #fff; padding: 20px 16px 16px; text-align: center; background: linear-gradient(135deg,#1a5276,#1f618d); box-shadow: 0 3px 10px rgba(0,0,0,.2); }
+.hdr h1 { font-size: 1.3rem; font-weight: 700; margin-bottom: 3px; }
+.hdr p { font-size: .75rem; opacity: .8; }
+.hw { padding: 16px; max-width: 520px; margin: 0 auto; }
+.st { font-size: .7rem; font-weight: 700; color: #7f8c8d; letter-spacing: 1px; margin: 16px 0 9px; }
+.fg { display: flex; flex-direction: column; gap: 9px; }
+.fc {
+  background: #fff; border: 1px solid #d5e8f0; border-radius: 14px;
+  padding: 14px 15px; display: flex; align-items: center; gap: 13px;
+  cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.07);
+  border-right: 5px solid transparent;
+  width: 100%; text-align: right; font-family: inherit;
+  -webkit-tap-highlight-color: rgba(0,0,0,.05);
+}
+.fc:active { opacity: .85; transform: scale(.98); }
+.ic { font-size: 1.9rem; width: 46px; height: 46px; border-radius: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.inf { flex: 1; }
+.nm { font-weight: 700; font-size: .93rem; margin-bottom: 2px; }
+.ds { font-size: .73rem; color: #7f8c8d; }
+.ar { color: #7f8c8d; font-size: 1.1rem; }
+.cb { border-right-color: #2e86c1; } .cb .ic { background: #eaf4fb; }
+.cg { border-right-color: #1e8449; } .cg .ic { background: #eafaf1; }
+.co { border-right-color: #d35400; } .co .ic { background: #fef5e7; }
+.cr { border-right-color: #c0392b; } .cr .ic { background: #fdedec; }
+.ck { border-right-color: #b7950b; } .ck .ic { background: #fef9e7; }
+.ct { border-right-color: #148f77; } .ct .ic { background: #e8f8f5; }
+.inner { max-width: 520px; margin: 0 auto; padding: 12px; }
+.phdr { display: flex; align-items: center; gap: 10px; padding: 13px 15px; color: #fff; }
+.bk { background: rgba(255,255,255,.18); border: none; color: #fff; border-radius: 8px; padding: 5px 13px; cursor: pointer; font-size: 1.3rem; line-height: 1; }
+.pt { font-weight: 700; font-size: 1rem; }
+.ps { font-size: .73rem; opacity: .8; }
+.card { background: #fff; border: 1px solid #d5e8f0; border-radius: 10px; padding: 12px; margin-bottom: 11px; box-shadow: 0 2px 7px rgba(0,0,0,.05); }
+.card h2 { font-size: .93rem; color: #1a5276; border-bottom: 2px solid #d5e8f0; padding-bottom: 5px; margin-bottom: 9px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 7px; align-items: flex-start; }
+.fl { display: flex; flex-direction: column; flex: 1; min-width: 115px; }
+.fl label { font-size: .73rem; color: #7f8c8d; margin-bottom: 3px; }
+.ff { display: flex; flex-direction: column; margin-bottom: 8px; }
+.ff label { font-size: .73rem; color: #7f8c8d; margin-bottom: 3px; }
+input[type=text], input[type=date], select, textarea {
+  border: 1px solid #d5e8f0; border-radius: 6px; padding: 6px 8px;
+  font-size: .84rem; font-family: inherit; color: #1c2833; background: #f9fbfc;
+  width: 100%; direction: rtl;
+}
+textarea { resize: vertical; min-height: 54px; }
+.rg { display: flex; gap: 11px; margin-top: 3px; flex-wrap: wrap; }
+.rg label { display: flex; align-items: center; gap: 4px; font-size: .84rem; cursor: pointer; }
+.shdr { display: flex; justify-content: space-between; align-items: center; background: #1a5276; color: #fff; border-radius: 6px; padding: 6px 9px; margin-bottom: 7px; font-size: .83rem; font-weight: 700; }
+.iblk { border: 1px solid #d5e8f0; border-radius: 7px; padding: 9px; margin-bottom: 7px; background: #f9fbff; }
+.btn { border: none; border-radius: 6px; padding: 6px 11px; cursor: pointer; font-size: .79rem; font-family: inherit; display: inline-flex; align-items: center; gap: 4px; }
+.bp { background: #1a5276; color: #fff; }
+.bsm { padding: 4px 8px; font-size: .73rem; }
+.bo2 { background: #fff; border: 1px solid #1a5276; color: #1a5276; }
+.add-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.pi { display: flex; align-items: center; gap: 6px; background: #f9f9f9; border: 1px solid #d5e8f0; border-radius: 6px; padding: 5px 8px; margin-bottom: 5px; }
+.pi input { flex: 1; }
+.dvd { border: none; border-top: 1px dashed #d5e8f0; margin: 6px 0; }
+.irow { border: 1px solid #d5e8f0; border-radius: 8px; padding: 10px 10px 10px 42px; margin-bottom: 8px; background: #f9fbff; position: relative; }
+.del { position: absolute; top: 8px; left: 7px; background: #e74c3c; color: #fff; border: none; border-radius: 5px; padding: 3px 7px; cursor: pointer; font-size: .7rem; }
+.send-btn { width: 100%; padding: 12px; background: #25d366; color: #fff; border: none; border-radius: 8px; font-size: .98rem; font-weight: 700; cursor: pointer; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px; }
+.prev-box { background: #f0f9f4; border: 1px solid #a9dfbf; border-radius: 8px; padding: 10px; font-size: .82rem; line-height: 1.85; white-space: pre-wrap; direction: rtl; min-height: 80px; margin-top: 8px; }
+.nr { display: flex; align-items: center; gap: 6px; background: #f9f9f9; border: 1px solid #d5e8f0; border-radius: 6px; padding: 5px 8px; margin-bottom: 5px; }
+.nr .nn { font-size: .78rem; color: #7f8c8d; width: 22px; flex-shrink: 0; text-align: center; font-weight: 700; }
+.nr input { flex: 1; }
+.rm { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 1rem; padding: 0 3px; }
 </style>
 </head>
 <body>
 
-<!-- HOME -->
+<!-- HOME - shown by default -->
 
-<div id="pg-home" class="page active">
+<div id="pg-home" style="display:block">
   <div class="hdr">
-    <h1>&#x1F691; &#x646;&#x638;&#x627;&#x645; &#x627;&#x644;&#x646;&#x645;&#x627;&#x630;&#x62C; &#x627;&#x644;&#x645;&#x64A;&#x62F;&#x627;&#x646;&#x64A;&#x629;</h1>
-    <p>&#x627;&#x62E;&#x62A;&#x631; &#x627;&#x644;&#x646;&#x645;&#x648;&#x630;&#x62C; &#x627;&#x644;&#x645;&#x637;&#x644;&#x648;&#x628;</p>
+    <h1>&#x1F691; نظام النماذج الميدانية</h1>
+    <p>اختر النموذج المطلوب</p>
   </div>
-  <div class="home-wrap">
-    <div class="sec-title">&#x646;&#x645;&#x627;&#x630;&#x62C; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div>
-    <div class="fgrid">
-      <div class="fcard cb" onclick="go('pg-shift')">
+  <div class="hw">
+    <div class="st">نماذج المناوبة</div>
+    <div class="fg">
+      <button class="fc cb" onclick="go('pg-shift')">
         <div class="ic">&#x1F4CB;</div>
-        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x646;&#x647;&#x627;&#x64A;&#x629; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div><div class="ds">&#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;&#x627;&#x62A; &#x648;&#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A; &#x648;&#x627;&#x644;&#x63A;&#x64A;&#x627;&#x628; &#x648;&#x627;&#x644;&#x637;&#x627;&#x642;&#x645;</div></div>
+        <div class="inf"><div class="nm">نموذج نهاية المناوبة</div><div class="ds">البلاغات والمركبات والغياب والطاقم</div></div>
         <div class="ar">&#x2039;</div>
-      </div>
-      <div class="fcard ct" onclick="go('pg-moshr')">
+      </button>
+      <button class="fc ct" onclick="go('pg-moshr')">
         <div class="ic">&#x1F4CA;</div>
-        <div class="inf"><div class="nm">&#x645;&#x624;&#x634;&#x631; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div><div class="ds">&#x645;&#x62A;&#x648;&#x633;&#x637; &#x648;&#x642;&#x62A; &#x627;&#x644;&#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629; &#x648;&#x62C;&#x645;&#x644;&#x629; &#x627;&#x644;&#x62E;&#x62A;&#x627;&#x645;</div></div>
+        <div class="inf"><div class="nm">مؤشر المناوبة</div><div class="ds">متوسط وقت الاستجابة وجملة الختام</div></div>
         <div class="ar">&#x2039;</div>
-      </div>
+      </button>
     </div>
-    <div class="sec-title">&#x646;&#x645;&#x627;&#x630;&#x62C; &#x627;&#x644;&#x635;&#x64A;&#x627;&#x646;&#x629;</div>
-    <div class="fgrid">
-      <div class="fcard cg" onclick="go('pg-oil')">
+    <div class="st">نماذج الصيانة</div>
+    <div class="fg">
+      <button class="fc cg" onclick="go('pg-oil')">
         <div class="ic">&#x1F6E2;</div>
-        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x62A;&#x63A;&#x64A;&#x64A;&#x631; &#x627;&#x644;&#x632;&#x64A;&#x62A;</div><div class="ds">&#x62A;&#x633;&#x62C;&#x64A;&#x644; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x62A;&#x63A;&#x64A;&#x64A;&#x631; &#x632;&#x64A;&#x62A; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A;</div></div>
+        <div class="inf"><div class="nm">نموذج تغيير الزيت</div><div class="ds">تسجيل بيانات تغيير زيت المركبات</div></div>
         <div class="ar">&#x2039;</div>
-      </div>
-      <div class="fcard co" onclick="go('pg-device')">
+      </button>
+      <button class="fc co" onclick="go('pg-device')">
         <div class="ic">&#x1F527;</div>
-        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x635;&#x64A;&#x627;&#x646;&#x629; &#x62C;&#x647;&#x627;&#x632;</div><div class="ds">&#x635;&#x64A;&#x627;&#x646;&#x629; &#x627;&#x644;&#x623;&#x62C;&#x647;&#x632;&#x629; &#x627;&#x644;&#x637;&#x628;&#x64A;&#x629; &#x648;&#x627;&#x644;&#x645;&#x64A;&#x62F;&#x627;&#x646;&#x64A;&#x629;</div></div>
+        <div class="inf"><div class="nm">نموذج صيانة جهاز</div><div class="ds">صيانة الأجهزة الطبية والميدانية</div></div>
         <div class="ar">&#x2039;</div>
-      </div>
-      <div class="fcard cr" onclick="go('pg-vm')">
+      </button>
+      <button class="fc cr" onclick="go('pg-vm')">
         <div class="ic">&#x1F691;</div>
-        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x635;&#x64A;&#x627;&#x646;&#x629; &#x645;&#x631;&#x643;&#x628;&#x629;</div><div class="ds">&#x62A;&#x633;&#x62C;&#x64A;&#x644; &#x623;&#x639;&#x637;&#x627;&#x644; &#x648;&#x637;&#x644;&#x628;&#x627;&#x62A; &#x627;&#x644;&#x635;&#x64A;&#x627;&#x646;&#x629;</div></div>
+        <div class="inf"><div class="nm">نموذج صيانة مركبة</div><div class="ds">تسجيل أعطال وطلبات الصيانة</div></div>
         <div class="ar">&#x2039;</div>
-      </div>
+      </button>
     </div>
-    <div class="sec-title">&#x646;&#x645;&#x627;&#x630;&#x62C; &#x623;&#x62E;&#x631;&#x649;</div>
-    <div class="fgrid">
-      <div class="fcard ck" onclick="go('pg-rosc')">
+    <div class="st">نماذج أخرى</div>
+    <div class="fg">
+      <button class="fc ck" onclick="go('pg-rosc')">
         <div class="ic">&#x2764;</div>
-        <div class="inf"><div class="nm">&#x646;&#x645;&#x648;&#x630;&#x62C; ROSC</div><div class="ds">&#x62A;&#x642;&#x631;&#x64A;&#x631; &#x625;&#x646;&#x639;&#x627;&#x634; &#x642;&#x644;&#x628;&#x64A; &#x631;&#x626;&#x648;&#x64A; &#x646;&#x627;&#x62C;&#x62D;</div></div>
+        <div class="inf"><div class="nm">نموذج ROSC</div><div class="ds">تقرير إنعاش قلبي رئوي ناجح</div></div>
         <div class="ar">&#x2039;</div>
-      </div>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- نهاية المناوبة -->
+<!-- SHIFT -->
 
 <div id="pg-shift" class="page">
   <div class="phdr" style="background:linear-gradient(135deg,#1a5276,#1f618d);">
     <button class="bk" onclick="go('pg-home')">&#x203A;</button>
-    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x646;&#x647;&#x627;&#x64A;&#x629; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div><div class="ps">&#x62A;&#x642;&#x631;&#x64A;&#x631; &#x634;&#x627;&#x645;&#x644; &#x644;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div></div>
+    <div><div class="pt">نموذج نهاية المناوبة</div><div class="ps">تقرير شامل للمناوبة</div></div>
   </div>
   <div class="inner">
     <div class="card">
       <div class="row">
-        <div class="fl"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="s-date"></div>
-        <div class="fl"><label>&#x627;&#x644;&#x641;&#x62A;&#x631;&#x629;</label>
+        <div class="fl"><label>التاريخ</label><input type="date" id="s-date"></div>
+        <div class="fl"><label>الفترة</label>
           <div class="rg">
-            <label><input type="radio" name="sp" value="&#x635;&#x628;&#x627;&#x62D;&#x64A;&#x629;" checked> &#x635;&#x628;&#x627;&#x62D;&#x64A;&#x629;</label>
-            <label><input type="radio" name="sp" value="&#x645;&#x633;&#x627;&#x626;&#x64A;&#x629;"> &#x645;&#x633;&#x627;&#x626;&#x64A;&#x629;</label>
+            <label><input type="radio" name="sp" value="صباحية" checked> صباحية</label>
+            <label><input type="radio" name="sp" value="مسائية"> مسائية</label>
           </div>
         </div>
       </div>
     </div>
-    <div class="card" style="border-right:4px solid #2471a3;">
-      <h2>&#x1F4CA; &#x627;&#x644;&#x645;&#x624;&#x634;&#x631;</h2>
-      <div class="ff"><label>&#x645;&#x62A;&#x648;&#x633;&#x637; &#x648;&#x642;&#x62A; &#x627;&#x644;&#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629; (&#x62F;&#x642;&#x64A;&#x642;&#x629;)</label><input type="text" id="s-ir" placeholder="&#x62F;&#x642;&#x64A;&#x642;&#x629;"></div>
-      <div class="ff"><label>&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x624;&#x634;&#x631;</label><textarea id="s-in" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
+    <div class="card" style="border-right:4px solid #2471a3">
+      <h2>&#x1F4CA; الموشر</h2>
+      <div class="ff"><label>متوسط وقت الاستجابة (دقيقة)</label><input type="text" id="s-ir" placeholder="دقيقة"></div>
+      <div class="ff"><label>ملاحظات الموشر</label><textarea id="s-in" placeholder="ملاحظات..."></textarea></div>
     </div>
     <div class="card">
-      <h2>&#x1F697; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A;</h2>
+      <h2>&#x1F697; المركبات</h2>
       <div class="row">
-        <div class="fl"><label>&#x639;&#x627;&#x645;&#x644;&#x629;</label><input type="text" id="s-vw" placeholder="&#x639;&#x62F;&#x62F;"></div>
-        <div class="fl"><label>&#x627;&#x62D;&#x62A;&#x64A;&#x627;&#x637;</label><input type="text" id="s-vr" placeholder="&#x639;&#x62F;&#x62F;"></div>
-        <div class="fl"><label>&#x645;&#x62A;&#x639;&#x637;&#x644;&#x629;</label><input type="text" id="s-vb" placeholder="&#x639;&#x62F;&#x62F;"></div>
+        <div class="fl"><label>عاملة</label><input type="text" id="s-vw"></div>
+        <div class="fl"><label>احتياط</label><input type="text" id="s-vr"></div>
+        <div class="fl"><label>متعطلة</label><input type="text" id="s-vb"></div>
       </div>
-      <div class="ff"><label>&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A; &#x627;&#x644;&#x623;&#x639;&#x637;&#x627;&#x644;</label><textarea id="s-vn" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
+      <div class="ff"><label>ملاحظات الأعطال</label><textarea id="s-vn" placeholder="ملاحظات..."></textarea></div>
     </div>
     <div class="card">
-      <h2>&#x1F4CB; &#x628;&#x644;&#x627;&#x63A;&#x627;&#x62A; &#x627;&#x644;&#x62A;&#x62F;&#x62E;&#x644; &#x627;&#x644;&#x633;&#x631;&#x64A;&#x639;</h2>
-      <div id="s-sec-con"></div>
-      <button class="btn bo2 bsm" onclick="sAddSec()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x642;&#x637;&#x627;&#x639;</button>
+      <h2>&#x1F4CB; بلاغات التدخل السريع</h2>
+      <div id="s-secs"></div>
+      <button class="btn bo2 bsm" onclick="sAddSec()">&#x2795; إضافة قطاع</button>
     </div>
     <div class="card">
-      <h2>&#x1F464; &#x627;&#x644;&#x63A;&#x64A;&#x627;&#x628; &#x648;&#x627;&#x644;&#x645;&#x62A;&#x623;&#x62E;&#x631;&#x64A;&#x646;</h2>
-      <label style="font-size:.8rem;font-weight:700;display:block;margin-bottom:5px;">&#x623;&#x633;&#x645;&#x627;&#x621; &#x627;&#x644;&#x63A;&#x64A;&#x627;&#x628;</label>
+      <h2>&#x1F464; الغياب والمتأخرين</h2>
+      <div style="font-size:.8rem;font-weight:700;margin-bottom:5px;">أسماء الغياب</div>
       <div id="s-abs"></div>
-      <button class="btn bo2 bsm" onclick="sAddP('abs')">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x63A;&#x64A;&#x627;&#x628;</button>
+      <button class="btn bo2 bsm" onclick="sAddP('abs')">&#x2795; إضافة غياب</button>
       <hr class="dvd">
-      <label style="font-size:.8rem;font-weight:700;display:block;margin:7px 0 5px;">&#x623;&#x633;&#x645;&#x627;&#x621; &#x627;&#x644;&#x645;&#x62A;&#x623;&#x62E;&#x631;&#x64A;&#x646;</label>
+      <div style="font-size:.8rem;font-weight:700;margin:7px 0 5px;">أسماء المتأخرين</div>
       <div id="s-lat"></div>
-      <button class="btn bo2 bsm" onclick="sAddP('lat')">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x645;&#x62A;&#x623;&#x62E;&#x631;</button>
+      <button class="btn bo2 bsm" onclick="sAddP('lat')">&#x2795; إضافة متأخر</button>
     </div>
-    <div class="card"><h2>&#x1F4DD; &#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A; &#x639;&#x627;&#x645;&#x629;</h2><textarea id="s-gn" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
+    <div class="card"><h2>&#x1F4DD; ملاحظات عامة</h2><textarea id="s-gn" placeholder="ملاحظات..."></textarea></div>
     <div class="card">
-      <h2>&#x1F465; &#x645;&#x639;&#x644;&#x648;&#x645;&#x627;&#x62A; &#x627;&#x644;&#x637;&#x627;&#x642;&#x645;</h2>
+      <h2>&#x1F465; معلومات الطاقم</h2>
       <div class="row">
-        <div class="fl"><label>&#x643;&#x628;&#x64A;&#x631; &#x627;&#x644;&#x645;&#x633;&#x639;&#x641;&#x64A;&#x646;</label><input type="text" id="s-ch" placeholder="&#x627;&#x644;&#x627;&#x633;&#x645;"></div>
-        <div class="fl"><label>&#x627;&#x644;&#x645;&#x633;&#x627;&#x639;&#x62F;</label><input type="text" id="s-as" placeholder="&#x627;&#x644;&#x627;&#x633;&#x645;"></div>
+        <div class="fl"><label>كبير المسعفين</label><input type="text" id="s-ch"></div>
+        <div class="fl"><label>المساعد</label><input type="text" id="s-as"></div>
       </div>
     </div>
-    <button class="send-btn" onclick="sSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
+    <button class="send-btn" onclick="sSend()">&#x1F4E4; إرسال على الواتساب</button>
   </div>
 </div>
 
-<!-- مؤشر المناوبة -->
+<!-- MOSHR -->
 
 <div id="pg-moshr" class="page">
   <div class="phdr" style="background:linear-gradient(135deg,#148f77,#1abc9c);">
     <button class="bk" onclick="go('pg-home')">&#x203A;</button>
-    <div><div class="pt">&#x645;&#x624;&#x634;&#x631; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</div><div class="ps">&#x642;&#x637;&#x627;&#x639; &#x627;&#x644;&#x648;&#x633;&#x637;</div></div>
+    <div><div class="pt">مؤشر المناوبة</div><div class="ps">قطاع الوسط</div></div>
   </div>
   <div class="inner">
     <div class="card">
-      <div class="ff"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="m-d" oninput="mPrev()"></div>
-      <div class="ff" style="margin-top:7px;"><label>&#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629;</label>
+      <div class="ff"><label>التاريخ</label><input type="date" id="m-d" oninput="mPrev()"></div>
+      <div class="ff" style="margin-top:7px"><label>المناوبة</label>
         <div class="rg">
-          <label><input type="radio" name="mp" value="&#x635;&#x628;&#x627;&#x62D;&#x64A;&#x629;" checked onchange="mPrev()"> &#x635;&#x628;&#x627;&#x62D;&#x64A;&#x629;</label>
-          <label><input type="radio" name="mp" value="&#x645;&#x633;&#x627;&#x626;&#x64A;&#x629;" onchange="mPrev()"> &#x645;&#x633;&#x627;&#x626;&#x64A;&#x629;</label>
+          <label><input type="radio" name="mp" value="صباحية" checked onchange="mPrev()"> صباحية</label>
+          <label><input type="radio" name="mp" value="مسائية" onchange="mPrev()"> مسائية</label>
         </div>
       </div>
-      <div class="ff" style="margin-top:7px;"><label>&#x645;&#x62A;&#x648;&#x633;&#x637; &#x648;&#x642;&#x62A; &#x627;&#x644;&#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629;</label><input type="text" id="m-r" placeholder="&#x645;&#x62B;&#x627;&#x644;: 8 &#x62F;&#x642;&#x627;&#x626;&#x642;" oninput="mPrev()"></div>
+      <div class="ff" style="margin-top:7px"><label>متوسط وقت الاستجابة</label><input type="text" id="m-r" placeholder="مثال: 8 دقائق" oninput="mPrev()"></div>
     </div>
     <div class="card">
-      <h2>&#x1F4AC; &#x62C;&#x645;&#x644;&#x629; &#x627;&#x644;&#x62E;&#x62A;&#x627;&#x645;</h2>
-      <label style="font-size:.73rem;color:var(--mu);display:block;margin-bottom:4px;">&#x627;&#x62E;&#x62A;&#x631; &#x62C;&#x645;&#x644;&#x629;</label>
+      <h2>&#x1F4AC; جملة الختام</h2>
+      <label style="font-size:.73rem;color:#7f8c8d;display:block;margin-bottom:4px">اختر جملة</label>
       <select id="m-ph" onchange="mPrev()">
-        <option value="">-- &#x628;&#x62F;&#x648;&#x646; &#x62C;&#x645;&#x644;&#x629; --</option>
-        <option value="&#x627;&#x644;&#x644;&#x647; &#x64A;&#x639;&#x637;&#x64A;&#x643;&#x645; &#x627;&#x644;&#x639;&#x627;&#x641;&#x64A;&#x629; &#x62C;&#x645;&#x64A;&#x639;&#x627; &#x645;&#x627;&#x642;&#x635;&#x631;&#x62A;&#x648;&#x627; &#x1F339;">&#x627;&#x644;&#x644;&#x647; &#x64A;&#x639;&#x637;&#x64A;&#x643;&#x645; &#x627;&#x644;&#x639;&#x627;&#x641;&#x64A;&#x629; &#x62C;&#x645;&#x64A;&#x639;&#x627; &#x645;&#x627;&#x642;&#x635;&#x631;&#x62A;&#x648;&#x627; &#x1F339;</option>
-        <option value="&#x62C;&#x632;&#x627;&#x643;&#x645; &#x627;&#x644;&#x644;&#x647; &#x62E;&#x64A;&#x631;&#x627; &#x639;&#x644;&#x649; &#x62C;&#x647;&#x648;&#x62F;&#x643;&#x645; &#x627;&#x644;&#x645;&#x628;&#x630;&#x648;&#x644;&#x629; &#x1F339;">&#x62C;&#x632;&#x627;&#x643;&#x645; &#x627;&#x644;&#x644;&#x647; &#x62E;&#x64A;&#x631;&#x627; &#x639;&#x644;&#x649; &#x62C;&#x647;&#x648;&#x62F;&#x643;&#x645; &#x627;&#x644;&#x645;&#x628;&#x630;&#x648;&#x644;&#x629; &#x1F339;</option>
-        <option value="&#x628;&#x627;&#x631;&#x643; &#x627;&#x644;&#x644;&#x647; &#x641;&#x64A;&#x643;&#x645; &#x648;&#x646;&#x641;&#x639; &#x628;&#x643;&#x645; &#x1F339;">&#x628;&#x627;&#x631;&#x643; &#x627;&#x644;&#x644;&#x647; &#x641;&#x64A;&#x643;&#x645; &#x648;&#x646;&#x641;&#x639; &#x628;&#x643;&#x645; &#x1F339;</option>
-        <option value="&#x634;&#x643;&#x631;&#x627; &#x644;&#x643;&#x644; &#x645;&#x646; &#x623;&#x633;&#x647;&#x645; &#x1F339;">&#x634;&#x643;&#x631;&#x627; &#x644;&#x643;&#x644; &#x645;&#x646; &#x623;&#x633;&#x647;&#x645; &#x641;&#x64A; &#x625;&#x646;&#x62C;&#x627;&#x62D; &#x647;&#x630;&#x647; &#x627;&#x644;&#x645;&#x646;&#x627;&#x648;&#x628;&#x629; &#x1F339;</option>
-        <option value="&#x648;&#x641;&#x642;&#x643;&#x645; &#x627;&#x644;&#x644;&#x647; &#x648;&#x633;&#x62F;&#x62F; &#x62E;&#x637;&#x627;&#x643;&#x645; &#x1F339;">&#x648;&#x641;&#x642;&#x643;&#x645; &#x627;&#x644;&#x644;&#x647; &#x648;&#x633;&#x62F;&#x62F; &#x62E;&#x637;&#x627;&#x643;&#x645; &#x1F339;</option>
+        <option value="">-- بدون جملة --</option>
+        <option>الله يعطيكم العافية جميعاً ماقصرتوا &#x1F339;</option>
+        <option>جزاكم الله خيراً على جهودكم المبذولة &#x1F339;</option>
+        <option>بارك الله فيكم ونفع بكم &#x1F339;</option>
+        <option>شكراً لكل من أسهم في إنجاح هذه المناوبة &#x1F339;</option>
+        <option>وفقكم الله وسدد خطاكم &#x1F339;</option>
       </select>
       <div class="prev-box" id="m-prev"></div>
     </div>
-    <button class="send-btn" style="background:#148f77;" onclick="mSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
+    <button class="send-btn" style="background:#148f77" onclick="mSend()">&#x1F4E4; إرسال على الواتساب</button>
   </div>
 </div>
 
-<!-- تغيير الزيت -->
+<!-- OIL -->
 
 <div id="pg-oil" class="page">
   <div class="phdr" style="background:linear-gradient(135deg,#1e8449,#239b56);">
     <button class="bk" onclick="go('pg-home')">&#x203A;</button>
-    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x62A;&#x63A;&#x64A;&#x64A;&#x631; &#x627;&#x644;&#x632;&#x64A;&#x62A;</div><div class="ps">&#x62A;&#x633;&#x62C;&#x64A;&#x644; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x62A;&#x63A;&#x64A;&#x64A;&#x631; &#x632;&#x64A;&#x62A; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A;</div></div>
+    <div><div class="pt">نموذج تغيير الزيت</div><div class="ps">تسجيل بيانات تغيير زيت المركبات</div></div>
   </div>
   <div class="inner">
-    <div class="card"><div class="ff"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="o-d"></div></div>
-    <div class="card"><h2>&#x1F6E2; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x627;&#x62A;</h2><div id="o-list"></div><button class="btn bo2 bsm" onclick="oAdd()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x645;&#x631;&#x643;&#x628;&#x629;</button></div>
-    <div class="card"><h2>&#x1F4DD; &#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;</h2><textarea id="o-n" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
-    <button class="send-btn" style="background:#1e8449;" onclick="oSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
+    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="o-d"></div></div>
+    <div class="card"><h2>&#x1F6E2; بيانات المركبات</h2><div id="o-list"></div><button class="btn bo2 bsm" onclick="oAdd()">&#x2795; إضافة مركبة</button></div>
+    <div class="card"><h2>&#x1F4DD; ملاحظات</h2><textarea id="o-n" placeholder="ملاحظات..."></textarea></div>
+    <button class="send-btn" style="background:#1e8449" onclick="oSend()">&#x1F4E4; إرسال على الواتساب</button>
   </div>
 </div>
 
-<!-- صيانة جهاز -->
+<!-- DEVICE -->
 
 <div id="pg-device" class="page">
   <div class="phdr" style="background:linear-gradient(135deg,#d35400,#e67e22);">
     <button class="bk" onclick="go('pg-home')">&#x203A;</button>
-    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x635;&#x64A;&#x627;&#x646;&#x629; &#x62C;&#x647;&#x627;&#x632;</div><div class="ps">&#x635;&#x64A;&#x627;&#x646;&#x629; &#x627;&#x644;&#x623;&#x62C;&#x647;&#x632;&#x629; &#x627;&#x644;&#x637;&#x628;&#x64A;&#x629;</div></div>
+    <div><div class="pt">نموذج صيانة جهاز</div><div class="ps">صيانة الأجهزة الطبية</div></div>
   </div>
   <div class="inner">
-    <div class="card"><div class="ff"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="d-d"></div></div>
-    <div class="card"><h2>&#x1F527; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x627;&#x644;&#x623;&#x62C;&#x647;&#x632;&#x629;</h2><div id="d-list"></div><button class="btn bo2 bsm" onclick="dAdd()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x62C;&#x647;&#x627;&#x632;</button></div>
-    <div class="card"><h2>&#x1F4DD; &#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;</h2><textarea id="d-n" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
-    <button class="send-btn" style="background:#d35400;" onclick="dSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
+    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="d-d"></div></div>
+    <div class="card"><h2>&#x1F527; بيانات الأجهزة</h2><div id="d-list"></div><button class="btn bo2 bsm" onclick="dAdd()">&#x2795; إضافة جهاز</button></div>
+    <div class="card"><h2>&#x1F4DD; ملاحظات</h2><textarea id="d-n" placeholder="ملاحظات..."></textarea></div>
+    <button class="send-btn" style="background:#d35400" onclick="dSend()">&#x1F4E4; إرسال على الواتساب</button>
   </div>
 </div>
 
-<!-- صيانة مركبة -->
+<!-- VM -->
 
 <div id="pg-vm" class="page">
   <div class="phdr" style="background:linear-gradient(135deg,#c0392b,#e74c3c);">
     <button class="bk" onclick="go('pg-home')">&#x203A;</button>
-    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; &#x635;&#x64A;&#x627;&#x646;&#x629; &#x645;&#x631;&#x643;&#x628;&#x629;</div><div class="ps">&#x62A;&#x633;&#x62C;&#x64A;&#x644; &#x623;&#x639;&#x637;&#x627;&#x644; &#x648;&#x637;&#x644;&#x628;&#x627;&#x62A; &#x627;&#x644;&#x635;&#x64A;&#x627;&#x646;&#x629;</div></div>
+    <div><div class="pt">نموذج صيانة مركبة</div><div class="ps">تسجيل أعطال وطلبات الصيانة</div></div>
   </div>
   <div class="inner">
-    <div class="card"><div class="ff"><label>&#x627;&#x644;&#x62A;&#x627;&#x631;&#x64A;&#x62E;</label><input type="date" id="v-d"></div></div>
+    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="v-d"></div></div>
     <div class="card">
-      <h2>&#x1F691; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x629;</h2>
+      <h2>&#x1F691; بيانات المركبة</h2>
       <div class="row">
-        <div class="fl"><label>&#x631;&#x642;&#x645; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x629;</label><input type="text" id="v-num" placeholder="&#x631;&#x642;&#x645; &#x627;&#x644;&#x644;&#x648;&#x62D;&#x629;"></div>
-        <div class="fl"><label>&#x646;&#x648;&#x639; &#x627;&#x644;&#x645;&#x631;&#x643;&#x628;&#x629;</label><input type="text" id="v-typ" placeholder="&#x646;&#x648;&#x639; / &#x645;&#x648;&#x62F;&#x64A;&#x644;"></div>
+        <div class="fl"><label>رقم المركبة</label><input type="text" id="v-num" placeholder="رقم اللوحة"></div>
+        <div class="fl"><label>نوع المركبة</label><input type="text" id="v-typ" placeholder="نوع / موديل"></div>
       </div>
       <div class="row">
-        <div class="fl"><label>&#x639;&#x62F;&#x627;&#x62F; &#x627;&#x644;&#x643;&#x64A;&#x644;&#x648;&#x645;&#x62A;&#x631;&#x627;&#x62A;</label><input type="text" id="v-km" placeholder="&#x643;&#x645;"></div>
-        <div class="fl"><label>&#x627;&#x644;&#x623;&#x648;&#x644;&#x648;&#x64A;&#x629;</label><select id="v-pri"><option>&#x639;&#x627;&#x62F;&#x64A;&#x629;</option><option>&#x639;&#x627;&#x62C;&#x644;&#x629;</option><option>&#x62D;&#x631;&#x62C;&#x629;</option></select></div>
+        <div class="fl"><label>عداد الكيلومترات</label><input type="text" id="v-km" placeholder="كم"></div>
+        <div class="fl"><label>الأولوية</label><select id="v-pri"><option>عادية</option><option>عاجلة</option><option>حرجة</option></select></div>
       </div>
     </div>
-    <div class="card"><h2>&#x26A0; &#x627;&#x644;&#x623;&#x639;&#x637;&#x627;&#x644; &#x627;&#x644;&#x645;&#x628;&#x644;&#x651;&#x63A; &#x639;&#x646;&#x647;&#x627;</h2><div id="v-faults"></div><button class="btn bo2 bsm" onclick="vAdd()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x639;&#x637;&#x644;</button></div>
-    <div class="card"><h2>&#x1F4DD; &#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;</h2><textarea id="v-n" placeholder="&#x645;&#x644;&#x627;&#x62D;&#x638;&#x627;&#x62A;..."></textarea></div>
-    <button class="send-btn" style="background:#c0392b;" onclick="vSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
+    <div class="card"><h2>&#x26A0; الأعطال المبلّغ عنها</h2><div id="v-faults"></div><button class="btn bo2 bsm" onclick="vAdd()">&#x2795; إضافة عطل</button></div>
+    <div class="card"><h2>&#x1F4DD; ملاحظات</h2><textarea id="v-n" placeholder="ملاحظات..."></textarea></div>
+    <button class="send-btn" style="background:#c0392b" onclick="vSend()">&#x1F4E4; إرسال على الواتساب</button>
   </div>
 </div>
 
@@ -274,202 +315,299 @@ textarea{resize:vertical;min-height:54px;}
 <div id="pg-rosc" class="page">
   <div class="phdr" style="background:linear-gradient(135deg,#922b21,#e74c3c);">
     <button class="bk" onclick="go('pg-home')">&#x203A;</button>
-    <div><div class="pt">&#x646;&#x645;&#x648;&#x630;&#x62C; ROSC</div><div class="ps">&#x625;&#x646;&#x639;&#x627;&#x634; &#x642;&#x644;&#x628;&#x64A; &#x631;&#x626;&#x648;&#x64A; &#x646;&#x627;&#x62C;&#x62D;</div></div>
+    <div><div class="pt">نموذج ROSC</div><div class="ps">إنعاش قلبي رئوي ناجح</div></div>
   </div>
   <div class="inner">
     <div class="card">
-      <h2>&#x1F4CB; &#x628;&#x64A;&#x627;&#x646;&#x627;&#x62A; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;</h2>
-      <div class="ff"><label>&#x62A;&#x648;&#x642;&#x64A;&#x62A; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;</label><input type="text" id="r-ti" placeholder="&#x645;&#x62B;&#x627;&#x644;: 14:30"></div>
-      <div class="ff" style="margin-top:7px;"><label>&#x646;&#x648;&#x639; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;</label><input type="text" id="r-ty" placeholder="&#x646;&#x648;&#x639; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;"></div>
-      <div class="ff" style="margin-top:7px;"><label>&#x645;&#x648;&#x642;&#x639; &#x627;&#x644;&#x628;&#x644;&#x627;&#x63A;</label><input type="text" id="r-lo" placeholder="&#x627;&#x644;&#x645;&#x648;&#x642;&#x639;"></div>
-      <div class="ff" style="margin-top:7px;"><label>&#x632;&#x645;&#x646; &#x627;&#x644;&#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629;</label><input type="text" id="r-re" placeholder="&#x645;&#x62B;&#x627;&#x644;: 8 &#x62F;&#x642;&#x627;&#x626;&#x642;"></div>
+      <h2>&#x1F4CB; بيانات البلاغ</h2>
+      <div class="ff"><label>توقيت البلاغ</label><input type="text" id="r-ti" placeholder="مثال: 14:30"></div>
+      <div class="ff" style="margin-top:7px"><label>نوع البلاغ</label><input type="text" id="r-ty"></div>
+      <div class="ff" style="margin-top:7px"><label>موقع البلاغ</label><input type="text" id="r-lo"></div>
+      <div class="ff" style="margin-top:7px"><label>زمن الاستجابة</label><input type="text" id="r-re" placeholder="مثال: 8 دقائق"></div>
     </div>
-    <div class="card"><h2>&#x1F691; &#x627;&#x644;&#x648;&#x62D;&#x62F;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x633;&#x62A;&#x62C;&#x64A;&#x628;&#x629;</h2><textarea id="r-un" placeholder="&#x627;&#x630;&#x643;&#x631; &#x627;&#x644;&#x648;&#x62D;&#x62F;&#x627;&#x62A;..." style="min-height:60px;"></textarea></div>
+    <div class="card"><h2>&#x1F691; الوحدات المستجيبة</h2><textarea id="r-un" placeholder="اذكر الوحدات..." style="min-height:60px"></textarea></div>
     <div class="card">
-      <h2>&#x2705; &#x646;&#x62A;&#x627;&#x626;&#x62C; &#x627;&#x644;&#x62A;&#x62F;&#x62E;&#x644;</h2>
+      <h2>&#x2705; نتائج التدخل</h2>
       <div class="row">
-        <div class="fl"><label>&#x647;&#x644; &#x62A;&#x62D;&#x642;&#x642; ROSC&#x61F;</label><select id="r-ro"><option value="&#x646;&#x639;&#x645;">&#x646;&#x639;&#x645;</option><option value="&#x644;&#x627;">&#x644;&#x627;</option></select></div>
-        <div class="fl"><label>&#x647;&#x644; &#x62A;&#x645; &#x627;&#x633;&#x62A;&#x62E;&#x62F;&#x627;&#x645; &#x62C;&#x647;&#x627;&#x632; &#x644;&#x648;&#x643;&#x633;&#x61F;</label><select id="r-lu"><option value="&#x646;&#x639;&#x645;">&#x646;&#x639;&#x645;</option><option value="&#x644;&#x627;">&#x644;&#x627;</option></select></div>
+        <div class="fl"><label>هل تحقق ROSC؟</label><select id="r-ro"><option value="نعم">نعم</option><option value="لا">لا</option></select></div>
+        <div class="fl"><label>هل تم استخدام جهاز لوكس؟</label><select id="r-lu"><option value="نعم">نعم</option><option value="لا">لا</option></select></div>
       </div>
     </div>
     <div class="card">
-      <h2>&#x1F465; &#x623;&#x633;&#x645;&#x627;&#x621; &#x627;&#x644;&#x632;&#x645;&#x644;&#x627;&#x621; &#x627;&#x644;&#x645;&#x634;&#x627;&#x631;&#x643;&#x64A;&#x646;</h2>
+      <h2>&#x1F465; أسماء الزملاء المشاركين</h2>
       <div id="r-names"></div>
-      <button class="btn bo2 bsm" id="r-add-btn" onclick="rAddName()">&#x2795; &#x625;&#x636;&#x627;&#x641;&#x629; &#x627;&#x633;&#x645;</button>
+      <button class="btn bo2 bsm" id="r-add-btn" onclick="rAddName()">&#x2795; إضافة اسم</button>
     </div>
     <div class="card">
-      <h2>&#x1F396; &#x627;&#x644;&#x62A;&#x62D;&#x643;&#x645; &#x648;&#x627;&#x644;&#x62A;&#x646;&#x633;&#x64A;&#x642;</h2>
-      <div class="ff"><label>&#x62A;&#x62D;&#x643;&#x645; &#x639;&#x645;&#x644;&#x64A;&#x627;&#x62A;&#x64A;</label><input type="text" id="r-op" placeholder="&#x627;&#x644;&#x627;&#x633;&#x645;"></div>
-      <div class="ff" style="margin-top:7px;"><label>&#x62A;&#x646;&#x633;&#x64A;&#x642; &#x627;&#x633;&#x62A;&#x62C;&#x627;&#x628;&#x629;</label><input type="text" id="r-co" placeholder="&#x627;&#x644;&#x627;&#x633;&#x645;"></div>
+      <h2>&#x1F396; التحكم والتنسيق</h2>
+      <div class="ff"><label>تحكم عملياتي</label><input type="text" id="r-op"></div>
+      <div class="ff" style="margin-top:7px"><label>تنسيق استجابة</label><input type="text" id="r-co"></div>
     </div>
-    <button class="send-btn" style="background:#922b21;" onclick="rSend()">&#x1F4E4; &#x625;&#x631;&#x633;&#x627;&#x644; &#x639;&#x644;&#x649; &#x627;&#x644;&#x648;&#x627;&#x62A;&#x633;&#x627;&#x628;</button>
+    <button class="send-btn" style="background:#922b21" onclick="rSend()">&#x1F4E4; إرسال على الواتساب</button>
   </div>
 </div>
 
 <script>
-function go(id){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
-function wa(msg){window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');}
-function L(){var s='';for(var i=0;i<14;i++)s+='\u2796';return s;}
-
-document.addEventListener('DOMContentLoaded',function(){
-  var t=new Date().toISOString().split('T')[0];
-  ['s-date','o-d','d-d','v-d','m-d'].forEach(function(id){var el=document.getElementById(id);if(el)el.value=t;});
+// ---- INIT ----
+window.onload = function() {
+  var t = new Date().toISOString().split('T')[0];
+  ['s-date','o-d','d-d','v-d','m-d'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = t;
+  });
   sAddSec('\u0627\u0644\u0648\u0633\u0637');
   mPrev();
-});
+};
 
-/* ---- SHIFT ---- */
-var sCount=0,sSecs={};
-function sAddSec(nm){var id='sc'+Date.now();sSecs[id]={name:nm||'',incs:[]};sRender();}
-function sDelSec(id){delete sSecs[id];sRender();}
-function sRender(){
-  var c=document.getElementById('s-sec-con');c.innerHTML='';
-  Object.keys(sSecs).forEach(function(id){
-    var s=sSecs[id],w=document.createElement('div');w.style.marginBottom='13px';
-    w.innerHTML='<div class="sec-hdr"><span>\u0627\u0644\u0642\u0637\u0627\u0639:</span><input id="sn'+id+'" type="text" value="'+s.name+'" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:4px;color:#fff;padding:2px 6px;font-size:.8rem;width:120px;text-align:right;" oninput="sSecs[\''+id+'\'].name=this.value"><button class="rm-btn" onclick="sDelSec(\''+id+'\')" style="color:#fff;">\uD83D\uDDD1</button></div><div id="si'+id+'"></div><div style="margin-top:9px;"><div style="font-weight:700;font-size:.86rem;margin-bottom:4px;">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u062F\u0627\u0639\u0645\u0629:</div><textarea id="sup'+id+'" style="width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea></div><div style="margin-top:9px;margin-bottom:9px;"><div style="font-weight:700;font-size:.86rem;margin-bottom:4px;">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0645\u0644\u063A\u064A\u0629:</div><textarea id="can'+id+'" style="width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea></div><div class="add-bar"><button class="btn bp bsm" onclick="sAddInc(\''+id+'\')">\u2795 \u0625\u0636\u0627\u0641\u0629 \u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629</button><button class="btn bo2 bsm" onclick="sBulk(\''+id+'\',5)">\u0625\u0636\u0627\u0641\u0629 5</button><button class="btn bo2 bsm" onclick="sBulk(\''+id+'\',7)">\u0623\u0636\u0641 1..7</button></div>';
-
-```
-c.appendChild(w);sRenderIncs(id);
-```
-
-});
+// ---- SHIFT ----
+var sCount = 0, sSecs = {};
+function sAddSec(nm) {
+  var id = 'sc' + Date.now();
+  sSecs[id] = { name: nm || '', incs: [] };
+  sRender();
 }
-function sRenderIncs(id){
-var c=document.getElementById(‘si’+id);if(!c)return;c.innerHTML=’’;
-sSecs[id].incs.forEach(function(inc,idx){
-var b=document.createElement(‘div’);b.className=‘inc-blk’;
-b.innerHTML=’<div style="display:flex;align-items:center;gap:8px;"><span style="font-weight:700;font-size:.88rem;white-space:nowrap;">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629 ‘+inc.n+’:</span><input type="text" placeholder="\u0623\u062F\u062E\u0644 \u0631\u0642\u0645 \u0627\u0644\u0628\u0644\u0627\u063A \u0623\u0648 \u0627\u0644\u0645\u0644\u0627\u062D\u0638\u0629" value="'+(inc.note||'')+'" oninput="sSecs[\''+id+'\'].incs['+idx+'].note=this.value" style="flex:1;"><button onclick="sDelInc(\''+id+'\','+idx+')" style="background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:.8rem;white-space:nowrap;">\u062D\u0630\u0641</button></div>’;
+function sDelSec(id) { delete sSecs[id]; sRender(); }
+function sRender() {
+  var c = document.getElementById('s-secs');
+  c.innerHTML = '';
+  var keys = Object.keys(sSecs);
+  for (var k = 0; k < keys.length; k++) {
+    var id = keys[k], s = sSecs[id];
+    var w = document.createElement('div');
+    w.style.marginBottom = '13px';
+    w.innerHTML =
+      '<div class="shdr">' +
+        '<span>\u0627\u0644\u0642\u0637\u0627\u0639:</span>' +
+        '<input id="sn' + id + '" type="text" value="' + (s.name||'') + '"' +
+          ' style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:4px;padding:2px 6px;font-size:.8rem;width:120px;text-align:right;"' +
+          ' oninput="sSecs[\'' + id + '\'].name=this.value">' +
+        '<button class="rm" onclick="sDelSec(\'' + id + '\')" style="color:#fff">\uD83D\uDDD1</button>' +
+      '</div>' +
+      '<div id="si' + id + '"></div>' +
+      '<div style="margin-top:9px"><div style="font-weight:700;font-size:.86rem;margin-bottom:4px">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u062F\u0627\u0639\u0645\u0629:</div>' +
+        '<textarea id="sup' + id + '" style="width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea></div>' +
+
+```
+  '<div style="margin-top:9px;margin-bottom:9px"><div style="font-weight:700;font-size:.86rem;margin-bottom:4px">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0645\u0644\u063A\u064A\u0629:</div>' +
+    '<textarea id="can' + id + '" style="width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;"></textarea></div>' +
+  '<div class="add-bar">' +
+    '<button class="btn bp bsm" onclick="sAddInc(\'' + id + '\')">\u2795 \u0625\u0636\u0627\u0641\u0629 \u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629</button>' +
+    '<button class="btn bo2 bsm" onclick="sBulk(\'' + id + '\',5)">\u0625\u0636\u0627\u0641\u0629 5</button>' +
+    '<button class="btn bo2 bsm" onclick="sBulk(\'' + id + '\',7)">\u0623\u0636\u0641 1..7</button>' +
+  '</div>';
+c.appendChild(w);
+sRenderIncs(id);
+```
+
+}
+}
+function sRenderIncs(id) {
+var c = document.getElementById(‘si’ + id);
+if (!c) return;
+c.innerHTML = ‘’;
+var incs = sSecs[id].incs;
+for (var i = 0; i < incs.length; i++) {
+(function(inc, idx) {
+var b = document.createElement(‘div’);
+b.className = ‘iblk’;
+b.innerHTML =
+‘<div style="display:flex;align-items:center;gap:8px">’ +
+‘<span style="font-weight:700;font-size:.88rem;white-space:nowrap">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629 ’ + inc.n + ‘:</span>’ +
+‘<input type=“text” placeholder=”\u0631\u0642\u0645 \u0627\u0644\u0628\u0644\u0627\u063A \u0623\u0648 \u0645\u0644\u0627\u062D\u0638\u0629” value=”’ + (inc.note || ‘’) + ‘”’ +
+’ oninput=“sSecs['’ + id + ‘'].incs[’ + idx + ‘].note=this.value” style=“flex:1”>’ +
+‘<button onclick=“sDelInc('’ + id + ‘',’ + idx + ‘)”’ +
+’ style=“background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:.8rem;white-space:nowrap”>\u062D\u0630\u0641</button>’ +
+‘</div>’;
 c.appendChild(b);
-});
+})(incs[i], i);
 }
-function sAddInc(id){sCount++;sSecs[id].incs.push({n:sCount,note:’’});sRenderIncs(id);}
-function sBulk(id,n){for(var i=0;i<n;i++){sCount++;sSecs[id].incs.push({n:sCount,note:’’});}sRenderIncs(id);}
-function sDelInc(id,idx){sSecs[id].incs.splice(idx,1);sRenderIncs(id);}
-function sAddP(type){var c=document.getElementById(type===‘abs’?‘s-abs’:‘s-lat’),d=document.createElement(‘div’);d.className=‘p-item’;d.innerHTML=’<input type="text" placeholder="\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0627\u0645\u0644"><button class="rm-btn" onclick="this.parentElement.remove()">\u2715</button>’;c.appendChild(d);d.querySelector(‘input’).focus();}
-function sSend(){
-var date=document.getElementById(‘s-date’).value||’\u2014’,period=(document.querySelector(‘input[name=“sp”]:checked’)||{}).value||’\u2014’;
-var ir=document.getElementById(‘s-ir’).value||’\u2014’,iN=document.getElementById(‘s-in’).value||’’;
-var vw=document.getElementById(‘s-vw’).value||’\u2014’,vr=document.getElementById(‘s-vr’).value||’\u2014’,vb=document.getElementById(‘s-vb’).value||’\u2014’,vn=document.getElementById(‘s-vn’).value||’’;
-var gn=document.getElementById(‘s-gn’).value||’’,ch=document.getElementById(‘s-ch’).value||’\u2014’,as=document.getElementById(‘s-as’).value||’\u2014’;
-var li=L();
-var msg=li+’\n       \uD83D\uDCCB *\u0646\u0645\u0648\u0630\u062C \u0646\u0647\u0627\u064A\u0629 \u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629*\n’+li+’\n’;
-msg+=’\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\uD83D\uDD50 *\u0627\u0644\u0641\u062A\u0631\u0629:* ‘+period+’\n\n’;
-msg+=’*[ \uD83D\uDCCA \u0627\u0644\u0645\u0624\u0634\u0631 ]*\n> \u23F1 *\u0645\u062A\u0648\u0633\u0637 \u0648\u0642\u062A \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’+ir+’ \u062F\u0642\u064A\u0642\u0629*\n’;
-if(iN)msg+=’> \uD83D\uDCDD *\u0645\u0644\u0627\u062D\u0638\u0627\u062A:* ‘+iN+’\n’;
-msg+=’\n*[ \uD83D\uDE97 \u0627\u0644\u0645\u0631\u0643\u0628\u0627\u062A ]*\n> \u2705 *\u0639\u0627\u0645\u0644\u0629:* ‘+vw+’   |   \u23F3 *\u0627\u062D\u062A\u064A\u0627\u0637:* ‘+vr+’   |   \u274C *\u0645\u062A\u0639\u0637\u0644\u0629:* ‘+vb+’\n’;
-if(vn)msg+=’> \uD83D\uDD27 *\u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0627\u0644\u0623\u0639\u0637\u0627\u0644:* ‘+vn+’\n’;
-msg+=’\n*[ \uD83D\uDCCB \u0627\u0644\u0628\u0644\u0627\u063A\u0627\u062A ]*\n’;
-Object.keys(sSecs).forEach(function(id){
-var s=sSecs[id],nm=(document.getElementById(‘sn’+id)||{}).value||s.name||’\u2014’;
-msg+=’\n\uD83D\uDCCD *\u0627\u0644\u0642\u0637\u0627\u0639: ‘+nm+’*\n’;
-if(!s.incs.length)msg+=’*\u0644\u0627 \u062A\u0648\u062C\u062F \u0628\u0644\u0627\u063A\u0627\u062A*\n’;
-else s.incs.forEach(function(i){msg+=’   \uD83D\uDD39 *\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629 ‘+i.n+’:* ‘+(i.note||’\u2014’)+’\n’;});
-var sup=(document.getElementById(‘sup’+id)||{}).value||’’,can=(document.getElementById(‘can’+id)||{}).value||’’;
-if(sup)msg+=’   \uD83D\uDFE2 *\u062F\u0627\u0639\u0645\u0629:* ‘+sup+’\n’;
-if(can)msg+=’   \uD83D\uDD34 *\u0645\u0644\u063A\u064A\u0629:* ‘+can+’\n’;
-});
-var abs=[].slice.call(document.querySelectorAll(’#s-abs input’)).map(function(i){return i.value;}).filter(Boolean);
-var lat=[].slice.call(document.querySelectorAll(’#s-lat input’)).map(function(i){return i.value;}).filter(Boolean);
-if(abs.length||lat.length){msg+=’\n*[ \uD83D\uDC64 \u0627\u0644\u063A\u064A\u0627\u0628 \u0648\u0627\u0644\u0645\u062A\u0623\u062E\u0631\u064A\u0646 ]*\n’;if(abs.length)msg+=’> \uD83D\uDEAB *\u0627\u0644\u063A\u064A\u0627\u0628:* ‘+abs.join(’\u060C ‘)+’\n’;if(lat.length)msg+=’> \u23F1 *\u0627\u0644\u0645\u062A\u0623\u062E\u0631\u0648\u0646:* ‘+lat.join(’\u060C ‘)+’\n’;}
-if(gn)msg+=’\n*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0639\u0627\u0645\u0629 ]*\n> ‘+gn+’\n’;
-msg+=’\n*[ \uD83D\uDC65 \u0627\u0644\u0637\u0627\u0642\u0645 ]*\n> \uD83C\uDF96 *\u0643\u0628\u064A\u0631 \u0627\u0644\u0645\u0633\u0639\u0641\u064A\u0646:* ‘+ch+’\n> \uD83E\uDD1D *\u0627\u0644\u0645\u0633\u0627\u0639\u062F:* ‘+as+’\n\n’+li;
+}
+function sAddInc(id) { sCount++; sSecs[id].incs.push({ n: sCount, note: ‘’ }); sRenderIncs(id); }
+function sBulk(id, n) { for (var i = 0; i < n; i++) { sCount++; sSecs[id].incs.push({ n: sCount, note: ‘’ }); } sRenderIncs(id); }
+function sDelInc(id, idx) { sSecs[id].incs.splice(idx, 1); sRenderIncs(id); }
+function sAddP(type) {
+var c = document.getElementById(type === ‘abs’ ? ‘s-abs’ : ‘s-lat’);
+var d = document.createElement(‘div’); d.className = ‘pi’;
+d.innerHTML = ‘<input type="text" placeholder="\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0627\u0645\u0644">’ +
+‘<button class="rm" onclick="this.parentElement.remove()">\u2715</button>’;
+c.appendChild(d); d.querySelector(‘input’).focus();
+}
+function v(id) { return (document.getElementById(id) || {}).value || ‘\u2014’; }
+function sSend() {
+var li = L();
+var msg = li + ‘\n       \uD83D\uDCCB *\u0646\u0645\u0648\u0630\u062C \u0646\u0647\u0627\u064A\u0629 \u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629*\n’ + li + ‘\n’;
+msg += ‘\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ’ + v(‘s-date’) + ‘\n’;
+var per = document.querySelector(‘input[name=“sp”]:checked’);
+msg += ‘\uD83D\uDD50 *\u0627\u0644\u0641\u062A\u0631\u0629:* ’ + (per ? per.value : ‘\u2014’) + ‘\n\n’;
+msg += ‘*[ \uD83D\uDCCA \u0627\u0644\u0645\u0624\u0634\u0631 ]*\n’;
+msg += ‘> \u23F1 *\u0645\u062A\u0648\u0633\u0637 \u0648\u0642\u062A \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’ + v(‘s-ir’) + ’ \u062F\u0642\u064A\u0642\u0629*\n’;
+var iN = v(‘s-in’); if (iN !== ‘\u2014’) msg += ‘> \uD83D\uDCDD *\u0645\u0644\u0627\u062D\u0638\u0627\u062A:* ’ + iN + ‘\n’;
+msg += ‘\n*[ \uD83D\uDE97 \u0627\u0644\u0645\u0631\u0643\u0628\u0627\u062A ]*\n’;
+msg += ’> \u2705 *\u0639\u0627\u0645\u0644\u0629:* ’ + v(‘s-vw’) + ’   |   \u23F3 *\u0627\u062D\u062A\u064A\u0627\u0637:* ’ + v(‘s-vr’) + ’   |   \u274C *\u0645\u062A\u0639\u0637\u0644\u0629:* ’ + v(‘s-vb’) + ‘\n’;
+var vN = v(‘s-vn’); if (vN !== ‘\u2014’) msg += ’> \uD83D\uDD27 *\u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0627\u0644\u0623\u0639\u0637\u0627\u0644:* ’ + vN + ‘\n’;
+msg += ’\n*[ \uD83D\uDCCB \u0627\u0644\u0628\u0644\u0627\u063A\u0627\u062A ]*\n’;
+var keys = Object.keys(sSecs);
+for (var k = 0; k < keys.length; k++) {
+var id = keys[k], s = sSecs[id];
+var nm = (document.getElementById(‘sn’ + id) || {}).value || s.name || ‘\u2014’;
+msg += ‘\n\uD83D\uDCCD *\u0627\u0644\u0642\u0637\u0627\u0639: ’ + nm + ’*\n’;
+if (!s.incs.length) { msg += ‘*\u0644\u0627 \u062A\u0648\u062C\u062F \u0628\u0644\u0627\u063A\u0627\u062A*\n’; }
+else { for (var i = 0; i < s.incs.length; i++) msg += ’   \uD83D\uDD39 *\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629 ’ + s.incs[i].n + ’:* ’ + (s.incs[i].note || ‘\u2014’) + ‘\n’; }
+var sup = (document.getElementById(‘sup’ + id) || {}).value || ‘’;
+var can = (document.getElementById(‘can’ + id) || {}).value || ‘’;
+if (sup) msg += ’   \uD83D\uDFE2 *\u062F\u0627\u0639\u0645\u0629:* ’ + sup + ‘\n’;
+if (can) msg += ’   \uD83D\uDD34 *\u0645\u0644\u063A\u064A\u0629:* ’ + can + ‘\n’;
+}
+var abs = [].slice.call(document.querySelectorAll(’#s-abs input’)).map(function(x){return x.value;}).filter(Boolean);
+var lat = [].slice.call(document.querySelectorAll(’#s-lat input’)).map(function(x){return x.value;}).filter(Boolean);
+if (abs.length || lat.length) {
+msg += ’\n*[ \uD83D\uDC64 \u0627\u0644\u063A\u064A\u0627\u0628 \u0648\u0627\u0644\u0645\u062A\u0623\u062E\u0631\u064A\u0646 ]*\n’;
+if (abs.length) msg += ‘> \uD83D\uDEAB *\u0627\u0644\u063A\u064A\u0627\u0628:* ’ + abs.join(’\u060C ’) + ‘\n’;
+if (lat.length) msg += ‘> \u23F1 *\u0627\u0644\u0645\u062A\u0623\u062E\u0631\u0648\u0646:* ’ + lat.join(’\u060C ’) + ‘\n’;
+}
+var gn = v(‘s-gn’); if (gn !== ‘\u2014’) msg += ’\n*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0639\u0627\u0645\u0629 ]*\n> ’ + gn + ‘\n’;
+msg += ’\n*[ \uD83D\uDC65 \u0627\u0644\u0637\u0627\u0642\u0645 ]*\n’;
+msg += ’> \uD83C\uDF96 *\u0643\u0628\u064A\u0631 \u0627\u0644\u0645\u0633\u0639\u0641\u064A\u0646:* ’ + v(‘s-ch’) + ‘\n’;
+msg += ’> \uD83E\uDD1D *\u0627\u0644\u0645\u0633\u0627\u0639\u062F:* ’ + v(‘s-as’) + ‘\n\n’ + li;
 wa(msg);
 }
 
-/* –– MOSHR –– */
-function mBuild(){
-var date=document.getElementById(‘m-d’).value||’\u2014’,period=(document.querySelector(‘input[name=“mp”]:checked’)||{}).value||’\u2014’;
-var resp=document.getElementById(‘m-r’).value||’\u2014’,phrase=document.getElementById(‘m-ph’).value||’’;
-var li=L();
-var msg=li+’\n   \uD83D\uDCCA *\u0645\u0624\u0634\u0631 \u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629 \u0644\u0642\u0637\u0627\u0639 \u0627\u0644\u0648\u0633\u0637*\n’+li+’\n’;
-msg+=’\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\uD83D\uDD50 *\u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629:* ‘+period+’\n\u23F1 *\u0645\u062A\u0648\u0633\u0637 \u0648\u0642\u062A \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’+resp+’*\n’;
-if(phrase)msg+=’\n’+phrase+’\n’;
-msg+=li;return msg;
+// –– MOSHR ––
+function mBuild() {
+var li = L();
+var per = document.querySelector(‘input[name=“mp”]:checked’);
+var ph = document.getElementById(‘m-ph’);
+var msg = li + ‘\n   \uD83D\uDCCA *\u0645\u0624\u0634\u0631 \u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629 \u0644\u0642\u0637\u0627\u0639 \u0627\u0644\u0648\u0633\u0637*\n’ + li + ‘\n’;
+msg += ’\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ’ + v(‘m-d’) + ‘\n’;
+msg += ‘\uD83D\uDD50 *\u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629:* ’ + (per ? per.value : ‘\u2014’) + ‘\n’;
+msg += ‘\u23F1 *\u0645\u062A\u0648\u0633\u0637 \u0648\u0642\u062A \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’ + v(‘m-r’) + ’*\n’;
+if (ph && ph.value) msg += ‘\n’ + ph.value + ‘\n’;
+msg += li;
+return msg;
 }
-function mPrev(){var el=document.getElementById(‘m-prev’);if(el)el.textContent=mBuild();}
-function mSend(){wa(mBuild());}
+function mPrev() { var el = document.getElementById(‘m-prev’); if (el) el.textContent = mBuild(); }
+function mSend() { wa(mBuild()); }
 
-/* –– OIL –– */
-function oAdd(){
-var c=document.getElementById(‘o-list’),d=document.createElement(‘div’);d.className=‘irow’;
-d.innerHTML=’<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button><div class="ff" style="margin-bottom:7px;"><label>\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629</label><input type="text" placeholder="\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629"></div><div class="ff" style="margin-bottom:7px;"><label>\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629</label><input type="text" placeholder="\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629"></div><div class="ff" style="margin-bottom:7px;"><label>\u0627\u0644\u0639\u062F\u0627\u062F \u0627\u0644\u062D\u0627\u0644\u064A (\u0643\u0645)</label><input type="text" placeholder="\u0627\u0644\u0643\u064A\u0644\u0648\u0645\u062A\u0631\u0627\u062A"></div><div class="ff"><label>\u0627\u0644\u0645\u0648\u0639\u062F \u0627\u0644\u0642\u0627\u062F\u0645 \u0644\u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0632\u064A\u062A (\u0643\u0645)</label><input type="text" placeholder="\u0627\u0644\u0643\u064A\u0644\u0648\u0645\u062A\u0631\u0627\u062A \u0627\u0644\u0642\u0627\u062F\u0645\u0629"></div>’;
+// –– OIL ––
+function oAdd() {
+var c = document.getElementById(‘o-list’), d = document.createElement(‘div’); d.className = ‘irow’;
+d.innerHTML = ‘<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button>’ +
+‘<div class="ff" style="margin-bottom:7px"><label>\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629</label><input type="text" placeholder="\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629"></div>’ +
+‘<div class="ff" style="margin-bottom:7px"><label>\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629</label><input type="text" placeholder="\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629"></div>’ +
+‘<div class="ff" style="margin-bottom:7px"><label>\u0627\u0644\u0639\u062F\u0627\u062F \u0627\u0644\u062D\u0627\u0644\u064A (\u0643\u0645)</label><input type="text" placeholder="\u0643\u0645"></div>’ +
+‘<div class="ff"><label>\u0627\u0644\u0645\u0648\u0639\u062F \u0627\u0644\u0642\u0627\u062F\u0645 \u0644\u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0632\u064A\u062A (\u0643\u0645)</label><input type="text" placeholder="\u0643\u0645"></div>’;
 c.appendChild(d);
 }
-function oSend(){
-var date=document.getElementById(‘o-d’).value||’\u2014’,notes=document.getElementById(‘o-n’).value||’’,li=L();
-var msg=li+’\n      \uD83D\uDEE2 *\u0646\u0645\u0648\u0630\u062C \u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0632\u064A\u062A*\n’+li+’\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\n’;
-var rows=document.querySelectorAll(’#o-list .irow’);
-if(!rows.length)msg+=’*\u0644\u0645 \u064A\u062A\u0645 \u0625\u062F\u062E\u0627\u0644 \u0623\u064A \u0645\u0631\u0643\u0628\u0629*\n’;
-[].forEach.call(rows,function(row,i){var f=row.querySelectorAll(‘input’);msg+=’*[ \uD83D\uDE91 \u0645\u0631\u0643\u0628\u0629 ‘+(i+1)+’ ]*\n> \uD83D\uDCFB *\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629:* ‘+(f[0].value||’\u2014’)+’\n> \uD83D\uDD22 *\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629:* ‘+(f[1].value||’\u2014’)+’\n> \uD83D\uDCCF *\u0627\u0644\u0639\u062F\u0627\u062F \u0627\u0644\u062D\u0627\u0644\u064A:* *’+(f[2].value||’\u2014’)+’ \u0643\u0645*\n> \uD83D\uDDD3 *\u0627\u0644\u0645\u0648\u0639\u062F \u0627\u0644\u0642\u0627\u062F\u0645:* *’+(f[3].value||’\u2014’)+’ \u0643\u0645*\n\n’;});
-if(notes)msg+=’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ‘+notes+’\n\n’;
-msg+=li;wa(msg);
+function oSend() {
+var li = L(), notes = v(‘o-n’);
+var msg = li + ‘\n      \uD83D\uDEE2 *\u0646\u0645\u0648\u0630\u062C \u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0632\u064A\u062A*\n’ + li + ‘\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ’ + v(‘o-d’) + ‘\n\n’;
+var rows = document.querySelectorAll(’#o-list .irow’);
+if (!rows.length) msg += ‘*\u0644\u0645 \u064A\u062A\u0645 \u0625\u062F\u062E\u0627\u0644 \u0623\u064A \u0645\u0631\u0643\u0628\u0629*\n’;
+for (var i = 0; i < rows.length; i++) {
+var f = rows[i].querySelectorAll(‘input’);
+msg += ‘*[ \uD83D\uDE91 \u0645\u0631\u0643\u0628\u0629 ’ + (i+1) + ’ ]*\n’;
+msg += ‘> \uD83D\uDCFB *\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629:* ’ + (f[0].value||’\u2014’) + ‘\n’;
+msg += ‘> \uD83D\uDD22 *\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629:* ’ + (f[1].value||’\u2014’) + ‘\n’;
+msg += ‘> \uD83D\uDCCF *\u0627\u0644\u0639\u062F\u0627\u062F \u0627\u0644\u062D\u0627\u0644\u064A:* *’ + (f[2].value||’\u2014’) + ’ \u0643\u0645*\n’;
+msg += ‘> \uD83D\uDDD3 *\u0627\u0644\u0645\u0648\u0639\u062F \u0627\u0644\u0642\u0627\u062F\u0645:* *’ + (f[3].value||’\u2014’) + ’ \u0643\u0645*\n\n’;
+}
+if (notes !== ‘\u2014’) msg += ’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ’ + notes + ‘\n\n’;
+msg += li; wa(msg);
 }
 
-/* –– DEVICE –– */
-function dAdd(){
-var c=document.getElementById(‘d-list’),d=document.createElement(‘div’);d.className=‘irow’;
-d.innerHTML=’<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button><div class="ff" style="margin-bottom:7px;"><label>\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632</label><input type="text" placeholder="\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632"></div><div class="ff" style="margin-bottom:7px;"><label>\u0627\u0644\u0633\u064A\u0631\u064A\u0627\u0644 \u0646\u0645\u0628\u0631</label><input type="text" placeholder="Serial No."></div><div class="ff"><label>\u0627\u0644\u0639\u0637\u0644 / \u0627\u0644\u0645\u0634\u0643\u0644\u0629</label><input type="text" placeholder="\u0648\u0635\u0641 \u0627\u0644\u0645\u0634\u0643\u0644\u0629"></div>’;
+// –– DEVICE ––
+function dAdd() {
+var c = document.getElementById(‘d-list’), d = document.createElement(‘div’); d.className = ‘irow’;
+d.innerHTML = ‘<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button>’ +
+‘<div class="ff" style="margin-bottom:7px"><label>\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632</label><input type="text" placeholder="\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632"></div>’ +
+‘<div class="ff" style="margin-bottom:7px"><label>\u0627\u0644\u0633\u064A\u0631\u064A\u0627\u0644 \u0646\u0645\u0628\u0631</label><input type="text" placeholder="Serial No."></div>’ +
+‘<div class="ff"><label>\u0627\u0644\u0639\u0637\u0644 / \u0627\u0644\u0645\u0634\u0643\u0644\u0629</label><input type="text" placeholder="\u0648\u0635\u0641 \u0627\u0644\u0645\u0634\u0643\u0644\u0629"></div>’;
 c.appendChild(d);
 }
-function dSend(){
-var date=document.getElementById(‘d-d’).value||’\u2014’,notes=document.getElementById(‘d-n’).value||’’,li=L();
-var msg=li+’\n      \uD83D\uDD27 *\u0646\u0645\u0648\u0630\u062C \u0635\u064A\u0627\u0646\u0629 \u062C\u0647\u0627\u0632*\n’+li+’\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\n’;
-var rows=document.querySelectorAll(’#d-list .irow’);
-if(!rows.length)msg+=’*\u0644\u0645 \u064A\u062A\u0645 \u0625\u062F\u062E\u0627\u0644 \u0623\u064A \u062C\u0647\u0627\u0632*\n’;
-[].forEach.call(rows,function(row,i){var f=row.querySelectorAll(‘input’);msg+=’*[ \uD83D\uDD27 \u062C\u0647\u0627\u0632 ‘+(i+1)+’ ]*\n> \uD83D\uDCDB *\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632:* ‘+(f[0].value||’\u2014’)+’\n> \uD83D\uDD16 *\u0627\u0644\u0633\u064A\u0631\u064A\u0627\u0644:* ‘+(f[1].value||’\u2014’)+’\n> \u26A0 *\u0627\u0644\u0639\u0637\u0644:* *’+(f[2].value||’\u2014’)+’*\n\n’;});
-if(notes)msg+=’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ‘+notes+’\n\n’;
-msg+=li;wa(msg);
+function dSend() {
+var li = L(), notes = v(‘d-n’);
+var msg = li + ‘\n      \uD83D\uDD27 *\u0646\u0645\u0648\u0630\u062C \u0635\u064A\u0627\u0646\u0629 \u062C\u0647\u0627\u0632*\n’ + li + ‘\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ’ + v(‘d-d’) + ‘\n\n’;
+var rows = document.querySelectorAll(’#d-list .irow’);
+if (!rows.length) msg += ‘*\u0644\u0645 \u064A\u062A\u0645 \u0625\u062F\u062E\u0627\u0644 \u0623\u064A \u062C\u0647\u0627\u0632*\n’;
+for (var i = 0; i < rows.length; i++) {
+var f = rows[i].querySelectorAll(‘input’);
+msg += ‘*[ \uD83D\uDD27 \u062C\u0647\u0627\u0632 ’ + (i+1) + ’ ]*\n’;
+msg += ‘> \uD83D\uDCDB *\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632:* ’ + (f[0].value||’\u2014’) + ‘\n’;
+msg += ‘> \uD83D\uDD16 *\u0627\u0644\u0633\u064A\u0631\u064A\u0627\u0644:* ’ + (f[1].value||’\u2014’) + ‘\n’;
+msg += ‘> \u26A0 *\u0627\u0644\u0639\u0637\u0644:* *’ + (f[2].value||’\u2014’) + ’*\n\n’;
+}
+if (notes !== ‘\u2014’) msg += ’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ’ + notes + ‘\n\n’;
+msg += li; wa(msg);
 }
 
-/* –– VM –– */
-function vAdd(){
-var c=document.getElementById(‘v-faults’),d=document.createElement(‘div’);d.className=‘irow’;
-d.innerHTML=’<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button><div class="ff" style="margin-bottom:7px;"><label>\u0648\u0635\u0641 \u0627\u0644\u0639\u0637\u0644</label><input type="text" placeholder="\u0648\u0635\u0641 \u0627\u0644\u0639\u0637\u0644"></div><div class="ff"><label>\u0627\u0644\u0634\u062F\u0629</label><select><option>\u0628\u0633\u064A\u0637</option><option>\u0645\u062A\u0648\u0633\u0637</option><option>\u062E\u0637\u064A\u0631</option></select></div>’;
+// –– VM ––
+function vAdd() {
+var c = document.getElementById(‘v-faults’), d = document.createElement(‘div’); d.className = ‘irow’;
+d.innerHTML = ‘<button class="del" onclick="this.parentElement.remove()">\u2715 \u062D\u0630\u0641</button>’ +
+‘<div class="ff" style="margin-bottom:7px"><label>\u0648\u0635\u0641 \u0627\u0644\u0639\u0637\u0644</label><input type="text" placeholder="\u0648\u0635\u0641 \u0627\u0644\u0639\u0637\u0644"></div>’ +
+‘<div class="ff"><label>\u0627\u0644\u0634\u062F\u0629</label><select><option>\u0628\u0633\u064A\u0637</option><option>\u0645\u062A\u0648\u0633\u0637</option><option>\u062E\u0637\u064A\u0631</option></select></div>’;
 c.appendChild(d);
 }
-function vSend(){
-var date=document.getElementById(‘v-d’).value||’\u2014’,num=document.getElementById(‘v-num’).value||’\u2014’,typ=document.getElementById(‘v-typ’).value||’\u2014’,km=document.getElementById(‘v-km’).value||’\u2014’,pri=document.getElementById(‘v-pri’).value||’\u2014’,notes=document.getElementById(‘v-n’).value||’’;
-var pE={’\u0639\u0627\u062F\u064A\u0629’:’\uD83D\uDFE2’,’\u0639\u0627\u062C\u0644\u0629’:’\uD83D\uDFE1’,’\u062D\u0631\u062C\u0629’:’\uD83D\uDD34’},sE={’\u0628\u0633\u064A\u0637’:’\uD83D\uDFE1’,’\u0645\u062A\u0648\u0633\u0637’:’\uD83D\uDFE0’,’\u062E\u0637\u064A\u0631’:’\uD83D\uDD34’};
-var li=L();
-var msg=li+’\n     \uD83D\uDE91 *\u0646\u0645\u0648\u0630\u062C \u0635\u064A\u0627\u0646\u0629 \u0645\u0631\u0643\u0628\u0629*\n’+li+’\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ‘+date+’\n\n’;
-msg+=’*[ \uD83D\uDE91 \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0645\u0631\u0643\u0628\u0629 ]*\n> \uD83D\uDD22 *\u0631\u0642\u0645 \u0627\u0644\u0645\u0631\u0643\u0628\u0629:* ‘+num+’\n> \uD83D\uDE98 *\u0627\u0644\u0646\u0648\u0639:* ‘+typ+’\n> \uD83D\uDCCF *\u0627\u0644\u0639\u062F\u0627\u062F:* *’+km+’ \u0643\u0645*\n> ‘+(pE[pri]||’\u26AA’)+’ *\u0627\u0644\u0623\u0648\u0644\u0648\u064A\u0629:* *’+pri+’*\n\n’;
-var rows=document.querySelectorAll(’#v-faults .irow’);
-if(rows.length){msg+=’*[ \u26A0 \u0627\u0644\u0623\u0639\u0637\u0627\u0644 ]*\n’;[].forEach.call(rows,function(row,i){var f=row.querySelector(‘input’),s=row.querySelector(‘select’);msg+=’> ‘+(i+1)+’. *’+(f?f.value:’\u2014’)+’* \u2014 ‘+(sE[s?s.value:’’]||’\u26AA’)+’ *’+(s?s.value:’\u2014’)+’*\n’;});msg+=’\n’;}
-if(notes)msg+=’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ‘+notes+’\n\n’;
-msg+=li;wa(msg);
+function vSend() {
+var li = L(), pE = {’\u0639\u0627\u062F\u064A\u0629’:’\uD83D\uDFE2’,’\u0639\u0627\u062C\u0644\u0629’:’\uD83D\uDFE1’,’\u062D\u0631\u062C\u0629’:’\uD83D\uDD34’}, sE = {’\u0628\u0633\u064A\u0637’:’\uD83D\uDFE1’,’\u0645\u062A\u0648\u0633\u0637’:’\uD83D\uDFE0’,’\u062E\u0637\u064A\u0631’:’\uD83D\uDD34’};
+var pri = v(‘v-pri’);
+var msg = li + ‘\n     \uD83D\uDE91 *\u0646\u0645\u0648\u0630\u062C \u0635\u064A\u0627\u0646\u0629 \u0645\u0631\u0643\u0628\u0629*\n’ + li + ‘\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ’ + v(‘v-d’) + ‘\n\n’;
+msg += ‘*[ \uD83D\uDE91 \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0645\u0631\u0643\u0628\u0629 ]*\n’;
+msg += ‘> \uD83D\uDD22 *\u0631\u0642\u0645 \u0627\u0644\u0645\u0631\u0643\u0628\u0629:* ’ + v(‘v-num’) + ‘\n’;
+msg += ‘> \uD83D\uDE98 *\u0627\u0644\u0646\u0648\u0639:* ’ + v(‘v-typ’) + ‘\n’;
+msg += ‘> \uD83D\uDCCF *\u0627\u0644\u0639\u062F\u0627\u062F:* *’ + v(‘v-km’) + ’ \u0643\u0645*\n’;
+msg += ‘> ’ + (pE[pri]||’\u26AA’) + ’ *\u0627\u0644\u0623\u0648\u0644\u0648\u064A\u0629:* *’ + pri + ’*\n\n’;
+var rows = document.querySelectorAll(’#v-faults .irow’);
+if (rows.length) {
+msg += ‘*[ \u26A0 \u0627\u0644\u0623\u0639\u0637\u0627\u0644 ]*\n’;
+for (var i = 0; i < rows.length; i++) {
+var f = rows[i].querySelector(‘input’), s = rows[i].querySelector(‘select’);
+msg += ‘> ’ + (i+1) + ‘. *’ + (f?f.value:’\u2014’) + ’* \u2014 ’ + (sE[s?s.value:’’]||’\u26AA’) + ’ *’ + (s?s.value:’\u2014’) + ’*\n’;
+}
+msg += ‘\n’;
+}
+var notes = v(‘v-n’); if (notes !== ‘\u2014’) msg += ’*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> ’ + notes + ‘\n\n’;
+msg += li; wa(msg);
 }
 
-/* –– ROSC –– */
-var rCount=0;
-function rAddName(){
-if(rCount>=10)return;
+// –– ROSC ––
+var rCount = 0;
+function rAddName() {
+if (rCount >= 10) return;
 rCount++;
-var ar=[’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’];
-var c=document.getElementById(‘r-names’),d=document.createElement(‘div’);d.className=‘name-add-row’;
-d.innerHTML=’<span class="nn">’+ar[rCount-1]+’</span><input type="text" placeholder="\u0627\u0644\u0627\u0633\u0645"><button class="rm-btn" onclick="rDelName(this)">\u2715</button>’;
-c.appendChild(d);
-var btn=document.getElementById(‘r-add-btn’);if(btn)btn.style.display=rCount>=10?‘none’:’’;
+var ar = [’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’];
+var c = document.getElementById(‘r-names’), d = document.createElement(‘div’); d.className = ‘nr’;
+d.innerHTML = ‘<span class="nn">’ + ar[rCount-1] + ‘</span><input type="text" placeholder="\u0627\u0644\u0627\u0633\u0645"><button class="rm" onclick="rDel(this)">\u2715</button>’;
+c.appendChild(d); d.querySelector(‘input’).focus();
+var btn = document.getElementById(‘r-add-btn’); if (btn) btn.style.display = rCount >= 10 ? ‘none’ : ‘’;
 }
-function rDelName(btn){
-btn.parentElement.remove();rCount–;
-var btn2=document.getElementById(‘r-add-btn’);if(btn2)btn2.style.display=’’;
-var ar=[’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’];
-document.querySelectorAll(’#r-names .nn’).forEach(function(sp,i){sp.textContent=ar[i]||(i+1);});
+function rDel(btn) {
+btn.parentElement.remove(); rCount–;
+document.getElementById(‘r-add-btn’).style.display = ‘’;
+var ar = [’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’];
+document.querySelectorAll(’#r-names .nn’).forEach(function(x,i){x.textContent=ar[i]||(i+1);});
 }
-function rSend(){
-var time=document.getElementById(‘r-ti’).value||’\u2014’,type=document.getElementById(‘r-ty’).value||’\u2014’,loc=document.getElementById(‘r-lo’).value||’\u2014’,resp=document.getElementById(‘r-re’).value||’\u2014’;
-var units=document.getElementById(‘r-un’).value||’\u2014’,rosc=document.getElementById(‘r-ro’).value,lucas=document.getElementById(‘r-lu’).value;
-var ops=document.getElementById(‘r-op’).value||’\u2014’,coord=document.getElementById(‘r-co’).value||’\u2014’;
-var names=[].slice.call(document.querySelectorAll(’#r-names input’)).map(function(i){return i.value;}).filter(Boolean);
-var ar=[’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’],li=L();
-var msg=li+’\n         \u2764 *\u0646\u0645\u0648\u0630\u062C ROSC*\n’+li+’\n\n’;
-msg+=’*[ \uD83D\uDCCB \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0628\u0644\u0627\u063A ]*\n> \u23F0 *\u062A\u0648\u0642\u064A\u062A \u0627\u0644\u0628\u0644\u0627\u063A:* ‘+time+’\n> \uD83D\uDCCC *\u0646\u0648\u0639 \u0627\u0644\u0628\u0644\u0627\u063A:* ‘+type+’\n> \uD83D\uDCCD *\u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0644\u0627\u063A:* ‘+loc+’\n> \u26A1 *\u0632\u0645\u0646 \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’+resp+’*\n\n’;
-msg+=’*[ \uD83D\uDE91 \u0627\u0644\u0648\u062D\u062F\u0627\u062A \u0627\u0644\u0645\u0633\u062A\u062C\u064A\u0628\u0629 ]*\n’;
-units.split(’\n’).forEach(function(u){if(u.trim())msg+=’> ‘+u.trim()+’\n’;});
-msg+=’\n*[ \u2705 \u0646\u062A\u0627\u0626\u062C \u0627\u0644\u062A\u062F\u062E\u0644 ]*\n> \uD83D\uDC93 *\u0647\u0644 \u062A\u062D\u0642\u0642 ROSC\u061F:* *’+rosc+’*\n> \uD83E\uDD16 *\u0647\u0644 \u062A\u0645 \u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u062C\u0647\u0627\u0632 \u0644\u0648\u0643\u0633\u061F:* *’+lucas+’*\n\n’;
-msg+=li+’\n\u0639\u0645\u0644 \u0639\u0638\u064A\u0645 \u064A\u062C\u0633\u062F \u0627\u0644\u0625\u062E\u0644\u0627\u0635 \u0648\u0627\u0644\u0627\u062D\u062A\u0631\u0627\u0641\u064A\u0629 \u0641\u064A \u0627\u0644\u0639\u0645\u0644\n\u0628\u0643\u0644 \u0641\u062E\u0631 \u0648\u0627\u0639\u062A\u0632\u0627\u0632\u060C \u0646\u062A\u0642\u062F\u0645 \u0628\u062C\u0632\u064A\u0644 \u0627\u0644\u0634\u0643\u0631 \u0648\u0627\u0644\u0639\u0631\u0641\u0627\u0646 \u0644\u062C\u0647\u0648\u062F \u0627\u0644\u0632\u0645\u0644\u0627\u0621 \u0627\u0644\u0630\u064A\u0646 \u0643\u0627\u0646 \u0644\u0647\u0645 \u2013 \u0628\u0639\u062F \u062A\u0648\u0641\u064A\u0642 \u0627\u0644\u0644\u0647 \u2013 \u0627\u0644\u0641\u0636\u0644 \u0641\u064A \u0646\u062C\u0627\u062D \u0639\u0645\u0644\u064A\u0629 \u0625\u0646\u0639\u0627\u0634 \u0642\u0644\u0628\u064A \u0631\u0626\u0648\u064A\n’+li+’\n\n’;
-if(names.length){names.forEach(function(n,i){msg+=(ar[i]||(i+1)+’’)+’- *’+n+’*\n’;});msg+=’\n’;}
-msg+=’> \uD83C\uDFAF *\u062A\u062D\u0643\u0645 \u0639\u0645\u0644\u064A\u0627\u062A\u064A:* ‘+ops+’\n> \uD83D\uDD17 *\u062A\u0646\u0633\u064A\u0642 \u0627\u0633\u062A\u062C\u0627\u0628\u0629:* ‘+coord+’\n\n’+li+’\n\u062C\u0632\u0627\u0643\u0645 \u0627\u0644\u0644\u0647 \u062E\u064A\u0631\u064B\u0627\u060C \u0648\u0643\u062A\u0628 \u0623\u062C\u0631\u0643\u0645\u060C \u0648\u062C\u0639\u0644 \u0645\u0627 \u0642\u062F\u0645\u062A\u0645\u0648\u0647 \u0641\u064A \u0645\u0648\u0627\u0632\u064A\u0646 \u062D\u0633\u0646\u0627\u062A\u0643\u0645 \uD83C\uDF39\n’+li;
+function rSend() {
+var li = L();
+var rosc = v(‘r-ro’), lucas = v(‘r-lu’);
+var msg = li + ‘\n         \u2764 *\u0646\u0645\u0648\u0630\u062C ROSC*\n’ + li + ‘\n\n’;
+msg += ‘*[ \uD83D\uDCCB \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0628\u0644\u0627\u063A ]*\n’;
+msg += ‘> \u23F0 *\u062A\u0648\u0642\u064A\u062A \u0627\u0644\u0628\u0644\u0627\u063A:* ’ + v(‘r-ti’) + ‘\n’;
+msg += ‘> \uD83D\uDCCC *\u0646\u0648\u0639 \u0627\u0644\u0628\u0644\u0627\u063A:* ’ + v(‘r-ty’) + ‘\n’;
+msg += ‘> \uD83D\uDCCD *\u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0644\u0627\u063A:* ’ + v(‘r-lo’) + ‘\n’;
+msg += ‘> \u26A1 *\u0632\u0645\u0646 \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* *’ + v(‘r-re’) + ’*\n\n’;
+msg += ‘*[ \uD83D\uDE91 \u0627\u0644\u0648\u062D\u062F\u0627\u062A \u0627\u0644\u0645\u0633\u062A\u062C\u064A\u0628\u0629 ]*\n’;
+var un = v(‘r-un’); un.split(’\n’).forEach(function(x){if(x.trim())msg+=’> ‘+x.trim()+’\n’;});
+msg += ‘\n*[ \u2705 \u0646\u062A\u0627\u0626\u062C \u0627\u0644\u062A\u062F\u062E\u0644 ]*\n’;
+msg += ‘> \uD83D\uDC93 *\u0647\u0644 \u062A\u062D\u0642\u0642 ROSC\u061F:* *’ + rosc + (rosc===’\u0646\u0639\u0645’?’ \uD83D\uDC4F’:’’) + ’*\n’;
+msg += ‘> \uD83E\uDD16 *\u0647\u0644 \u062A\u0645 \u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u062C\u0647\u0627\u0632 \u0644\u0648\u0643\u0633\u061F:* *’ + lucas + (lucas===’\u0646\u0639\u0645’?’ \u2705’:’’) + ’*\n\n’;
+msg += li + ‘\n\u0639\u0645\u0644 \u0639\u0638\u064A\u0645 \u064A\u062C\u0633\u062F \u0627\u0644\u0625\u062E\u0644\u0627\u0635 \u0648\u0627\u0644\u0627\u062D\u062A\u0631\u0627\u0641\u064A\u0629 \u0641\u064A \u0627\u0644\u0639\u0645\u0644\n\u0628\u0643\u0644 \u0641\u062E\u0631 \u0648\u0627\u0639\u062A\u0632\u0627\u0632\u060C \u0646\u062A\u0642\u062F\u0645 \u0628\u062C\u0632\u064A\u0644 \u0627\u0644\u0634\u0643\u0631 \u0648\u0627\u0644\u0639\u0631\u0641\u0627\u0646 \u0644\u062C\u0647\u0648\u062F \u0627\u0644\u0632\u0645\u0644\u0627\u0621 \u0627\u0644\u0630\u064A\u0646 \u0643\u0627\u0646 \u0644\u0647\u0645 \u2013 \u0628\u0639\u062F \u062A\u0648\u0641\u064A\u0642 \u0627\u0644\u0644\u0647 \u2013 \u0627\u0644\u0641\u0636\u0644 \u0641\u064A \u0646\u062C\u0627\u062D \u0639\u0645\u0644\u064A\u0629 \u0625\u0646\u0639\u0627\u0634 \u0642\u0644\u0628\u064A \u0631\u0626\u0648\u064A\n’ + li + ‘\n\n’;
+var names = [].slice.call(document.querySelectorAll(’#r-names input’)).map(function(x){return x.value;}).filter(Boolean);
+var ar = [’\u0661’,’\u0662’,’\u0663’,’\u0664’,’\u0665’,’\u0666’,’\u0667’,’\u0668’,’\u0669’,’\u0661\u0660’];
+if (names.length) { names.forEach(function(n,i){msg+=(ar[i]||(i+1)+’’)+’- *’+n+’*\n’;}); msg+=’\n’; }
+msg += ’> \uD83C\uDFAF *\u062A\u062D\u0643\u0645 \u0639\u0645\u0644\u064A\u0627\u062A\u064A:* ’ + v(‘r-op’) + ‘\n’;
+msg += ’> \uD83D\uDD17 *\u062A\u0646\u0633\u064A\u0642 \u0627\u0633\u062A\u062C\u0627\u0628\u0629:* ’ + v(‘r-co’) + ‘\n\n’;
+msg += li + ‘\n\u062C\u0632\u0627\u0643\u0645 \u0627\u0644\u0644\u0647 \u062E\u064A\u0631\u064B\u0627\u060C \u0648\u0643\u062A\u0628 \u0623\u062C\u0631\u0643\u0645\u060C \u0648\u062C\u0639\u0644 \u0645\u0627 \u0642\u062F\u0645\u062A\u0645\u0648\u0647 \u0641\u064A \u0645\u0648\u0627\u0632\u064A\u0646 \u062D\u0633\u0646\u0627\u062A\u0643\u0645 \uD83C\uDF39\n’ + li;
 wa(msg);
 }
 </script>
