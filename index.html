@@ -49,9 +49,13 @@ textarea{resize:vertical;min-height:54px;}
 .pi{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:1px solid #d5e8f0;border-radius:6px;padding:5px 8px;margin-bottom:5px;}
 .pi input{flex:1;}
 .dvd{border:none;border-top:1px dashed #d5e8f0;margin:6px 0;}
+.irow{border:1px solid #d5e8f0;border-radius:8px;padding:10px 10px 10px 42px;margin-bottom:8px;background:#f9fbff;position:relative;}
+.del{position:absolute;top:8px;left:7px;background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:3px 7px;cursor:pointer;font-size:.7rem;}
 .send-btn{width:100%;padding:12px;background:#25d366;color:#fff;border:none;border-radius:8px;font-size:.98rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;}
 .prev-box{background:#f0f9f4;border:1px solid #a9dfbf;border-radius:8px;padding:10px;font-size:.82rem;line-height:1.85;white-space:pre-wrap;direction:rtl;min-height:80px;margin-top:8px;}
 .nr{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:1px solid #d5e8f0;border-radius:6px;padding:5px 8px;margin-bottom:5px;}
+.nr .nn{font-size:.78rem;color:#7f8c8d;width:22px;flex-shrink:0;text-align:center;font-weight:700;}
+.nr input{flex:1;}
 .rm{background:none;border:none;color:#e74c3c;cursor:pointer;font-size:1rem;padding:0 3px;}
 </style>
 </head>
@@ -98,13 +102,11 @@ textarea{resize:vertical;min-height:54px;}
         </div>
       </div>
     </div>
-    <div class="card">
-      <h2>📊 المؤشر</h2>
+    <div class="card"><h2>📊 الموشر</h2>
       <div class="ff"><label>متوسط وقت الاستجابة (دقيقة)</label><input type="text" id="s-ir" placeholder="دقيقة"></div>
-      <div class="ff"><label>ملاحظات المؤشر</label><textarea id="s-in" placeholder="ملاحظات..."></textarea></div>
+      <div class="ff"><label>ملاحظات الموشر</label><textarea id="s-in" placeholder="ملاحظات..."></textarea></div>
     </div>
-    <div class="card">
-      <h2>🚗 المركبات</h2>
+    <div class="card"><h2>🚑 المركبات</h2>
       <div class="row">
         <div class="fl"><label>عاملة</label><input type="text" id="s-vw"></div>
         <div class="fl"><label>احتياط</label><input type="text" id="s-vr"></div>
@@ -112,18 +114,17 @@ textarea{resize:vertical;min-height:54px;}
       </div>
       <div class="ff"><label>ملاحظات الأعطال</label><textarea id="s-vn" placeholder="ملاحظات..."></textarea></div>
     </div>
-    <div class="card">
-      <h2>📋 بلاغات التدخل السريع</h2>
-      <div id="s-secs"></div>
-      <button class="btn bo2 bsm" id="btn-add-sec">➕ إضافة قطاع</button>
+    <div class="card"><h2>📋 بلاغات التدخل السريع</h2><div id="s-secs"></div><button class="btn bo2 bsm" id="btn-add-sec">➕ إضافة قطاع</button></div>
+    <div class="card"><h2>👤 الغياب والمتأخرين</h2>
+      <div id="s-abs"></div><button class="btn bo2 bsm" id="btn-add-abs">➕ إضافة غياب</button><hr class="dvd">
+      <div id="s-lat"></div><button class="btn bo2 bsm" id="btn-add-lat">➕ إضافة متأخر</button>
     </div>
-    <div class="card">
-      <h2>👤 الغياب والمتأخرين</h2>
-      <div id="s-abs"></div>
-      <button class="btn bo2 bsm" id="btn-add-abs">➕ إضافة غياب</button>
-      <hr class="dvd">
-      <div id="s-lat"></div>
-      <button class="btn bo2 bsm" id="btn-add-lat">➕ إضافة متأخر</button>
+    <div class="card"><h2>📝 ملاحظات عامة</h2><textarea id="s-gn" placeholder="ملاحظات..."></textarea></div>
+    <div class="card"><h2>👥 معلومات الطاقم</h2>
+      <div class="row">
+        <div class="fl"><label>كبير المسعفين</label><input type="text" id="s-ch"></div>
+        <div class="fl"><label>المساعد</label><input type="text" id="s-as"></div>
+      </div>
     </div>
     <button class="send-btn" id="btn-s-send">📤 إرسال على الواتساب</button>
   </div>
@@ -145,15 +146,82 @@ textarea{resize:vertical;min-height:54px;}
       </div>
       <div class="ff"><label>متوسط وقت الاستجابة</label><input type="text" id="m-r" placeholder="مثال: 8 دقائق"></div>
     </div>
-    <div class="card">
-      <h2>💬 جملة الختام</h2>
+    <div class="card"><h2>💬 جملة الختام</h2>
       <select id="m-ph">
         <option value="">-- بدون جملة --</option>
         <option value="الله يعطيكم العافية جميعاً ماقصرتوا 🌹">الله يعطيكم العافية جميعاً ماقصرتوا 🌹</option>
         <option value="جزاكم الله خيراً على جهودكم المبذولة 🌹">جزاكم الله خيراً على جهودكم المبذولة 🌹</option>
       </select>
+      <div class="prev-box" id="m-prev"></div>
     </div>
     <button class="send-btn" style="background:#148f77" id="btn-m-send">📤 إرسال على الواتساب</button>
+  </div>
+</div>
+
+<div id="pg-oil" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#1e8449,#239b56)">
+    <button class="bk" id="bk-oil">›</button>
+    <div><div class="pt">نموذج تغيير الزيت</div><div class="ps">تسجيل بيانات تغيير زيت المركبات</div></div>
+  </div>
+  <div class="inner">
+    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="o-d"></div></div>
+    <div class="card"><h2>🛢️ بيانات المركبات</h2><div id="o-list"></div><button class="btn bo2 bsm" id="btn-o-add">➕ إضافة مركبة</button></div>
+    <div class="card"><h2>📝 ملاحظات</h2><textarea id="o-n" placeholder="ملاحظات..."></textarea></div>
+    <button class="send-btn" style="background:#1e8449" id="btn-o-send">📤 إرسال على الواتساب</button>
+  </div>
+</div>
+
+<div id="pg-device" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#d35400,#e67e22)">
+    <button class="bk" id="bk-device">›</button>
+    <div><div class="pt">نموذج صيانة جهاز</div><div class="ps">صيانة الأجهزة الطبية</div></div>
+  </div>
+  <div class="inner">
+    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="d-d"></div></div>
+    <div class="card"><h2>🔧 بيانات الأجهزة</h2><div id="d-list"></div><button class="btn bo2 bsm" id="btn-d-add">➕ إضافة جهاز</button></div>
+    <div class="card"><h2>📝 ملاحظات</h2><textarea id="d-n" placeholder="ملاحظات..."></textarea></div>
+    <button class="send-btn" style="background:#d35400" id="btn-d-send">📤 إرسال على الواتساب</button>
+  </div>
+</div>
+
+<div id="pg-vm" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#c0392b,#e74c3c)">
+    <button class="bk" id="bk-vm">›</button>
+    <div><div class="pt">نموذج صيانة مركبة</div><div class="ps">تسجيل أعطال وطلبات الصيانة</div></div>
+  </div>
+  <div class="inner">
+    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="v-d"></div></div>
+    <div class="card"><h2>🚑 بيانات المركبة</h2>
+      <div class="row">
+        <div class="fl"><label>رقم المركبة</label><input type="text" id="v-num"></div>
+        <div class="fl"><label>نوع المركبة</label><input type="text" id="v-typ"></div>
+      </div>
+      <div class="row">
+        <div class="fl"><label>العداد</label><input type="text" id="v-km"></div>
+        <div class="fl"><label>الأولوية</label><select id="v-pri"><option>عادية</option><option>عاجلة</option><option>حرجة</option></select></div>
+      </div>
+    </div>
+    <div class="card"><h2>⚠️ الأعطال</h2><div id="v-faults"></div><button class="btn bo2 bsm" id="btn-v-add">➕ إضافة عطل</button></div>
+    <div class="card"><h2>📝 ملاحظات</h2><textarea id="v-n" placeholder="ملاحظات..."></textarea></div>
+    <button class="send-btn" style="background:#c0392b" id="btn-v-send">📤 إرسال على الواتساب</button>
+  </div>
+</div>
+
+<div id="pg-rosc" class="page">
+  <div class="phdr" style="background:linear-gradient(135deg,#922b21,#e74c3c)">
+    <button class="bk" id="bk-rosc">›</button>
+    <div><div class="pt">نموذج ROSC</div><div class="ps">إنعاش قلبي رئوي ناجح</div></div>
+  </div>
+  <div class="inner">
+    <div class="card">
+      <h2>📋 بيانات البلاغ</h2>
+      <div class="ff"><label>التوقيت</label><input type="text" id="r-ti"></div>
+      <div class="ff"><label>نوع البلاغ</label><input type="text" id="r-ty"></div>
+      <div class="ff"><label>الموقع</label><input type="text" id="r-lo"></div>
+    </div>
+    <div class="card"><h2>🚑 الوحدات المستجيبة</h2><textarea id="r-un"></textarea></div>
+    <div class="card"><h2>👥 الأسماء</h2><div id="r-names"></div><button class="btn bo2 bsm" id="btn-r-add">➕ إضافة اسم</button></div>
+    <button class="send-btn" style="background:#922b21" id="btn-r-send">📤 إرسال على الواتساب</button>
   </div>
 </div>
 
@@ -161,58 +229,100 @@ textarea{resize:vertical;min-height:54px;}
 (function() {
   "use strict";
 
-  function el(id) { return document.getElementById(id); }
-  function gv(id) { var e = el(id); return e ? e.value.trim() : ''; }
-  function on(id, ev, fn) { var e = el(id); if (e) e.addEventListener(ev, fn); }
+  const el = (id) => document.getElementById(id);
+  const gv = (id) => el(id)?.value.trim() || '';
+  const on = (id, ev, fn) => el(id)?.addEventListener(ev, fn);
 
-  function show(id) {
-    document.getElementById('pg-home').style.display = 'none';
-    var pages = document.getElementsByClassName('page');
-    for (var i = 0; i < pages.length; i++) pages[i].style.display = 'none';
-    el(id).style.display = 'block';
+  // تصحيح مشكلة الرموز - استخدام كود الـ Unicode المباشر
+  function wa(msg) {
+    // التحويل لـ URI يحل مشكلة علامات الاستفهام
+    const encodedMsg = encodeURIComponent(msg);
+    window.open(`https://wa.me/?text=${encodedMsg}`, '_blank');
   }
 
-  // Navigation
-  on('btn-go-shift', 'click', function() { show('pg-shift'); });
-  on('btn-go-moshr', 'click', function() { show('pg-moshr'); });
-  on('bk-shift', 'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
-  on('bk-moshr', 'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
+  function show(id) {
+    document.querySelectorAll('.page, #pg-home').forEach(p => p.style.display = 'none');
+    el(id).style.display = 'block';
+    window.scrollTo(0,0);
+  }
 
-  // WhatsApp Messaging with formatted emojis
-  on('btn-s-send', 'click', function() {
-    var line = "➖➖➖➖➖➖➖➖➖➖";
-    var per = document.querySelector('input[name="sp"]:checked')?.value || '—';
-    
-    var msg = line + "\n";
-    msg += "📋 *نموذج نهاية المناوبة*\n";
-    msg += line + "\n\n";
-    
-    msg += "📅 *التاريخ:* " + (gv('s-date') || '—') + "\n";
-    msg += "🕒 *الفترة:* " + per + "\n\n";
-    
-    msg += "📊 *[ المؤشر ]*\n";
-    msg += "⏱️ *متوسط الاستجابة:* " + (gv('s-ir') || '—') + " دقيقة\n";
-    if(gv('s-in')) msg += "📝 *ملاحظات:* " + gv('s-in') + "\n";
-    
-    msg += "\n🚑 *[ المركبات ]*\n";
-    msg += "✅ *عاملة:* " + (gv('s-vw') || '0') + "\n";
-    msg += "⏳ *احتياط:* " + (gv('s-vr') || '0') + "\n";
-    msg += "❌ *عطل:* " + (gv('s-vb') || '0') + "\n";
-    
-    var url = "https://wa.me/?text=" + encodeURIComponent(msg);
-    window.open(url, '_blank');
+  // التنقل
+  on('btn-go-shift', 'click', () => show('pg-shift'));
+  on('btn-go-moshr', 'click', () => show('pg-moshr'));
+  on('btn-go-oil', 'click', () => show('pg-oil'));
+  on('btn-go-device', 'click', () => show('pg-device'));
+  on('btn-go-vm', 'click', () => show('pg-vm'));
+  on('btn-go-rosc', 'click', () => show('pg-rosc'));
+  document.querySelectorAll('.bk').forEach(b => b.onclick = () => show('pg-home'));
+
+  // إضافة العناصر الديناميكية
+  function createRemovableInput(containerId, placeholder) {
+    const div = document.createElement('div');
+    div.className = 'pi';
+    div.innerHTML = `<input type="text" placeholder="${placeholder}" style="flex:1;"><button class="rm">✖</button>`;
+    div.querySelector('.rm').onclick = () => div.remove();
+    el(containerId).appendChild(div);
+  }
+
+  on('btn-add-abs', 'click', () => createRemovableInput('s-abs', 'اسم الغائب'));
+  on('btn-add-lat', 'click', () => createRemovableInput('s-lat', 'اسم المتأخر'));
+  on('btn-r-add', 'click', () => createRemovableInput('r-names', 'اسم الزميل'));
+
+  // معالجة قطاعات المناوبة
+  let sSecs = {};
+  function renderShiftSecs() {
+    el('s-secs').innerHTML = '';
+    Object.keys(sSecs).forEach(id => {
+      const s = sSecs[id];
+      const div = document.createElement('div');
+      div.className = 'iblk';
+      div.innerHTML = `
+        <div style="display:flex; gap:5px; margin-bottom:5px;">
+          <input type="text" value="${s.name}" class="s-sec-name" style="font-weight:bold; background:#eaf4fb;">
+          <button class="rm del-sec">✖</button>
+        </div>
+        <textarea placeholder="البلاغات..." class="s-sec-val">${s.val}</textarea>
+      `;
+      div.querySelector('.del-sec').onclick = () => { delete sSecs[id]; renderShiftSecs(); };
+      div.querySelector('.s-sec-name').oninput = (e) => sSecs[id].name = e.target.value;
+      div.querySelector('.s-sec-val').oninput = (e) => sSecs[id].val = e.target.value;
+      el('s-secs').appendChild(div);
+    });
+  }
+
+  on('btn-add-sec', 'click', () => {
+    const id = Date.now();
+    sSecs[id] = {name: 'قطاع جديد', val: ''};
+    renderShiftSecs();
   });
 
-  on('btn-m-send', 'click', function() {
-    var per = document.querySelector('input[name="mp"]:checked')?.value || '—';
-    var msg = "📊 *مؤشر المناوبة*\n\n";
-    msg += "📅 *التاريخ:* " + gv('m-d') + "\n";
-    msg += "🕒 *المناوبة:* " + per + "\n";
-    msg += "⏱️ *وقت الاستجابة:* " + gv('m-r') + "\n\n";
-    msg += gv('m-ph');
+  // إرسال البيانات (نموذج المناوبة)
+  on('btn-s-send', 'click', () => {
+    let m = `➖➖➖➖➖➖➖➖\n📋 *نموذج نهاية المناوبة*\n➖➖➖➖➖➖➖➖\n`;
+    m += `📅 التاريخ: ${gv('s-date')}\n🕒 الفترة: ${document.querySelector('input[name="sp"]:checked').value}\n\n`;
+    m += `📊 *المؤشر*\n⏱️ الاستجابة: ${gv('s-ir')} د\n📝 ملاحظات: ${gv('s-in')}\n\n`;
+    m += `🚑 *المركبات*\n✅ عامة: ${gv('s-vw')} | ⏳ احتياط: ${gv('s-vr')} | ❌ عطل: ${gv('s-vb')}\n`;
     
-    window.open("https://wa.me/?text=" + encodeURIComponent(msg), '_blank');
+    Object.values(sSecs).forEach(s => {
+      if(s.val) m += `\n📍 *${s.name}*:\n${s.val}\n`;
+    });
+
+    const abs = [...document.querySelectorAll('#s-abs input')].map(i => i.value).filter(Boolean);
+    if(abs.length) m += `\n🚫 *الغياب*: ${abs.join(' - ')}`;
+
+    m += `\n\n👥 *الطاقم*:\n- كبير المسعفين: ${gv('s-ch')}\n- المساعد: ${gv('s-as')}`;
+    wa(m);
   });
+
+  // نموذج المؤشر فقط
+  on('btn-m-send', 'click', () => {
+    let m = `📊 *مؤشر المناوبة - قطاع الوسط*\n\n📅 التاريخ: ${gv('m-d')}\n⏱️ الاستجابة: ${gv('m-r')}\n\n${gv('m-ph')}`;
+    wa(m);
+  });
+
+  // تجهيز التواريخ
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(i => i.value = today);
 
 })();
 </script>
