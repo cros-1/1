@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -50,49 +49,41 @@ textarea{resize:vertical;min-height:54px;}
 .pi{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:1px solid #d5e8f0;border-radius:6px;padding:5px 8px;margin-bottom:5px;}
 .pi input{flex:1;}
 .dvd{border:none;border-top:1px dashed #d5e8f0;margin:6px 0;}
-.irow{border:1px solid #d5e8f0;border-radius:8px;padding:10px 10px 10px 42px;margin-bottom:8px;background:#f9fbff;position:relative;}
-.del{position:absolute;top:8px;left:7px;background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:3px 7px;cursor:pointer;font-size:.7rem;}
 .send-btn{width:100%;padding:12px;background:#25d366;color:#fff;border:none;border-radius:8px;font-size:.98rem;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;}
 .prev-box{background:#f0f9f4;border:1px solid #a9dfbf;border-radius:8px;padding:10px;font-size:.82rem;line-height:1.85;white-space:pre-wrap;direction:rtl;min-height:80px;margin-top:8px;}
 .nr{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:1px solid #d5e8f0;border-radius:6px;padding:5px 8px;margin-bottom:5px;}
-.nr .nn{font-size:.78rem;color:#7f8c8d;width:22px;flex-shrink:0;text-align:center;font-weight:700;}
-.nr input{flex:1;}
 .rm{background:none;border:none;color:#e74c3c;cursor:pointer;font-size:1rem;padding:0 3px;}
 </style>
 </head>
 <body>
 
-<!-- HOME -->
-
-<div id="pg-home" style="display:block;min-height:100vh;background:#f0f4f8">
+<div id="pg-home" style="display:block;">
   <div class="hdr">
-    <h1>&#x1F691; نظام النماذج الميدانية</h1>
+    <h1>🚑 نظام النماذج الميدانية</h1>
     <p>اختر النموذج المطلوب</p>
   </div>
   <div class="hw">
     <div class="st">نماذج المناوبة</div>
     <div class="fg">
-      <button class="fc cb" id="btn-go-shift"><div class="ic">&#x1F4CB;</div><div class="inf"><div class="nm">نموذج نهاية المناوبة</div><div class="ds">البلاغات والمركبات والغياب والطاقم</div></div><div class="ar">&#x2039;</div></button>
-      <button class="fc ct" id="btn-go-moshr"><div class="ic">&#x1F4CA;</div><div class="inf"><div class="nm">مؤشر المناوبة</div><div class="ds">متوسط وقت الاستجابة وجملة الختام</div></div><div class="ar">&#x2039;</div></button>
+      <button class="fc cb" id="btn-go-shift"><div class="ic">📋</div><div class="inf"><div class="nm">نموذج نهاية المناوبة</div><div class="ds">البلاغات والمركبات والغياب والطاقم</div></div><div class="ar">‹</div></button>
+      <button class="fc ct" id="btn-go-moshr"><div class="ic">📊</div><div class="inf"><div class="nm">مؤشر المناوبة</div><div class="ds">متوسط وقت الاستجابة وجملة الختام</div></div><div class="ar">‹</div></button>
     </div>
     <div class="st">نماذج الصيانة</div>
     <div class="fg">
-      <button class="fc cg" id="btn-go-oil"><div class="ic">&#x1F6E2;</div><div class="inf"><div class="nm">نموذج تغيير الزيت</div><div class="ds">تسجيل بيانات تغيير زيت المركبات</div></div><div class="ar">&#x2039;</div></button>
-      <button class="fc co" id="btn-go-device"><div class="ic">&#x1F527;</div><div class="inf"><div class="nm">نموذج صيانة جهاز</div><div class="ds">صيانة الأجهزة الطبية والميدانية</div></div><div class="ar">&#x2039;</div></button>
-      <button class="fc cr" id="btn-go-vm"><div class="ic">&#x1F691;</div><div class="inf"><div class="nm">نموذج صيانة مركبة</div><div class="ds">تسجيل أعطال وطلبات الصيانة</div></div><div class="ar">&#x2039;</div></button>
+      <button class="fc cg" id="btn-go-oil"><div class="ic">🛢️</div><div class="inf"><div class="nm">نموذج تغيير الزيت</div><div class="ds">تسجيل بيانات تغيير زيت المركبات</div></div><div class="ar">‹</div></button>
+      <button class="fc co" id="btn-go-device"><div class="ic">🔧</div><div class="inf"><div class="nm">نموذج صيانة جهاز</div><div class="ds">صيانة الأجهزة الطبية والميدانية</div></div><div class="ar">‹</div></button>
+      <button class="fc cr" id="btn-go-vm"><div class="ic">🚑</div><div class="inf"><div class="nm">نموذج صيانة مركبة</div><div class="ds">تسجيل أعطال وطلبات الصيانة</div></div><div class="ar">‹</div></button>
     </div>
     <div class="st">نماذج أخرى</div>
     <div class="fg">
-      <button class="fc ck" id="btn-go-rosc"><div class="ic">&#x2764;</div><div class="inf"><div class="nm">نموذج ROSC</div><div class="ds">تقرير إنعاش قلبي رئوي ناجح</div></div><div class="ar">&#x2039;</div></button>
+      <button class="fc ck" id="btn-go-rosc"><div class="ic">❤️</div><div class="inf"><div class="nm">نموذج ROSC</div><div class="ds">تقرير إنعاش قلبي رئوي ناجح</div></div><div class="ar">‹</div></button>
     </div>
   </div>
 </div>
 
-<!-- SHIFT -->
-
 <div id="pg-shift" class="page">
   <div class="phdr" style="background:linear-gradient(135deg,#1a5276,#1f618d)">
-    <button class="bk" id="bk-shift">&#x203A;</button>
+    <button class="bk" id="bk-shift">›</button>
     <div><div class="pt">نموذج نهاية المناوبة</div><div class="ps">تقرير شامل للمناوبة</div></div>
   </div>
   <div class="inner">
@@ -107,13 +98,13 @@ textarea{resize:vertical;min-height:54px;}
         </div>
       </div>
     </div>
-    <div class="card" style="border-right:4px solid #2471a3">
-      <h2>&#x1F4CA; الموشر</h2>
+    <div class="card">
+      <h2>📊 المؤشر</h2>
       <div class="ff"><label>متوسط وقت الاستجابة (دقيقة)</label><input type="text" id="s-ir" placeholder="دقيقة"></div>
-      <div class="ff"><label>ملاحظات الموشر</label><textarea id="s-in" placeholder="ملاحظات..."></textarea></div>
+      <div class="ff"><label>ملاحظات المؤشر</label><textarea id="s-in" placeholder="ملاحظات..."></textarea></div>
     </div>
     <div class="card">
-      <h2>&#x1F697; المركبات</h2>
+      <h2>🚗 المركبات</h2>
       <div class="row">
         <div class="fl"><label>عاملة</label><input type="text" id="s-vw"></div>
         <div class="fl"><label>احتياط</label><input type="text" id="s-vr"></div>
@@ -122,169 +113,47 @@ textarea{resize:vertical;min-height:54px;}
       <div class="ff"><label>ملاحظات الأعطال</label><textarea id="s-vn" placeholder="ملاحظات..."></textarea></div>
     </div>
     <div class="card">
-      <h2>&#x1F4CB; بلاغات التدخل السريع</h2>
+      <h2>📋 بلاغات التدخل السريع</h2>
       <div id="s-secs"></div>
-      <button class="btn bo2 bsm" id="btn-add-sec">&#x2795; إضافة قطاع</button>
+      <button class="btn bo2 bsm" id="btn-add-sec">➕ إضافة قطاع</button>
     </div>
     <div class="card">
-      <h2>&#x1F464; الغياب والمتأخرين</h2>
-      <div style="font-size:.8rem;font-weight:700;margin-bottom:5px">أسماء الغياب</div>
+      <h2>👤 الغياب والمتأخرين</h2>
       <div id="s-abs"></div>
-      <button class="btn bo2 bsm" id="btn-add-abs">&#x2795; إضافة غياب</button>
+      <button class="btn bo2 bsm" id="btn-add-abs">➕ إضافة غياب</button>
       <hr class="dvd">
-      <div style="font-size:.8rem;font-weight:700;margin:7px 0 5px">أسماء المتأخرين</div>
       <div id="s-lat"></div>
-      <button class="btn bo2 bsm" id="btn-add-lat">&#x2795; إضافة متأخر</button>
+      <button class="btn bo2 bsm" id="btn-add-lat">➕ إضافة متأخر</button>
     </div>
-    <div class="card"><h2>&#x1F4DD; ملاحظات عامة</h2><textarea id="s-gn" placeholder="ملاحظات..."></textarea></div>
-    <div class="card">
-      <h2>&#x1F465; معلومات الطاقم</h2>
-      <div class="row">
-        <div class="fl"><label>كبير المسعفين</label><input type="text" id="s-ch"></div>
-        <div class="fl"><label>المساعد</label><input type="text" id="s-as"></div>
-      </div>
-    </div>
-    <button class="send-btn" id="btn-s-send">&#x1F4E4; إرسال على الواتساب</button>
+    <button class="send-btn" id="btn-s-send">📤 إرسال على الواتساب</button>
   </div>
 </div>
 
-<!-- MOSHR -->
-
 <div id="pg-moshr" class="page">
   <div class="phdr" style="background:linear-gradient(135deg,#148f77,#1abc9c)">
-    <button class="bk" id="bk-moshr">&#x203A;</button>
+    <button class="bk" id="bk-moshr">›</button>
     <div><div class="pt">مؤشر المناوبة</div><div class="ps">قطاع الوسط</div></div>
   </div>
   <div class="inner">
     <div class="card">
       <div class="ff"><label>التاريخ</label><input type="date" id="m-d"></div>
-      <div class="ff" style="margin-top:7px"><label>المناوبة</label>
+      <div class="ff"><label>المناوبة</label>
         <div class="rg">
           <label><input type="radio" name="mp" value="صباحية" checked> صباحية</label>
           <label><input type="radio" name="mp" value="مسائية"> مسائية</label>
         </div>
       </div>
-      <div class="ff" style="margin-top:7px"><label>متوسط وقت الاستجابة</label><input type="text" id="m-r" placeholder="مثال: 8 دقائق"></div>
+      <div class="ff"><label>متوسط وقت الاستجابة</label><input type="text" id="m-r" placeholder="مثال: 8 دقائق"></div>
     </div>
     <div class="card">
-      <h2>&#x1F4AC; جملة الختام</h2>
-      <label style="font-size:.73rem;color:#7f8c8d;display:block;margin-bottom:4px">اختر جملة</label>
+      <h2>💬 جملة الختام</h2>
       <select id="m-ph">
         <option value="">-- بدون جملة --</option>
         <option value="الله يعطيكم العافية جميعاً ماقصرتوا 🌹">الله يعطيكم العافية جميعاً ماقصرتوا 🌹</option>
         <option value="جزاكم الله خيراً على جهودكم المبذولة 🌹">جزاكم الله خيراً على جهودكم المبذولة 🌹</option>
-        <option value="بارك الله فيكم ونفع بكم 🌹">بارك الله فيكم ونفع بكم 🌹</option>
-        <option value="شكراً لكل من أسهم في إنجاح هذه المناوبة 🌹">شكراً لكل من أسهم 🌹</option>
-        <option value="وفقكم الله وسدد خطاكم 🌹">وفقكم الله وسدد خطاكم 🌹</option>
       </select>
-      <div class="prev-box" id="m-prev"></div>
     </div>
-    <button class="send-btn" style="background:#148f77" id="btn-m-send">&#x1F4E4; إرسال على الواتساب</button>
-  </div>
-</div>
-
-<!-- OIL -->
-
-<div id="pg-oil" class="page">
-  <div class="phdr" style="background:linear-gradient(135deg,#1e8449,#239b56)">
-    <button class="bk" id="bk-oil">&#x203A;</button>
-    <div><div class="pt">نموذج تغيير الزيت</div><div class="ps">تسجيل بيانات تغيير زيت المركبات</div></div>
-  </div>
-  <div class="inner">
-    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="o-d"></div></div>
-    <div class="card">
-      <h2>&#x1F6E2; بيانات المركبات</h2>
-      <div id="o-list"></div>
-      <button class="btn bo2 bsm" id="btn-o-add">&#x2795; إضافة مركبة</button>
-    </div>
-    <div class="card"><h2>&#x1F4DD; ملاحظات</h2><textarea id="o-n" placeholder="ملاحظات..."></textarea></div>
-    <button class="send-btn" style="background:#1e8449" id="btn-o-send">&#x1F4E4; إرسال على الواتساب</button>
-  </div>
-</div>
-
-<!-- DEVICE -->
-
-<div id="pg-device" class="page">
-  <div class="phdr" style="background:linear-gradient(135deg,#d35400,#e67e22)">
-    <button class="bk" id="bk-device">&#x203A;</button>
-    <div><div class="pt">نموذج صيانة جهاز</div><div class="ps">صيانة الأجهزة الطبية</div></div>
-  </div>
-  <div class="inner">
-    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="d-d"></div></div>
-    <div class="card">
-      <h2>&#x1F527; بيانات الأجهزة</h2>
-      <div id="d-list"></div>
-      <button class="btn bo2 bsm" id="btn-d-add">&#x2795; إضافة جهاز</button>
-    </div>
-    <div class="card"><h2>&#x1F4DD; ملاحظات</h2><textarea id="d-n" placeholder="ملاحظات..."></textarea></div>
-    <button class="send-btn" style="background:#d35400" id="btn-d-send">&#x1F4E4; إرسال على الواتساب</button>
-  </div>
-</div>
-
-<!-- VM -->
-
-<div id="pg-vm" class="page">
-  <div class="phdr" style="background:linear-gradient(135deg,#c0392b,#e74c3c)">
-    <button class="bk" id="bk-vm">&#x203A;</button>
-    <div><div class="pt">نموذج صيانة مركبة</div><div class="ps">تسجيل أعطال وطلبات الصيانة</div></div>
-  </div>
-  <div class="inner">
-    <div class="card"><div class="ff"><label>التاريخ</label><input type="date" id="v-d"></div></div>
-    <div class="card">
-      <h2>&#x1F691; بيانات المركبة</h2>
-      <div class="row">
-        <div class="fl"><label>رقم المركبة</label><input type="text" id="v-num" placeholder="رقم اللوحة"></div>
-        <div class="fl"><label>نوع المركبة</label><input type="text" id="v-typ" placeholder="نوع/موديل"></div>
-      </div>
-      <div class="row">
-        <div class="fl"><label>عداد الكيلومترات</label><input type="text" id="v-km" placeholder="كم"></div>
-        <div class="fl"><label>الأولوية</label><select id="v-pri"><option>عادية</option><option>عاجلة</option><option>حرجة</option></select></div>
-      </div>
-    </div>
-    <div class="card">
-      <h2>&#x26A0; الأعطال</h2>
-      <div id="v-faults"></div>
-      <button class="btn bo2 bsm" id="btn-v-add">&#x2795; إضافة عطل</button>
-    </div>
-    <div class="card"><h2>&#x1F4DD; ملاحظات</h2><textarea id="v-n" placeholder="ملاحظات..."></textarea></div>
-    <button class="send-btn" style="background:#c0392b" id="btn-v-send">&#x1F4E4; إرسال على الواتساب</button>
-  </div>
-</div>
-
-<!-- ROSC -->
-
-<div id="pg-rosc" class="page">
-  <div class="phdr" style="background:linear-gradient(135deg,#922b21,#e74c3c)">
-    <button class="bk" id="bk-rosc">&#x203A;</button>
-    <div><div class="pt">نموذج ROSC</div><div class="ps">إنعاش قلبي رئوي ناجح</div></div>
-  </div>
-  <div class="inner">
-    <div class="card">
-      <h2>&#x1F4CB; بيانات البلاغ</h2>
-      <div class="ff"><label>توقيت البلاغ</label><input type="text" id="r-ti" placeholder="مثال: 14:30"></div>
-      <div class="ff" style="margin-top:7px"><label>نوع البلاغ</label><input type="text" id="r-ty"></div>
-      <div class="ff" style="margin-top:7px"><label>موقع البلاغ</label><input type="text" id="r-lo"></div>
-      <div class="ff" style="margin-top:7px"><label>زمن الاستجابة</label><input type="text" id="r-re" placeholder="مثال: 8 دقائق"></div>
-    </div>
-    <div class="card"><h2>&#x1F691; الوحدات المستجيبة</h2><textarea id="r-un" placeholder="اذكر الوحدات..." style="min-height:60px"></textarea></div>
-    <div class="card">
-      <h2>&#x2705; نتائج التدخل</h2>
-      <div class="row">
-        <div class="fl"><label>هل تحقق ROSC؟</label><select id="r-ro"><option value="نعم">نعم</option><option value="لا">لا</option></select></div>
-        <div class="fl"><label>هل تم استخدام جهاز لوكس؟</label><select id="r-lu"><option value="نعم">نعم</option><option value="لا">لا</option></select></div>
-      </div>
-    </div>
-    <div class="card">
-      <h2>&#x1F465; أسماء الزملاء</h2>
-      <div id="r-names"></div>
-      <button class="btn bo2 bsm" id="btn-r-add">&#x2795; إضافة اسم</button>
-    </div>
-    <div class="card">
-      <h2>&#x1F3AF; التحكم والتنسيق</h2>
-      <div class="ff"><label>تحكم عملياتي</label><input type="text" id="r-op"></div>
-      <div class="ff" style="margin-top:7px"><label>تنسيق استجابة</label><input type="text" id="r-co"></div>
-    </div>
-    <button class="send-btn" style="background:#922b21" id="btn-r-send">&#x1F4E4; إرسال على الواتساب</button>
+    <button class="send-btn" style="background:#148f77" id="btn-m-send">📤 إرسال على الواتساب</button>
   </div>
 </div>
 
@@ -292,395 +161,60 @@ textarea{resize:vertical;min-height:54px;}
 (function() {
   "use strict";
 
-  // ======================================================
-  // HELPERS
-  // ======================================================
+  function el(id) { return document.getElementById(id); }
+  function gv(id) { var e = el(id); return e ? e.value.trim() : ''; }
+  function on(id, ev, fn) { var e = el(id); if (e) e.addEventListener(ev, fn); }
+
   function show(id) {
     document.getElementById('pg-home').style.display = 'none';
     var pages = document.getElementsByClassName('page');
     for (var i = 0; i < pages.length; i++) pages[i].style.display = 'none';
-    document.getElementById(id).style.display = 'block';
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    el(id).style.display = 'block';
   }
 
-  function home() { show('pg-home'); document.getElementById('pg-home').style.display = 'block'; }
+  // Navigation
+  on('btn-go-shift', 'click', function() { show('pg-shift'); });
+  on('btn-go-moshr', 'click', function() { show('pg-moshr'); });
+  on('bk-shift', 'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
+  on('bk-moshr', 'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
 
-  function wa(msg) { window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); }
-
-  function L() { var s = ''; for (var i = 0; i < 14; i++) s += '\u2796'; return s; }
-
-  function gv(id) {
-    var el = document.getElementById(id);
-    return el ? el.value.trim() : '';
-  }
-
-  function el(id) { return document.getElementById(id); }
-
-  function on(id, ev, fn) { var e = el(id); if (e) e.addEventListener(ev, fn); }
-
-  // ======================================================
-  // NAVIGATION
-  // ======================================================
-  on('btn-go-shift',  'click', function() { show('pg-shift'); });
-  on('btn-go-moshr',  'click', function() { show('pg-moshr'); });
-  on('btn-go-oil',    'click', function() { show('pg-oil'); });
-  on('btn-go-device', 'click', function() { show('pg-device'); });
-  on('btn-go-vm',     'click', function() { show('pg-vm'); });
-  on('btn-go-rosc',   'click', function() { show('pg-rosc'); });
-  on('bk-shift',  'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
-  on('bk-moshr',  'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
-  on('bk-oil',    'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
-  on('bk-device', 'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
-  on('bk-vm',     'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
-  on('bk-rosc',   'click', function() { show('pg-home'); el('pg-home').style.display='block'; });
-
-  // ======================================================
-  // INIT DATES
-  // ======================================================
-  var today = new Date().toISOString().split('T')[0];
-  ['s-date','o-d','d-d','v-d','m-d'].forEach(function(id) {
-    var e = el(id); if (e) e.value = today;
-  });
-
-  // ======================================================
-  // SHIFT FORM
-  // ======================================================
-  var sCount = 0;
-  var sSecs = {};
-
-  function mk(tag, props, styles) {
-    var e = document.createElement(tag);
-    if (props) Object.keys(props).forEach(function(k) { e[k] = props[k]; });
-    if (styles) e.style.cssText = styles;
-    return e;
-  }
-
-  function sRenderIncs(sid) {
-    var c = el('si' + sid); if (!c) return;
-    c.innerHTML = '';
-    sSecs[sid].incs.forEach(function(inc, idx) {
-      var blk = mk('div'); blk.className = 'iblk';
-      var row = mk('div', null, 'display:flex;align-items:center;gap:8px');
-      var lbl = mk('span', {textContent: '\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629 ' + inc.n + ':'}, 'font-weight:700;font-size:.88rem;white-space:nowrap');
-      var inp = mk('input', {type:'text', placeholder:'\u0631\u0642\u0645 \u0627\u0644\u0628\u0644\u0627\u063A \u0623\u0648 \u0645\u0644\u0627\u062D\u0638\u0629', value:inc.note||''}, 'flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;');
-      inp.addEventListener('input', (function(s,i){ return function(){ sSecs[s].incs[i].note = this.value; }; })(sid, idx));
-      var btn = mk('button', {textContent:'\u062D\u0630\u0641'}, 'background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:.8rem;white-space:nowrap;');
-      btn.addEventListener('click', (function(s,i){ return function(){ sSecs[s].incs.splice(i,1); sRenderIncs(s); }; })(sid, idx));
-      row.appendChild(lbl); row.appendChild(inp); row.appendChild(btn);
-      blk.appendChild(row); c.appendChild(blk);
-    });
-  }
-
-  function sAddInc(sid) { sCount++; sSecs[sid].incs.push({n:sCount,note:''}); sRenderIncs(sid); }
-  function sBulk(sid, n) { for(var i=0;i<n;i++){sCount++;sSecs[sid].incs.push({n:sCount,note:''});} sRenderIncs(sid); }
-
-  function sRender() {
-    var c = el('s-secs'); c.innerHTML = '';
-    Object.keys(sSecs).forEach(function(sid) {
-      var s = sSecs[sid];
-      var wrap = mk('div', null, 'margin-bottom:13px');
-
-      // header
-      var hdr = mk('div'); hdr.className = 'shdr';
-      var lbl = mk('span', {textContent:'\u0627\u0644\u0642\u0637\u0627\u0639:'});
-      var sinp = mk('input', {type:'text',value:s.name}, 'background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:4px;padding:2px 6px;font-size:.8rem;width:120px;text-align:right;direction:rtl;');
-      sinp.addEventListener('input', (function(id){ return function(){ sSecs[id].name=this.value; }; })(sid));
-      var dbtn = mk('button', {textContent:'\uD83D\uDDD1'}, 'background:none;border:none;color:#fff;cursor:pointer;font-size:1rem;');
-      dbtn.addEventListener('click', (function(id){ return function(){ delete sSecs[id]; sRender(); }; })(sid));
-      hdr.appendChild(lbl); hdr.appendChild(sinp); hdr.appendChild(dbtn);
-      wrap.appendChild(hdr);
-
-      // incs container
-      var incsDiv = mk('div'); incsDiv.id = 'si' + sid;
-      wrap.appendChild(incsDiv);
-
-      // supporting
-      var supDiv = mk('div', null, 'margin-top:9px');
-      supDiv.innerHTML = '<div style="font-weight:700;font-size:.86rem;margin-bottom:4px">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u062F\u0627\u0639\u0645\u0629:</div>';
-      var supTa = mk('textarea', null, 'width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;background:#f9fbfc;');
-      supTa.id = 'sup' + sid;
-      supDiv.appendChild(supTa); wrap.appendChild(supDiv);
-
-      // cancelled
-      var canDiv = mk('div', null, 'margin-top:9px;margin-bottom:9px');
-      canDiv.innerHTML = '<div style="font-weight:700;font-size:.86rem;margin-bottom:4px">\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0645\u0644\u063A\u064A\u0629:</div>';
-      var canTa = mk('textarea', null, 'width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;background:#f9fbfc;');
-      canTa.id = 'can' + sid;
-      canDiv.appendChild(canTa); wrap.appendChild(canDiv);
-
-      // add bar
-      var bar = mk('div'); bar.className = 'add-bar';
-      var b1 = mk('button', {textContent:'\u2795 \u0625\u0636\u0627\u0641\u0629 \u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629'}); b1.className = 'btn bp bsm';
-      b1.addEventListener('click', (function(id){ return function(){ sAddInc(id); }; })(sid));
-      var b2 = mk('button', {textContent:'\u0625\u0636\u0627\u0641\u0629 5'}); b2.className = 'btn bo2 bsm';
-      b2.addEventListener('click', (function(id){ return function(){ sBulk(id,5); }; })(sid));
-      var b3 = mk('button', {textContent:'\u0623\u0636\u0641 1..7'}); b3.className = 'btn bo2 bsm';
-      b3.addEventListener('click', (function(id){ return function(){ sBulk(id,7); }; })(sid));
-      bar.appendChild(b1); bar.appendChild(b2); bar.appendChild(b3);
-      wrap.appendChild(bar);
-      c.appendChild(wrap);
-      sRenderIncs(sid);
-    });
-  }
-
-  function sAddSec(nm) {
-    var id = 'sc' + Date.now() + Math.random().toString(36).slice(2);
-    sSecs[id] = { name: nm || '', incs: [] };
-    sRender();
-  }
-
-  on('btn-add-sec', 'click', function() { sAddSec(''); });
-  sAddSec('\u0627\u0644\u0648\u0633\u0637');
-
-  function addPerson(listId) {
-    var c = el(listId);
-    var d = mk('div'); d.className = 'pi';
-    var inp = mk('input', {type:'text', placeholder:'\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0643\u0627\u0645\u0644'}, 'flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;');
-    var btn = mk('button', {textContent:'\u2715'}); btn.className = 'rm';
-    btn.addEventListener('click', function() { d.parentNode.removeChild(d); });
-    d.appendChild(inp); d.appendChild(btn);
-    c.appendChild(d); inp.focus();
-  }
-
-  on('btn-add-abs', 'click', function() { addPerson('s-abs'); });
-  on('btn-add-lat', 'click', function() { addPerson('s-lat'); });
-
+  // WhatsApp Messaging with formatted emojis
   on('btn-s-send', 'click', function() {
-    var li = L();
-    var per = document.querySelector('input[name="sp"]:checked');
-    var msg = li + '\n       \uD83D\uDCCB *\u0646\u0645\u0648\u0630\u062C \u0646\u0647\u0627\u064A\u0629 \u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629*\n' + li + '\n';
-    msg += '\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* ' + (gv('s-date')||'\u2014') + '\n';
-    msg += '\uD83D\uDD50 *\u0627\u0644\u0641\u062A\u0631\u0629:* ' + (per?per.value:'\u2014') + '\n\n';
-    msg += '*[ \uD83D\uDCCA \u0627\u0644\u0645\u0624\u0634\u0631 ]*\n';
-    msg += '> \u23F1 *\u0645\u062A\u0648\u0633\u0637 \u0648\u0642\u062A \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* _' + (gv('s-ir')||'\u2014') + ' \u062F\u0642\u064A\u0642\u0629_\n';
-    var iN=gv('s-in'); if(iN) msg+='> *\u0645\u0644\u0627\u062D\u0638\u0627\u062A:* '+iN+'\n';
-    msg+='\n*[ \uD83D\uDE97 \u0627\u0644\u0645\u0631\u0643\u0628\u0627\u062A ]*\n';
-    msg+='> \u2705 *\u0639\u0627\u0645\u0644\u0629:* '+(gv('s-vw')||'\u2014')+'   |   \u23F3 *\u0627\u062D\u062A\u064A\u0627\u0637:* '+(gv('s-vr')||'\u2014')+'   |   \u274C *\u0645\u062A\u0639\u0637\u0644\u0629:* '+(gv('s-vb')||'\u2014')+'\n';
-    var vN=gv('s-vn'); if(vN) msg+='> *\u0645\u0644\u0627\u062D\u0638\u0627\u062A \u0623\u0639\u0637\u0627\u0644:* '+vN+'\n';
-    msg+='\n*[ \uD83D\uDCCB \u0627\u0644\u0628\u0644\u0627\u063A\u0627\u062A ]*\n';
-    Object.keys(sSecs).forEach(function(sid) {
-      var s=sSecs[sid];
-      msg+='\n\uD83D\uDCCD *\u0627\u0644\u0642\u0637\u0627\u0639: '+s.name+'*\n';
-      if(!s.incs.length) msg+='_\u0644\u0627 \u062A\u0648\u062C\u062F \u0628\u0644\u0627\u063A\u0627\u062A_\n';
-      else s.incs.forEach(function(inc){ msg+='   \uD83D\uDD39 *\u0627\u0633\u062A\u062C\u0627\u0628\u0629 \u0623\u0648\u0644\u064A\u0629 '+inc.n+':* '+(inc.note||'\u2014')+'\n'; });
-      var se=el('sup'+sid), ce=el('can'+sid);
-      if(se&&se.value.trim()) msg+='   \uD83D\uDFE2 *\u062F\u0627\u0639\u0645\u0629:* '+se.value.trim()+'\n';
-      if(ce&&ce.value.trim()) msg+='   \uD83D\uDD34 *\u0645\u0644\u063A\u064A\u0629:* '+ce.value.trim()+'\n';
-    });
-    var abs=[].slice.call(document.querySelectorAll('#s-abs input')).map(function(x){return x.value.trim();}).filter(Boolean);
-    var lat=[].slice.call(document.querySelectorAll('#s-lat input')).map(function(x){return x.value.trim();}).filter(Boolean);
-    if(abs.length||lat.length){
-      msg+='\n*[ \uD83D\uDC64 \u0627\u0644\u063A\u064A\u0627\u0628 ]*\n';
-      if(abs.length) msg+='> \uD83D\uDEAB *\u063A\u064A\u0627\u0628:* '+abs.join('\u060C ')+'\n';
-      if(lat.length) msg+='> \u23F1 *\u0645\u062A\u0623\u062E\u0631\u0648\u0646:* '+lat.join('\u060C ')+'\n';
-    }
-    var gn=gv('s-gn'); if(gn) msg+='\n*[ \uD83D\uDCDD \u0645\u0644\u0627\u062D\u0638\u0627\u062A ]*\n> '+gn+'\n';
-    msg+='\n*[ \uD83D\uDC65 \u0627\u0644\u0637\u0627\u0642\u0645 ]*\n';
-    msg+='> *\u0643\u0628\u064A\u0631 \u0627\u0644\u0645\u0633\u0639\u0641\u064A\u0646:* '+(gv('s-ch')||'\u2014')+'\n';
-    msg+='> *\u0627\u0644\u0645\u0633\u0627\u0639\u062F:* '+(gv('s-as')||'\u2014')+'\n\n'+li;
-    wa(msg);
+    var line = "➖➖➖➖➖➖➖➖➖➖";
+    var per = document.querySelector('input[name="sp"]:checked')?.value || '—';
+    
+    var msg = line + "\n";
+    msg += "📋 *نموذج نهاية المناوبة*\n";
+    msg += line + "\n\n";
+    
+    msg += "📅 *التاريخ:* " + (gv('s-date') || '—') + "\n";
+    msg += "🕒 *الفترة:* " + per + "\n\n";
+    
+    msg += "📊 *[ المؤشر ]*\n";
+    msg += "⏱️ *متوسط الاستجابة:* " + (gv('s-ir') || '—') + " دقيقة\n";
+    if(gv('s-in')) msg += "📝 *ملاحظات:* " + gv('s-in') + "\n";
+    
+    msg += "\n🚑 *[ المركبات ]*\n";
+    msg += "✅ *عاملة:* " + (gv('s-vw') || '0') + "\n";
+    msg += "⏳ *احتياط:* " + (gv('s-vr') || '0') + "\n";
+    msg += "❌ *عطل:* " + (gv('s-vb') || '0') + "\n";
+    
+    var url = "https://wa.me/?text=" + encodeURIComponent(msg);
+    window.open(url, '_blank');
   });
 
-  // ======================================================
-  // MOSHR FORM
-  // ======================================================
-  function mBuild() {
-    var per = document.querySelector('input[name="mp"]:checked');
-    var ph = el('m-ph');
-    var li = L();
-    var msg = li+'\n   \uD83D\uDCCA *\u0645\u0624\u0634\u0631 \u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629 \u0644\u0642\u0637\u0627\u0639 \u0627\u0644\u0648\u0633\u0637*\n'+li+'\n';
-    msg+='\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* '+(gv('m-d')||'\u2014')+'\n';
-    msg+='\uD83D\uDD50 *\u0627\u0644\u0645\u0646\u0627\u0648\u0628\u0629:* '+(per?per.value:'\u2014')+'\n';
-    msg+='\u23F1 *\u0645\u062A\u0648\u0633\u0637 \u0648\u0642\u062A \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* _'+(gv('m-r')||'\u2014')+'_\n';
-    if(ph&&ph.value) msg+='\n'+ph.value+'\n';
-    msg+=li;
-    return msg;
-  }
-  function mPrev() { var e=el('m-prev'); if(e) e.textContent=mBuild(); }
-  ['m-d','m-r'].forEach(function(id){ on(id,'input',mPrev); });
-  on('m-ph','change',mPrev);
-  document.querySelectorAll('input[name="mp"]').forEach(function(r){ r.addEventListener('change',mPrev); });
-  mPrev();
-  on('btn-m-send','click',function(){ wa(mBuild()); });
-
-  // ======================================================
-  // OIL FORM
-  // ======================================================
-  on('btn-o-add','click',function(){
-    var c=el('o-list');
-    var d=mk('div'); d.className='irow';
-    var del=mk('button',{textContent:'\u2715 \u062D\u0630\u0641'}); del.className='del';
-    del.addEventListener('click',function(){ d.parentNode.removeChild(d); });
-    d.appendChild(del);
-    [
-      ['\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629','\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629'],
-      ['\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629','\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629'],
-      ['\u0627\u0644\u0639\u062F\u0627\u062F \u0627\u0644\u062D\u0627\u0644\u064A (\u0643\u0645)','\u0643\u0645'],
-      ['\u0627\u0644\u0645\u0648\u0639\u062F \u0627\u0644\u0642\u0627\u062F\u0645 \u0644\u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0632\u064A\u062A (\u0643\u0645)','\u0643\u0645']
-    ].forEach(function(f,i){
-      var row=mk('div'); row.className='ff'; if(i<3) row.style.marginBottom='7px';
-      var lbl=mk('label',{textContent:f[0]});
-      var inp=mk('input',{type:'text',placeholder:f[1]});
-      row.appendChild(lbl); row.appendChild(inp); d.appendChild(row);
-    });
-    c.appendChild(d);
-  });
-
-  on('btn-o-send','click',function(){
-    var li=L();
-    var msg=li+'\n      \uD83D\uDEE2 *\u0646\u0645\u0648\u0630\u062C \u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0632\u064A\u062A*\n'+li+'\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* '+(gv('o-d')||'\u2014')+'\n\n';
-    var rows=document.querySelectorAll('#o-list .irow');
-    if(!rows.length) msg+='_\u0644\u0645 \u064A\u062A\u0645 \u0625\u062F\u062E\u0627\u0644 \u0623\u064A \u0645\u0631\u0643\u0628\u0629_\n';
-    [].forEach.call(rows,function(row,i){
-      var f=row.querySelectorAll('input');
-      msg+='*[ \uD83D\uDE91 \u0645\u0631\u0643\u0628\u0629 '+(i+1)+' ]*\n';
-      msg+='> *\u0646\u062F\u0627\u0621 \u0627\u0644\u0641\u0631\u0642\u0629:* '+(f[0]?f[0].value.trim()||'\u2014':'\u2014')+'\n';
-      msg+='> *\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062D\u0629:* '+(f[1]?f[1].value.trim()||'\u2014':'\u2014')+'\n';
-      msg+='> *\u0627\u0644\u0639\u062F\u0627\u062F \u0627\u0644\u062D\u0627\u0644\u064A:* _'+(f[2]?f[2].value.trim()||'\u2014':'\u2014')+' \u0643\u0645_\n';
-      msg+='> *\u0627\u0644\u0645\u0648\u0639\u062F \u0627\u0644\u0642\u0627\u062F\u0645:* _'+(f[3]?f[3].value.trim()||'\u2014':'\u2014')+' \u0643\u0645_\n\n';
-    });
-    var n=gv('o-n'); if(n) msg+='*\u0645\u0644\u0627\u062D\u0638\u0627\u062A:*\n> '+n+'\n\n';
-    msg+=li; wa(msg);
-  });
-
-  // ======================================================
-  // DEVICE FORM
-  // ======================================================
-  on('btn-d-add','click',function(){
-    var c=el('d-list');
-    var d=mk('div'); d.className='irow';
-    var del=mk('button',{textContent:'\u2715 \u062D\u0630\u0641'}); del.className='del';
-    del.addEventListener('click',function(){ d.parentNode.removeChild(d); });
-    d.appendChild(del);
-    [
-      ['\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632','\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632'],
-      ['\u0627\u0644\u0633\u064A\u0631\u064A\u0627\u0644 \u0646\u0645\u0628\u0631','Serial No.'],
-      ['\u0627\u0644\u0639\u0637\u0644 / \u0627\u0644\u0645\u0634\u0643\u0644\u0629','\u0648\u0635\u0641 \u0627\u0644\u0645\u0634\u0643\u0644\u0629']
-    ].forEach(function(f,i){
-      var row=mk('div'); row.className='ff'; if(i<2) row.style.marginBottom='7px';
-      var lbl=mk('label',{textContent:f[0]});
-      var inp=mk('input',{type:'text',placeholder:f[1]});
-      row.appendChild(lbl); row.appendChild(inp); d.appendChild(row);
-    });
-    c.appendChild(d);
-  });
-
-  on('btn-d-send','click',function(){
-    var li=L();
-    var msg=li+'\n      \uD83D\uDD27 *\u0646\u0645\u0648\u0630\u062C \u0635\u064A\u0627\u0646\u0629 \u062C\u0647\u0627\u0632*\n'+li+'\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* '+(gv('d-d')||'\u2014')+'\n\n';
-    var rows=document.querySelectorAll('#d-list .irow');
-    if(!rows.length) msg+='_\u0644\u0645 \u064A\u062A\u0645 \u0625\u062F\u062E\u0627\u0644 \u0623\u064A \u062C\u0647\u0627\u0632_\n';
-    [].forEach.call(rows,function(row,i){
-      var f=row.querySelectorAll('input');
-      msg+='*[ \uD83D\uDD27 \u062C\u0647\u0627\u0632 '+(i+1)+' ]*\n';
-      msg+='> *\u0627\u0633\u0645 \u0627\u0644\u062C\u0647\u0627\u0632:* '+(f[0]?f[0].value.trim()||'\u2014':'\u2014')+'\n';
-      msg+='> *\u0627\u0644\u0633\u064A\u0631\u064A\u0627\u0644:* '+(f[1]?f[1].value.trim()||'\u2014':'\u2014')+'\n';
-      msg+='> *\u0627\u0644\u0639\u0637\u0644:* _'+(f[2]?f[2].value.trim()||'\u2014':'\u2014')+'_\n\n';
-    });
-    var n=gv('d-n'); if(n) msg+='*\u0645\u0644\u0627\u062D\u0638\u0627\u062A:*\n> '+n+'\n\n';
-    msg+=li; wa(msg);
-  });
-
-  // ======================================================
-  // VM FORM
-  // ======================================================
-  on('btn-v-add','click',function(){
-    var c=el('v-faults');
-    var d=mk('div'); d.className='irow';
-    var del=mk('button',{textContent:'\u2715 \u062D\u0630\u0641'}); del.className='del';
-    del.addEventListener('click',function(){ d.parentNode.removeChild(d); });
-    d.appendChild(del);
-    var r1=mk('div'); r1.className='ff'; r1.style.marginBottom='7px';
-    var l1=mk('label',{textContent:'\u0648\u0635\u0641 \u0627\u0644\u0639\u0637\u0644'});
-    var i1=mk('input',{type:'text',placeholder:'\u0648\u0635\u0641 \u0627\u0644\u0639\u0637\u0644'});
-    r1.appendChild(l1); r1.appendChild(i1); d.appendChild(r1);
-    var r2=mk('div'); r2.className='ff';
-    var l2=mk('label',{textContent:'\u0627\u0644\u0634\u062F\u0629'});
-    var sel=mk('select');
-    ['\u0628\u0633\u064A\u0637','\u0645\u062A\u0648\u0633\u0637','\u062E\u0637\u064A\u0631'].forEach(function(o){ var op=mk('option',{textContent:o,value:o}); sel.appendChild(op); });
-    r2.appendChild(l2); r2.appendChild(sel); d.appendChild(r2);
-    c.appendChild(d);
-  });
-
-  on('btn-v-send','click',function(){
-    var li=L();
-    var pE={'\u0639\u0627\u062F\u064A\u0629':'\uD83D\uDFE2','\u0639\u0627\u062C\u0644\u0629':'\uD83D\uDFE1','\u062D\u0631\u062C\u0629':'\uD83D\uDD34'};
-    var sE={'\u0628\u0633\u064A\u0637':'\uD83D\uDFE1','\u0645\u062A\u0648\u0633\u0637':'\uD83D\uDFE0','\u062E\u0637\u064A\u0631':'\uD83D\uDD34'};
-    var pri=gv('v-pri')||'\u0639\u0627\u062F\u064A\u0629';
-    var msg=li+'\n     \uD83D\uDE91 *\u0646\u0645\u0648\u0630\u062C \u0635\u064A\u0627\u0646\u0629 \u0645\u0631\u0643\u0628\u0629*\n'+li+'\n\uD83D\uDCC5 *\u0627\u0644\u062A\u0627\u0631\u064A\u062E:* '+(gv('v-d')||'\u2014')+'\n\n';
-    msg+='*[ \uD83D\uDE91 \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0645\u0631\u0643\u0628\u0629 ]*\n';
-    msg+='> *\u0631\u0642\u0645 \u0627\u0644\u0645\u0631\u0643\u0628\u0629:* '+(gv('v-num')||'\u2014')+'\n';
-    msg+='> *\u0627\u0644\u0646\u0648\u0639:* '+(gv('v-typ')||'\u2014')+'\n';
-    msg+='> *\u0627\u0644\u0639\u062F\u0627\u062F:* _'+(gv('v-km')||'\u2014')+' \u0643\u0645_\n';
-    msg+='> '+(pE[pri]||'\u26AA')+' *\u0627\u0644\u0623\u0648\u0644\u0648\u064A\u0629:* *'+pri+'*\n\n';
-    var rows=document.querySelectorAll('#v-faults .irow');
-    if(rows.length){
-      msg+='*[ \u26A0 \u0627\u0644\u0623\u0639\u0637\u0627\u0644 ]*\n';
-      [].forEach.call(rows,function(row,i){
-        var f=row.querySelector('input'), s=row.querySelector('select');
-        var fv=f?f.value.trim():'\u2014', sv=s?s.value:'\u2014';
-        msg+='> '+(i+1)+'. _'+fv+'_ - '+(sE[sv]||'\u26AA')+' *'+sv+'*\n';
-      });
-      msg+='\n';
-    }
-    var n=gv('v-n'); if(n) msg+='*\u0645\u0644\u0627\u062D\u0638\u0627\u062A:*\n> '+n+'\n\n';
-    msg+=li; wa(msg);
-  });
-
-  // ======================================================
-  // ROSC FORM
-  // ======================================================
-  var rCount=0;
-  var arN=['\u0661','\u0662','\u0663','\u0664','\u0665','\u0666','\u0667','\u0668','\u0669','\u0661\u0660'];
-
-  on('btn-r-add','click',function(){
-    if(rCount>=10) return;
-    rCount++;
-    var c=el('r-names');
-    var d=mk('div'); d.className='nr';
-    var nn=mk('span',{textContent:arN[rCount-1]}); nn.className='nn';
-    var inp=mk('input',{type:'text',placeholder:'\u0627\u0644\u0627\u0633\u0645'}, 'flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;');
-    var del=mk('button',{textContent:'\u2715'}); del.className='rm';
-    del.addEventListener('click',function(){
-      d.parentNode.removeChild(d);
-      rCount--;
-      var addBtn=el('btn-r-add'); if(addBtn) addBtn.style.display='';
-      document.querySelectorAll('#r-names .nn').forEach(function(e,i){ e.textContent=arN[i]||(i+1)+''; });
-    });
-    d.appendChild(nn); d.appendChild(inp); d.appendChild(del);
-    c.appendChild(d); inp.focus();
-    if(rCount>=10){ var ab=el('btn-r-add'); if(ab) ab.style.display='none'; }
-  });
-
-  on('btn-r-send','click',function(){
-    var li=L();
-    var rosc=gv('r-ro')||'\u0646\u0639\u0645', lucas=gv('r-lu')||'\u0646\u0639\u0645';
-    var msg=li+'\n         \u2764 *\u0646\u0645\u0648\u0630\u062C ROSC*\n'+li+'\n\n';
-    msg+='*[ \uD83D\uDCCB \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0628\u0644\u0627\u063A ]*\n';
-    msg+='> *\u062A\u0648\u0642\u064A\u062A \u0627\u0644\u0628\u0644\u0627\u063A:* '+(gv('r-ti')||'\u2014')+'\n';
-    msg+='> *\u0646\u0648\u0639 \u0627\u0644\u0628\u0644\u0627\u063A:* '+(gv('r-ty')||'\u2014')+'\n';
-    msg+='> *\u0645\u0648\u0642\u0639 \u0627\u0644\u0628\u0644\u0627\u063A:* '+(gv('r-lo')||'\u2014')+'\n';
-    msg+='> *\u0632\u0645\u0646 \u0627\u0644\u0627\u0633\u062A\u062C\u0627\u0628\u0629:* _'+(gv('r-re')||'\u2014')+'_\n\n';
-    msg+='*[ \uD83D\uDE91 \u0627\u0644\u0648\u062D\u062F\u0627\u062A ]*\n';
-    var un=(gv('r-un')||'\u2014');
-    un.split('\n').forEach(function(x){ if(x.trim()) msg+='> '+x.trim()+'\n'; });
-    msg+='\n*[ \u2705 \u0646\u062A\u0627\u0626\u062C \u0627\u0644\u062A\u062F\u062E\u0644 ]*\n';
-    msg+='> *\u0647\u0644 \u062A\u062D\u0642\u0642 ROSC\u061F:* *'+rosc+(rosc==='\u0646\u0639\u0645'?' \uD83D\uDC4F':'')+'*\n';
-    msg+='> *\u0647\u0644 \u062A\u0645 \u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u062C\u0647\u0627\u0632 \u0644\u0648\u0643\u0633\u061F:* *'+lucas+(lucas==='\u0646\u0639\u0645'?' \u2705':'')+'*\n\n';
-    msg+=li+'\n\u0639\u0645\u0644 \u0639\u0638\u064A\u0645 \u064A\u062C\u0633\u062F \u0627\u0644\u0625\u062E\u0644\u0627\u0635 \u0648\u0627\u0644\u0627\u062D\u062A\u0631\u0627\u0641\u064A\u0629 \u0641\u064A \u0627\u0644\u0639\u0645\u0644\n\u0628\u0643\u0644 \u0641\u062E\u0631 \u0648\u0627\u0639\u062A\u0632\u0627\u0632\u060C \u0646\u062A\u0642\u062F\u0645 \u0628\u062C\u0632\u064A\u0644 \u0627\u0644\u0634\u0643\u0631 \u0648\u0627\u0644\u0639\u0631\u0641\u0627\u0646 \u0644\u062C\u0647\u0648\u062F \u0627\u0644\u0632\u0645\u0644\u0627\u0621 \u0627\u0644\u0630\u064A\u0646 \u0643\u0627\u0646 \u0644\u0647\u0645 - \u0628\u0639\u062F \u062A\u0648\u0641\u064A\u0642 \u0627\u0644\u0644\u0647 - \u0627\u0644\u0641\u0636\u0644 \u0641\u064A \u0646\u062C\u0627\u062D \u0639\u0645\u0644\u064A\u0629 \u0625\u0646\u0639\u0627\u0634 \u0642\u0644\u0628\u064A \u0631\u0626\u0648\u064A\n'+li+'\n\n';
-    var names=[].slice.call(document.querySelectorAll('#r-names input')).map(function(x){return x.value.trim();}).filter(Boolean);
-    names.forEach(function(n,i){ msg+=(arN[i]||(i+1)+'')+'- *'+n+'*\n'; });
-    if(names.length) msg+='\n';
-    msg+='> *\u062A\u062D\u0643\u0645 \u0639\u0645\u0644\u064A\u0627\u062A\u064A:* '+(gv('r-op')||'\u2014')+'\n';
-    msg+='> *\u062A\u0646\u0633\u064A\u0642 \u0627\u0633\u062A\u062C\u0627\u0628\u0629:* '+(gv('r-co')||'\u2014')+'\n\n';
-    msg+=li+'\n\u062C\u0632\u0627\u0643\u0645 \u0627\u0644\u0644\u0647 \u062E\u064A\u0631\u064B\u0627\u060C \u0648\u0643\u062A\u0628 \u0623\u062C\u0631\u0643\u0645\u060C \u0648\u062C\u0639\u0644 \u0645\u0627 \u0642\u062F\u0645\u062A\u0645\u0648\u0647 \u0641\u064A \u0645\u0648\u0627\u0632\u064A\u0646 \u062D\u0633\u0646\u0627\u062A\u0643\u0645 \uD83C\uDF39\n'+li;
-    wa(msg);
+  on('btn-m-send', 'click', function() {
+    var per = document.querySelector('input[name="mp"]:checked')?.value || '—';
+    var msg = "📊 *مؤشر المناوبة*\n\n";
+    msg += "📅 *التاريخ:* " + gv('m-d') + "\n";
+    msg += "🕒 *المناوبة:* " + per + "\n";
+    msg += "⏱️ *وقت الاستجابة:* " + gv('m-r') + "\n\n";
+    msg += gv('m-ph');
+    
+    window.open("https://wa.me/?text=" + encodeURIComponent(msg), '_blank');
   });
 
 })();
 </script>
-
 </body>
 </html>
